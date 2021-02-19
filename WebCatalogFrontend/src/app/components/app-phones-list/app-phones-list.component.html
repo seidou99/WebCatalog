@@ -1,6 +1,6 @@
-<div class="flex-row m-1 ">
-  <div class="filters flex-col col-25">
-    <mat-card class="flex-col">
+<div class="row m-1 ">
+  <div class="filters col col-25">
+    <mat-card class="col">
       <mat-form-field class="w-100">
         <mat-label>Производитель</mat-label>
         <input type="text" matInput [matAutocomplete]="auto">
@@ -14,7 +14,7 @@
       </mat-form-field>
 
       <mat-label class="block">Цена</mat-label>
-      <div class="flex-row">
+      <div class="row">
         <mat-form-field class="col-50 mr-05">
           <input matInput type="number" placeholder="От">
         </mat-form-field>
@@ -24,7 +24,7 @@
       </div>
 
       <mat-label class="block">Дата выхода на рынок</mat-label>
-      <div class="flex-row">
+      <div class="row">
         <mat-form-field class="col-50 mr-05">
           <input matInput type="number" placeholder="От">
         </mat-form-field>
@@ -39,7 +39,7 @@
       </mat-form-field>
 
       <mat-label class="block">Размер экрана</mat-label>
-      <div class="flex-row">
+      <div class="row">
         <mat-form-field class="col-50 mr-05">
           <mat-select placeholder="От"></mat-select>
         </mat-form-field>
@@ -49,7 +49,7 @@
       </div>
 
       <mat-label>Разрешение экрана</mat-label>
-      <div class="flex-row">
+      <div class="row">
         <mat-form-field class="col-50 mr-05">
           <mat-select placeholder="От"></mat-select>
         </mat-form-field>
@@ -69,7 +69,7 @@
       </mat-form-field>
 
       <mat-label>Оперативня память</mat-label>
-      <div class="flex-row">
+      <div class="row">
         <mat-form-field class="col-50 mr-05">
           <mat-select placeholder="От">
             <mat-option>3072</mat-option>
@@ -83,7 +83,7 @@
       </div>
 
       <mat-label>Флэш память</mat-label>
-      <div class="flex-row">
+      <div class="row">
         <mat-form-field class="col-50 mr-05">
           <mat-select placeholder="От">
             <mat-option>3072</mat-option>
@@ -101,7 +101,7 @@
       </section>
 
       <mat-label>Камера, Мп</mat-label>
-      <div class="flex-row">
+      <div class="row">
         <mat-form-field class="col-50 mr-05">
           <mat-select placeholder="От">
             <mat-option>3072</mat-option>
@@ -148,7 +148,7 @@
       </mat-form-field>
 
       <mat-label>Емкость аккумулятора, мАч</mat-label>
-      <div class="flex-row">
+      <div class="row">
         <mat-form-field class="col-50 mr-05">
           <mat-select placeholder="От">
             <mat-option>3072</mat-option>
@@ -194,7 +194,7 @@
       </mat-form-field>
 
       <mat-label>Частота процессора, ГГц</mat-label>
-      <div class="flex-row">
+      <div class="row">
         <mat-form-field class="col-50 mr-05">
           <mat-select placeholder="От">
             <mat-option>3072</mat-option>
@@ -239,7 +239,7 @@
       </mat-form-field>
 
       <mat-label>Максимальное разрешение видео</mat-label>
-      <div class="flex-row">
+      <div class="row">
         <mat-form-field class="col-50 mr-05">
           <mat-select placeholder="От">
             <mat-option>3072</mat-option>
@@ -253,7 +253,7 @@
       </div>
 
       <mat-label>Фронтальная камера</mat-label>
-      <div class="flex-row">
+      <div class="row">
         <mat-form-field class="col-50 mr-05">
           <mat-select placeholder="От">
             <mat-option>3072</mat-option>
@@ -282,7 +282,7 @@
       </mat-form-field>
 
       <mat-label>Длина, мм</mat-label>
-      <div class="flex-row">
+      <div class="row">
         <mat-form-field class="col-50 mr-05">
           <mat-select placeholder="От">
             <mat-option>3072</mat-option>
@@ -296,7 +296,7 @@
       </div>
 
       <mat-label>Ширина, мм</mat-label>
-      <div class="flex-row">
+      <div class="row">
         <mat-form-field class="col-50 mr-05">
           <mat-select placeholder="От">
             <mat-option>3072</mat-option>
@@ -310,7 +310,7 @@
       </div>
 
       <mat-label>Толщина, мм</mat-label>
-      <div class="flex-row">
+      <div class="row">
         <mat-form-field class="col-50 mr-05">
           <mat-select placeholder="От">
             <mat-option>3072</mat-option>
@@ -324,7 +324,7 @@
       </div>
 
       <mat-label>Вес, г</mat-label>
-      <div class="flex-row">
+      <div class="row">
         <mat-form-field class="col-50 mr-05">
           <mat-select placeholder="От">
             <mat-option>3072</mat-option>
@@ -338,15 +338,17 @@
       </div>
     </mat-card>
   </div>
-  <div class="flex-col col-75 ml-1">
-    <mat-card class="product">
-      <div class="flex-row">
-        <div class="product-image-wrapper flex-col">
-          <img src="https://content2.onliner.by/catalog/device/main/4569504868eb0c41952c484333a4b3c4.jpeg"
-               class="product-image">
+  <div class="col col-75 ml-1">
+    <mat-card>
+      <div class="row">
+        <div class="col">
+          <div class="product-image-preview-wrapper">
+            <img src="https://content2.onliner.by/catalog/device/main/4569504868eb0c41952c484333a4b3c4.jpeg"
+                 class="product-image mlr-auto block">
+          </div>
         </div>
-        <div class="flex-col ml-1">
-          <a routerLink="phone" class="mat-h2 phone-name-link">Смартфон Xiaomi Redmi 9T 4GB/128GB (оранжевый закат)</a>
+        <div class="col ml-1">
+          <a routerLink="1" class="mat-h2 phone-name-link">Смартфон Xiaomi Redmi 9T 4GB/128GB (оранжевый закат)</a>
 
           <p>Android, экран 6.53" IPS (1080x2340), Qualcomm Snapdragon 662, ОЗУ 4 ГБ, флэш-память 128 ГБ, карты памяти,
             камера 48 Мп, аккумулятор 6000 мАч, 2 SIM</p>
@@ -359,8 +361,8 @@
             <p>36 отзывов</p>
           </div>
         </div>
-        <div class="flex-col ml-1">
-          <h2 class="phone-price">от 549 р.</h2>
+        <div class="col ml-1">
+          <h2 class="product-price">от 549 р.</h2>
         </div>
       </div>
     </mat-card>

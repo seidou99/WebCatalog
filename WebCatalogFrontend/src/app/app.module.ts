@@ -17,12 +17,15 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import { AppPhoneComponent } from './components/app-phone/app-phone.component';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppPhonesListComponent,
     AppHomePageComponent,
+    AppPhoneComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,8 @@ import {MatButtonModule} from '@angular/material/button';
     MatSelectModule,
     MatCheckboxModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
