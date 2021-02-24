@@ -1,5 +1,6 @@
 package com.cafebabe;
 
+import com.cafebabe.model.BaseDataObject;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

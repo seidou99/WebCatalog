@@ -8,7 +8,7 @@ import {AppHomePageComponent} from './components/app-home-page/app-home-page.com
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatOptionModule} from '@angular/material/core';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
@@ -17,8 +17,12 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import { AppPhoneComponent } from './components/app-phone/app-phone.component';
+import {AppPhoneComponent} from './components/app-phone/app-phone.component';
 import {MatDividerModule} from '@angular/material/divider';
+import {NewPhoneModelComponent} from './components/new-phone-model/new-phone-model.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {AppDialogWithNameAndDescriptionComponent} from './components/app-dialog-with-name-and-description/app-dialog-with-name-and-description.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,6 +30,8 @@ import {MatDividerModule} from '@angular/material/divider';
     AppPhonesListComponent,
     AppHomePageComponent,
     AppPhoneComponent,
+    NewPhoneModelComponent,
+    AppDialogWithNameAndDescriptionComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +48,10 @@ import {MatDividerModule} from '@angular/material/divider';
     MatCheckboxModule,
     MatIconModule,
     MatButtonModule,
-    MatDividerModule
+    MatDividerModule,
+    MatDialogModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

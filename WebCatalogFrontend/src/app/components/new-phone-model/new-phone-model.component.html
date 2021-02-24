@@ -1,0 +1,204 @@
+<mat-card class="m-1">
+  <h2>Добавить новую модель телефона</h2>
+  <div class="grid1fr1fr grid grid-col-gap2em">
+    <div class="row flex-align-center">
+      <mat-form-field class="w-100">
+        <mat-label>Производитель</mat-label>
+        <input type="text" matInput [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let manufacturer of manufacturers | async"></mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-icon class="cursor-pointer" (click)="createNewManufacturer()">add</mat-icon>
+    </div>
+
+    <mat-form-field class="w-100">
+      <mat-label>Дата выхода на рынок</mat-label>
+      <input matInput type="number">
+    </mat-form-field>
+
+    <div class="row flex-align-center">
+      <mat-form-field class="w-100">
+        <mat-label>Операционная система</mat-label>
+        <mat-select></mat-select>
+      </mat-form-field>
+      <mat-icon class="cursor-pointer" (click)="createNewManufacturer()">add</mat-icon>
+    </div>
+
+    <mat-form-field class="w-100">
+      <mat-label>Размер экрана</mat-label>
+      <input matInput type="number">
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Горизонтальное разрешение экрана</mat-label>
+      <input matInput type="number">
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Вертикальное разрешение экрана</mat-label>
+      <input matInput type="number">
+    </mat-form-field>
+
+    <div class="row flex-align-center">
+      <mat-form-field class="w-100">
+        <mat-select></mat-select>
+        <mat-label>Технология экрана</mat-label>
+      </mat-form-field>
+      <mat-icon class="cursor-pointer" (click)="createNewManufacturer()">add</mat-icon>
+    </div>
+
+
+    <mat-form-field class="w-100">
+      <mat-label>Частота обновления экрана, Гц</mat-label>
+      <input matInput type="number">
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Количество вариантов оперативной и постоянной памяти</mat-label>
+      <input matInput type="number" [value]="ramAndRomVariants.length" (change)="changeRamAndRomVariants($event)">
+    </mat-form-field>
+
+    <div></div>
+
+    <mat-form-field class="w-100" *ngFor="let i of ramAndRomVariants">
+      <mat-label class="block">Оперативня память {{i}}, МБ</mat-label>
+      <input matInput type="number">
+    </mat-form-field>
+
+    <mat-form-field class="w-100" *ngFor="let i of ramAndRomVariants">
+      <mat-label>Флэш память {{i}}</mat-label>
+      <input matInput>
+    </mat-form-field>
+
+    <section class="w-100 row flex-align-center">
+      <mat-checkbox>Поддержка карт памяти</mat-checkbox>
+    </section>
+
+    <mat-form-field class="w-100">
+      <mat-label>Количество основных камер</mat-label>
+      <input matInput type="number">
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Камера, Мп</mat-label>
+      <input matInput type="number">
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Количество SIM-карт</mat-label>
+      <input matInput type="number">
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label class="block">Формат SIM-карты</mat-label>
+      <mat-select></mat-select>
+    </mat-form-field>
+
+    <section class="w-100 row flex-align-center">
+      <mat-checkbox>Поддержка LTE</mat-checkbox>
+    </section>
+
+    <section class="w-100 row flex-align-center">
+      <mat-checkbox>Поддержка 5G</mat-checkbox>
+    </section>
+
+
+    <mat-form-field class="w-100">
+      <mat-label class="block">Цвет корпуса</mat-label>
+      <mat-select></mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label class="block">Пыле- и влагозащита</mat-label>
+      <mat-select></mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Емкость аккумулятора, мАч</mat-label>
+      <input matInput type="number">
+    </mat-form-field>
+
+    <div class="row flex-align-center">
+      <mat-form-field class="w-100">
+        <mat-label class="block">Расположение сканера отпечатка пальца</mat-label>
+        <mat-select></mat-select>
+      </mat-form-field>
+      <mat-icon class="cursor-pointer" (click)="createNewManufacturer()">add</mat-icon>
+    </div>
+
+    <div class="flex-align-center row">
+      <mat-form-field class="w-100">
+        <mat-label class="block">Версия операционной системы</mat-label>
+        <mat-select></mat-select>
+      </mat-form-field>
+      <mat-icon class="cursor-pointer" (click)="createNewManufacturer()">add</mat-icon>
+    </div>
+
+    <mat-form-field class="w-100">
+      <mat-label class="block">Разрешающая способность экрана, ppi</mat-label>
+      <input matInput type="number">
+    </mat-form-field>
+
+    <div class="row flex-align-center">
+      <mat-form-field class="w-100">
+        <mat-label class="block">Защита от царапин</mat-label>
+        <mat-select></mat-select>
+      </mat-form-field>
+      <mat-icon class="cursor-pointer" (click)="createNewManufacturer()">add</mat-icon>
+    </div>
+
+    <div class="row flex-align-center">
+      <mat-form-field class="w-100">
+        <mat-label class="block">Процессор</mat-label>
+        <input type="text" matInput [matAutocomplete]="processorAutocomplete">
+        <mat-autocomplete autoActiveFirstOption #processorAutocomplete="matAutocomplete">
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-icon class="cursor-pointer" (click)="createNewManufacturer()">add</mat-icon>
+    </div>
+
+    <section class="w-100 flex-align-center row">
+      <mat-checkbox>Аудиопроцессор</mat-checkbox>
+    </section>
+
+    <mat-form-field class="w-100">
+      <mat-label>Фронтальная камера</mat-label>
+      <input matInput type="number">
+    </mat-form-field>
+
+    <section class="w-100 row flex-align-center">
+      <mat-checkbox>Аудиовыход</mat-checkbox>
+    </section>
+
+    <mat-form-field class="w-100">
+      <mat-label>Разъём подключения</mat-label>
+      <mat-select></mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Длина, мм</mat-label>
+      <input matInput type="number">
+    </mat-form-field>
+
+
+    <mat-form-field class="w-100">
+      <mat-label>Ширина, мм</mat-label>
+      <input matInput type="number">
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Толщина, мм</mat-label>
+      <input matInput type="number">
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Вес, г</mat-label>
+      <input matInput type="number">
+    </mat-form-field>
+  </div>
+  <div class="row flex-justify-end">
+    <button mat-stroked-button color="primary">Добавить</button>
+  </div>
+</mat-card>
+

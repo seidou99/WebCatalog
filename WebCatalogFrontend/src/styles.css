@@ -157,10 +157,30 @@ app-app-phones-list {
   padding-left: 1em;
 }
 
+.pr-1 {
+  padding-right: 1em;
+}
+
 .grid {
   display: grid;
 }
 
-.product-info-grid {
+.grid1fr1fr {
   grid-template-columns: 1fr 1fr;
+}
+
+.grid-col-gap2em {
+  grid-column-gap: 2em;
+}
+
+.flex-align-center {
+  align-items: center;
+}
+
+.flex-justify-end {
+  justify-content: flex-end;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
