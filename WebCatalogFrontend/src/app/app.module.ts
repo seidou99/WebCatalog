@@ -21,8 +21,10 @@ import {AppPhoneComponent} from './components/app-phone/app-phone.component';
 import {MatDividerModule} from '@angular/material/divider';
 import {NewPhoneModelComponent} from './components/new-phone-model/new-phone-model.component';
 import {MatDialogModule} from '@angular/material/dialog';
-import {AppDialogWithNameAndDescriptionComponent} from './components/app-dialog-with-name-and-description/app-dialog-with-name-and-description.component';
+import {AppDialogWithNameComponent} from './components/app-dialog-with-name/app-dialog-with-name.component';
 import {HttpClientModule} from '@angular/common/http';
+import { AppNewOperationSystemWithVersionDialogComponent } from './components/app-new-operation-system-with-version-dialog/app-new-operation-system-with-version-dialog.component';
+import { AppNewProcessorComponent } from './components/app-new-processor/app-new-processor.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import {HttpClientModule} from '@angular/common/http';
     AppHomePageComponent,
     AppPhoneComponent,
     NewPhoneModelComponent,
-    AppDialogWithNameAndDescriptionComponent,
+    AppDialogWithNameComponent,
+    AppNewOperationSystemWithVersionDialogComponent,
+    AppNewProcessorComponent,
   ],
   imports: [
     BrowserModule,

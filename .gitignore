@@ -106,8 +106,6 @@
 /.idea/inspectionProfiles/Project_Default.xml
 /.idea/vcs.xml
 /.idea/WebCatalog.iml
-/WebCatalogBackend/.mvn/wrapper/maven-wrapper.jar
-/WebCatalogBackend/.mvn/wrapper/maven-wrapper.jar
 /.idea/dataSources/0cff42df-4f87-4ef1-ae81-9998c6528b8f.xml
 /.idea/dataSources/58fc8459-ff6c-459d-a638-de1b9b272315.xml
 /conf/db/create-schema.sql

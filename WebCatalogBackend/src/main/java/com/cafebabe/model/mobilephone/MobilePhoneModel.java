@@ -1,6 +1,6 @@
 package com.cafebabe.model.mobilephone;
 
-import com.cafebabe.model.BaseDataObject;
+import com.cafebabe.model.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,14 +14,15 @@ import java.util.List;
 public class MobilePhoneModel extends BaseDataObject {
 
     @ManyToOne
-    protected MobilePhoneManufacturer manufacturer;
+    protected Manufacturer manufacturer;
 
     protected Date marketLaunchDate;
 
+    @Enumerated(EnumType.STRING)
     protected MobilePhoneType mobilePhoneType;
 
     @ManyToOne
-    protected MobilePhoneOperationSystemWithVersion operationSystem;
+    protected OperationSystemWithVersion operationSystem;
 
     protected Float screenDiagonalInInches;
 
@@ -34,6 +35,9 @@ public class MobilePhoneModel extends BaseDataObject {
     @ManyToOne
     protected RamType ramType;
 
+    @ManyToOne
+    protected FingerprintScannerLocation fingerprintScannerLocation;
+
     protected Integer romSizeInGb;
 
     @ManyToOne
@@ -43,6 +47,9 @@ public class MobilePhoneModel extends BaseDataObject {
     protected List<MobilePhoneCamera> cameras;
 
     protected Integer simCardsNumber;
+
+    @ManyToOne
+    protected SimCardType simCardType;
 
     @ManyToMany
     protected List<MemoryCardType> supportedMemoryCardTypes;

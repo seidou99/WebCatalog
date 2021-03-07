@@ -1,7 +1,7 @@
 package com.cafebabe.service.impl;
 
 import com.cafebabe.repository.BaseDataObjectRepository;
-import com.cafebabe.service.BaseDataObjectService;
+import com.cafebabe.service.interfaces.BaseDataObjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigInteger;
@@ -12,7 +12,7 @@ public class BaseDataObjectServiceImpl<S extends BaseDataObjectRepository<T>, T>
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
-    S baseRepository;
+    protected S baseRepository;
 
     @Override
     public Optional<T> findById(BigInteger id) {
@@ -28,4 +28,6 @@ public class BaseDataObjectServiceImpl<S extends BaseDataObjectRepository<T>, T>
     public T save(T pojo) {
         return baseRepository.save(pojo);
     }
+
+
 }

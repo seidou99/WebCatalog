@@ -1,6 +1,8 @@
 package com.cafebabe.model.mobilephone;
 
 import com.cafebabe.model.BaseDataObject;
+import com.cafebabe.model.Cpu;
+import com.cafebabe.model.Gpu;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,8 +15,8 @@ import javax.persistence.OneToOne;
 public class MobileApuPlatform extends BaseDataObject {
 
     @OneToOne
-    protected MobileCpu mobileCpu;
+    protected Cpu mobileCpu;
 
     @OneToOne
-    protected MobileGpu mobileGpu;
+    protected Gpu mobileGpu;
 }
