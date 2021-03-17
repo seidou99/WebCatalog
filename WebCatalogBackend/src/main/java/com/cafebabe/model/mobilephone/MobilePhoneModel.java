@@ -30,6 +30,11 @@ public class MobilePhoneModel extends BaseDataObject {
 
     protected Integer verticalScreenResolution;
 
+    @ManyToOne
+    protected ScreenTechnology screenTechnology;
+
+    protected Integer screenRefreshRate;
+
     protected Integer ramSizeInGb;
 
     @ManyToOne
@@ -43,13 +48,21 @@ public class MobilePhoneModel extends BaseDataObject {
     @ManyToOne
     protected RomType romType;
 
-    @OneToMany
-    protected List<MobilePhoneCamera> cameras;
+//    @OneToMany
+//    protected List<MobilePhoneCamera> cameras;
 
-    protected Integer simCardsNumber;
+    protected Integer simCardsAmount;
 
     @ManyToOne
     protected SimCardType simCardType;
+
+    protected boolean isMemoryCardSupported;
+
+    protected Integer camerasAmount;
+
+    protected Integer cameraInMp;
+
+    protected boolean is5GSupported;
 
     @ManyToMany
     protected List<MemoryCardType> supportedMemoryCardTypes;

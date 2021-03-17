@@ -24,7 +24,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {AppDialogWithNameComponent} from './components/app-dialog-with-name/app-dialog-with-name.component';
 import {HttpClientModule} from '@angular/common/http';
 import { AppNewOperationSystemWithVersionDialogComponent } from './components/app-new-operation-system-with-version-dialog/app-new-operation-system-with-version-dialog.component';
-import { AppNewProcessorComponent } from './components/app-new-processor/app-new-processor.component';
+import { AppNewCpuComponent } from './components/app-new-cpu/app-new-cpu.component';
+import {AppNewGpuComponent} from './components/app-new-gpu/app-new-gpu.component';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { AppNewProcessorComponent } from './components/app-new-processor/app-new
     NewPhoneModelComponent,
     AppDialogWithNameComponent,
     AppNewOperationSystemWithVersionDialogComponent,
-    AppNewProcessorComponent,
+    AppNewCpuComponent,
+    AppNewGpuComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +58,8 @@ import { AppNewProcessorComponent } from './components/app-new-processor/app-new
     MatDividerModule,
     MatDialogModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,19 @@
+<h2 matDialogTitle>Создать новый графический процессор</h2>
+<mat-dialog-content>
+  <mat-form-field class="w-100">
+    <mat-label>Название</mat-label>
+    <input matInput [(ngModel)]="result.name">
+  </mat-form-field>
+  <mat-form-field class="w-100">
+    <mat-label>Частота графического процессора</mat-label>
+    <input matInput [(ngModel)]="result.streamingProcessorsAmount" type="number">
+  </mat-form-field>
+  <mat-form-field class="w-100">
+    <mat-label>Количество потоковых ядер</mat-label>
+    <input matInput [(ngModel)]="result.clockSpeedInMHz" type="number">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Отмена</button>
+  <button mat-button [mat-dialog-close]="result" cdkFocusInitial>Создать</button>
+</mat-dialog-actions>

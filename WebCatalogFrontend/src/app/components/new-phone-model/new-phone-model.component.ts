@@ -12,10 +12,15 @@ import {OperationSystemWithVersionService} from '../../services/operation-system
 import {ManufacturerType} from '../../model/manufacturer-type';
 import {BaseDataObject} from '../../model/base-data-object';
 import {SimCardTypeService} from '../../services/sim-card-type.service';
-import {DustAndMoistureProtectionService} from "../../services/dust-and-moisture-protection.service";
-import {BaseDataObjectService} from "../../services/base-data-object-service";
-import {FingerprintScannerLocationService} from "../../services/fingerprint-scanner-location.service";
-import {ScreenProtectionService} from "../../services/screen-protection.service";
+import {DustAndMoistureProtectionService} from '../../services/dust-and-moisture-protection.service';
+import {BaseDataObjectService} from '../../services/base-data-object-service';
+import {FingerprintScannerLocationService} from '../../services/fingerprint-scanner-location.service';
+import {ScreenProtectionService} from '../../services/screen-protection.service';
+import {Cpu} from '../../model/cpu';
+import {AppNewCpuComponent} from '../app-new-cpu/app-new-cpu.component';
+import {CpuService} from '../../services/cpu.service';
+import {GpuType} from '../../model/gpu';
+import {FormBuilder} from "@angular/forms";
 
 @Component({
   selector: 'app-new-phone-model',
@@ -29,9 +34,47 @@ export class NewPhoneModelComponent implements OnInit {
               public simCardTypeService: SimCardTypeService,
               public dustAndMoistureProtectionService: DustAndMoistureProtectionService,
               public fingerprintScannerLocationService: FingerprintScannerLocationService,
-              public screenProtectionService: ScreenProtectionService) {
+              public screenProtectionService: ScreenProtectionService,
+              public cpuService: CpuService,
+              private fb: FormBuilder) {
+    const mapper = () => this.fb.control([null]);
+    const ramArray = this.fb.array(this.ramAndRomVariants.map(mapper));
+    const romArray = this.fb.array(this.ramAndRomVariants.map(mapper));
+    this.phoneModelForm.addControl('ramVariants', ramArray);
+    this.phoneModelForm.addControl('romVariants', romArray);
   }
 
+  phoneModelForm = this.fb.group({
+    manufacturer: [null],
+    releaseYear: [null],
+    operationSystem: [null],
+    screenDiagonalInInches: [null],
+    horizontalScreenResolution: [null],
+    verticalScreenResolution: [null],
+    screenTechnology: [null],
+    screenRefreshRate: [null],
+    isMemoryCardSupported: [false],
+    camerasAmount: [1],
+    cameraInMp: [null],
+    simCardsAmount: [1],
+    simCardType: [null],
+    is5GSupported: [false],
+    bodyColor: [null],
+    dustAndMoistureProtection: [null],
+    batteryCapacity: [null],
+    fingerprintScannerLocation: [null],
+    screenResolutionPpi: [null],
+    screenProtection: [null],
+    cpu: [null],
+    audioProcessor: [false],
+    frontCamera: [null],
+    audioOutput: [false],
+    connectionSocket: [null],
+    length: [null],
+    width: [null],
+    thickness: [null],
+    weight: [null]
+  });
   ramAndRomVariants: Array<number> = [1];
   manufacturers: Array<Manufacturer> = [];
   operationSystemsWithVersions: Array<OperationSystemWithVersion> = [];
@@ -40,6 +83,7 @@ export class NewPhoneModelComponent implements OnInit {
   dustAndMoistureProtections: Array<BaseDataObject> = [];
   fingerprintScannerLocations: Array<BaseDataObject> = [];
   screenProtections: Array<BaseDataObject> = [];
+  cpus: Array<Cpu> = [];
 
   async ngOnInit(): Promise<void> {
     this.manufacturers = await this.manufacturerService.getAll().toPromise();
@@ -53,6 +97,11 @@ export class NewPhoneModelComponent implements OnInit {
     for (let i = 0; i < $event.target.value; i++) {
       this.ramAndRomVariants.push(i + 1);
     }
+    const mapper = () => this.fb.control([null]);
+    const ramArray = this.fb.array(this.ramAndRomVariants.map(mapper));
+    const romArray = this.fb.array(this.ramAndRomVariants.map(mapper));
+    this.phoneModelForm.setControl('ramVariants', ramArray);
+    this.phoneModelForm.setControl('romVariants', romArray);
   }
 
   async createNewManufacturer(): Promise<void> {
@@ -103,6 +152,22 @@ export class NewPhoneModelComponent implements OnInit {
     );
   }
 
+  async createNewMobilePhoneCpu(): Promise<void> {
+    const dialogRef = this.dialog.open(AppNewCpuComponent, {width: '600px'});
+    const cpu = await dialogRef.afterClosed().toPromise() as Cpu;
+    if (cpu) {
+      if (cpu.integratedGpu) {
+        cpu.integratedGpu.gpuType = GpuType.MOBILE;
+        cpu.integratedGpu.isIntegrated = true;
+      }
+      console.log(cpu);
+      await this.cpuService.save(cpu).toPromise();
+      this.cpus = await this.cpuService.getAll().toPromise();
+      console.log(this.cpus);
+    }
+
+  }
+
   async createNewBaseDataObjectAndReloadAll(dialogTitle: string, baseDataObjectService: BaseDataObjectService<BaseDataObject>)
     : Promise<Array<BaseDataObject>> {
     const dialogRef = this.dialog.open(AppDialogWithNameComponent, {
@@ -115,6 +180,20 @@ export class NewPhoneModelComponent implements OnInit {
     const data = await baseDataObjectService.getAll().toPromise();
     // unlock field
     return data;
+  }
+
+  async createNewPhoneModel(): Promise<void> {
+    const rawValue = this.phoneModelForm.getRawValue();
+    console.log('poshel nahui');
+    console.log(rawValue);
+  }
+
+  nameDisplayFunction(object: BaseDataObject): string {
+    let result = '';
+    if (object && object.name) {
+      result = object.name;
+    }
+    return result;
   }
 
 }

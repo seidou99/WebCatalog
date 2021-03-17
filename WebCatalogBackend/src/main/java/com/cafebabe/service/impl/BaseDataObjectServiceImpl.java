@@ -29,5 +29,8 @@ public class BaseDataObjectServiceImpl<S extends BaseDataObjectRepository<T>, T>
         return baseRepository.save(pojo);
     }
 
-
+    @Override
+    public Iterable<T> save(Iterable<T> pojos) {
+        return baseRepository.saveAll(pojos);
+    }
 }

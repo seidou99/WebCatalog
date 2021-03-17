@@ -11,4 +11,6 @@ public interface BaseDataObjectService<T> {
     List<T> findAll();
 
     T save(T pojo);
+
+    Iterable<T> save(Iterable<T> pojos);
 }

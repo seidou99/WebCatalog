@@ -14,12 +14,12 @@ import java.util.List;
 public class Cpu extends BaseDataObject {
 
     protected Integer clockSpeedImMHz;
-    protected String cores;
     @ManyToOne
     protected Gpu integratedGpu;
 
     @ManyToMany
-    protected List<CpuMicroarchitecture> microarchitectureList;
+    protected List<CpuCoresBlock> coresBlocks;
+
     protected Integer digitalCapacityInBits;
     protected Integer techprocessInNm;
 

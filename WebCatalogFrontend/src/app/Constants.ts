@@ -12,6 +12,8 @@ export class Constants {
   static readonly DUST_AND_MOISTURE_PROTECTION_PATH = 'dust-and-moisture-protections';
   static readonly FINGERPRINT_SCANNER_LOCATIONS_PATH = 'fingerprint-scanner-locations';
   static readonly SCREEN_PROTECTIONS_PATH = 'screen-protections';
+  static readonly GPUS_PATH = 'gpus';
+  static readonly CPUS_PATH = 'cpus';
   static readonly MOBILE_PHONES_API_URL = `${Constants.SERVER_API_URL}/${Constants.MOBILE_PHONES_PATH}`;
   static readonly MANUFACTURERS_API_URL = `${Constants.SERVER_API_URL}/${Constants.MANUFACTURERS_PATH}`;
   static readonly OPERATION_SYSTEMS_API_URL = `${Constants.SERVER_API_URL}/${Constants.OPERATION_SYSTEMS_PATH}`;
@@ -21,4 +23,7 @@ export class Constants {
   static readonly DUST_AND_MOISTURE_PROTECTION_API_URL = `${Constants.SERVER_API_URL}/${Constants.DUST_AND_MOISTURE_PROTECTION_PATH}`;
   static readonly FINGERPRINT_SCANNER_LOCATIONS_API_URL = `${Constants.SERVER_API_URL}/${Constants.FINGERPRINT_SCANNER_LOCATIONS_PATH}`;
   static readonly SCREEN_PROTECTIONS_API_URL = `${Constants.SERVER_API_URL}/${Constants.SCREEN_PROTECTIONS_PATH}`;
+  static readonly GPUS_API_URL = `${Constants.SERVER_API_URL}/${Constants.GPUS_PATH}`;
+  static readonly MOBILE_GPUS_API_URL = `${Constants.SERVER_API_URL}/mobile-integrated-gpus`;
+  static readonly CPUS_API_URL = `${Constants.SERVER_API_URL}/${Constants.CPUS_PATH}`;
 }

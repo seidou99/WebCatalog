@@ -1,0 +1,49 @@
+<h2 matDialogTitle>Создать новый процессор</h2>
+<mat-dialog-content>
+  <mat-form-field class="w-100">
+    <mat-label>Название</mat-label>
+    <input matInput [(ngModel)]="result.name">
+  </mat-form-field>
+  <section class="w-100 row flex-align-center">
+    <mat-checkbox [(ngModel)]="hasIntegratedGpu">Имеет интегрированную видеокарту</mat-checkbox>
+  </section>
+  <div class="row flex-align-center" *ngIf="hasIntegratedGpu">
+    <mat-form-field class="w-100">
+      <mat-label>Интегрированная видеокарта</mat-label>
+      <mat-select [(ngModel)]="result.integratedGpu">
+        <mat-option *ngFor="let gpu of integratedGpus" [value]="gpu">{{gpu.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-icon class="cursor-pointer" (click)="createNewIntegratedGpu()">add</mat-icon>
+  </div>
+  <mat-form-field class="w-100">
+    <mat-label>Разрядность</mat-label>
+    <input matInput [(ngModel)]="result.digitalCapacityInBits">
+  </mat-form-field>
+  <mat-form-field class="w-100">
+    <mat-label>Техпроцесс, нм</mat-label>
+    <input matInput [(ngModel)]="result.techprocessInNm">
+  </mat-form-field>
+  <mat-form-field class="w-100">
+    <mat-label>Количество блоков ядер</mat-label>
+    <input matInput (change)="changeCoresBlocksAmount($event)" type="number">
+  </mat-form-field>
+  <div *ngFor="let i of coresBlocks">
+    <mat-form-field class="w-100">
+      <mat-label>Название блока {{i + 1}}</mat-label>
+      <input matInput [(ngModel)]="result.coresBlocks[i].name">
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <mat-label>Количество ядер {{i + 1}}</mat-label>
+      <input matInput type="number" [(ngModel)]="result.coresBlocks[i].coresAmount">
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <mat-label>Тактовая частота {{i + 1}}</mat-label>
+      <input matInput type="number" [(ngModel)]="result.coresBlocks[i].clockSpeedInMHz">
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Отмена</button>
+  <button mat-button [mat-dialog-close]="result" cdkFocusInitial>Создать</button>
+</mat-dialog-actions>
