@@ -8,5 +8,8 @@ import javax.persistence.Entity;
 @Entity
 @Getter
 @Setter
-public class FingerprintScannerLocation extends BaseDataObject {
+public class RamAndRomVariant extends BaseDataObject {
+
+    protected int ramSizeInGb;
+    protected int romSizeInGb;
 }

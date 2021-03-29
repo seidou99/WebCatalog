@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -16,7 +15,7 @@ public class MobilePhoneModel extends BaseDataObject {
     @ManyToOne
     protected Manufacturer manufacturer;
 
-    protected Date marketLaunchDate;
+    protected int marketLaunchYear;
 
     @Enumerated(EnumType.STRING)
     protected MobilePhoneType mobilePhoneType;
@@ -25,6 +24,9 @@ public class MobilePhoneModel extends BaseDataObject {
     protected OperationSystemWithVersion operationSystem;
 
     protected Float screenDiagonalInInches;
+
+    @OneToMany
+    protected List<RamAndRomVariant> ramAndRomVariants;
 
     protected Integer horizontalScreenResolution;
 
@@ -35,21 +37,14 @@ public class MobilePhoneModel extends BaseDataObject {
 
     protected Integer screenRefreshRate;
 
-    protected Integer ramSizeInGb;
-
     @ManyToOne
     protected RamType ramType;
 
     @ManyToOne
     protected FingerprintScannerLocation fingerprintScannerLocation;
 
-    protected Integer romSizeInGb;
-
     @ManyToOne
     protected RomType romType;
-
-//    @OneToMany
-//    protected List<MobilePhoneCamera> cameras;
 
     protected Integer simCardsAmount;
 
@@ -64,10 +59,19 @@ public class MobilePhoneModel extends BaseDataObject {
 
     protected boolean is5GSupported;
 
-    @ManyToMany
-    protected List<MemoryCardType> supportedMemoryCardTypes;
+//    @ManyToMany
+//    protected List<MemoryCardType> supportedMemoryCardTypes;
 
-    protected Integer maxMemoryCardSizeInGb;
+//    protected Integer maxMemoryCardSizeInGb;
+
+    protected boolean hasAudioProcessor;
+
+    protected float frontCamera;
+
+    protected boolean hasAudioOutput;
+
+    @ManyToOne
+    protected ConnectionSocket connectionSocket;
 
     protected String bodyMaterial;
 
@@ -76,4 +80,6 @@ public class MobilePhoneModel extends BaseDataObject {
     protected Float width;
 
     protected Float thickness;
+
+    protected Float weight;
 }

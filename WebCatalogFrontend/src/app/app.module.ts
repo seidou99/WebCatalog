@@ -26,6 +26,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { AppNewOperationSystemWithVersionDialogComponent } from './components/app-new-operation-system-with-version-dialog/app-new-operation-system-with-version-dialog.component';
 import { AppNewCpuComponent } from './components/app-new-cpu/app-new-cpu.component';
 import {AppNewGpuComponent} from './components/app-new-gpu/app-new-gpu.component';
+import { AppPhoneModelsListComponent } from './components/app-phone-models-list/app-phone-models-list.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import {AppNewGpuComponent} from './components/app-new-gpu/app-new-gpu.component
     AppNewOperationSystemWithVersionDialogComponent,
     AppNewCpuComponent,
     AppNewGpuComponent,
+    AppPhoneModelsListComponent,
   ],
   imports: [
     BrowserModule,

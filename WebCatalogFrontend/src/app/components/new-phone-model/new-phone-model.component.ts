@@ -20,7 +20,12 @@ import {Cpu} from '../../model/cpu';
 import {AppNewCpuComponent} from '../app-new-cpu/app-new-cpu.component';
 import {CpuService} from '../../services/cpu.service';
 import {GpuType} from '../../model/gpu';
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder} from '@angular/forms';
+import {RamAndRomVariant} from '../../model/ram-and-rom-variant';
+import {MobilePhoneModel} from '../../model/mobile-phone-model';
+import {MobilePhoneModelService} from '../../services/mobile-phone-model.service';
+import {ConnectionSocketService} from "../../services/connection-socket.service";
+import {BodyColorService} from "../../services/body-color.service";
 
 @Component({
   selector: 'app-new-phone-model',
@@ -35,18 +40,21 @@ export class NewPhoneModelComponent implements OnInit {
               public dustAndMoistureProtectionService: DustAndMoistureProtectionService,
               public fingerprintScannerLocationService: FingerprintScannerLocationService,
               public screenProtectionService: ScreenProtectionService,
-              public cpuService: CpuService,
-              private fb: FormBuilder) {
+              public cpuService: CpuService, private fb: FormBuilder,
+              private mobilePhoneModelService: MobilePhoneModelService,
+              public connectionSocketService: ConnectionSocketService,
+              public bodyColorService: BodyColorService) {
     const mapper = () => this.fb.control([null]);
-    const ramArray = this.fb.array(this.ramAndRomVariants.map(mapper));
-    const romArray = this.fb.array(this.ramAndRomVariants.map(mapper));
+    const ramArray = this.fb.array(this.ramAndRomVariantsAmount.map(mapper));
+    const romArray = this.fb.array(this.ramAndRomVariantsAmount.map(mapper));
     this.phoneModelForm.addControl('ramVariants', ramArray);
     this.phoneModelForm.addControl('romVariants', romArray);
   }
 
   phoneModelForm = this.fb.group({
+    name: [null],
     manufacturer: [null],
-    releaseYear: [null],
+    marketLaunchYear: [null],
     operationSystem: [null],
     screenDiagonalInInches: [null],
     horizontalScreenResolution: [null],
@@ -66,16 +74,16 @@ export class NewPhoneModelComponent implements OnInit {
     screenResolutionPpi: [null],
     screenProtection: [null],
     cpu: [null],
-    audioProcessor: [false],
-    frontCamera: [null],
-    audioOutput: [false],
+    hasAudioProcessor: [false],
+    frontCameraInMp: [null],
+    hasAudioOutput: [false],
     connectionSocket: [null],
     length: [null],
     width: [null],
     thickness: [null],
     weight: [null]
   });
-  ramAndRomVariants: Array<number> = [1];
+  ramAndRomVariantsAmount: Array<number> = [1];
   manufacturers: Array<Manufacturer> = [];
   operationSystemsWithVersions: Array<OperationSystemWithVersion> = [];
   screenTechnologies: Array<ScreenTechnology> = [];
@@ -84,22 +92,34 @@ export class NewPhoneModelComponent implements OnInit {
   fingerprintScannerLocations: Array<BaseDataObject> = [];
   screenProtections: Array<BaseDataObject> = [];
   cpus: Array<Cpu> = [];
+  connectionSockets: Array<BaseDataObject> = [];
+  bodyColors: Array<BaseDataObject> = [];
 
   async ngOnInit(): Promise<void> {
-    this.manufacturers = await this.manufacturerService.getAll().toPromise();
-    this.operationSystemsWithVersions = await this.operationSystemWithVersionService.getAll().toPromise();
-    this.screenTechnologies = await this.screenTechnologyService.getAll().toPromise();
-    console.log(this.manufacturers);
+    this.loadAllToField(this.manufacturerService, 'manufacturers');
+    this.loadAllToField(this.operationSystemWithVersionService, 'operationSystemsWithVersions');
+    this.loadAllToField(this.screenTechnologyService, 'screenTechnologies');
+    this.loadAllToField(this.cpuService, 'cpus');
+    this.loadAllToField(this.dustAndMoistureProtectionService, 'dustAndMoistureProtections');
+    this.loadAllToField(this.fingerprintScannerLocationService, 'fingerprintScannerLocations');
+    this.loadAllToField(this.screenProtectionService, 'screenProtections');
+    this.loadAllToField(this.simCardTypeService, 'simCardTypes');
+    this.loadAllToField(this.connectionSocketService, 'connectionSockets');
+    this.loadAllToField(this.bodyColorService, 'bodyColors');
   }
 
-  changeRamAndRomVariants($event: any): void {
-    this.ramAndRomVariants = [];
+  loadAllToField(service: BaseDataObjectService<any>, fieldName: string): void {
+    service.getAll().subscribe(data => this[fieldName] = data);
+  }
+
+  changeRamAndRomVariantsAmount($event: any): void {
+    this.ramAndRomVariantsAmount = [];
     for (let i = 0; i < $event.target.value; i++) {
-      this.ramAndRomVariants.push(i + 1);
+      this.ramAndRomVariantsAmount.push(i + 1);
     }
     const mapper = () => this.fb.control([null]);
-    const ramArray = this.fb.array(this.ramAndRomVariants.map(mapper));
-    const romArray = this.fb.array(this.ramAndRomVariants.map(mapper));
+    const ramArray = this.fb.array(this.ramAndRomVariantsAmount.map(mapper));
+    const romArray = this.fb.array(this.ramAndRomVariantsAmount.map(mapper));
     this.phoneModelForm.setControl('ramVariants', ramArray);
     this.phoneModelForm.setControl('romVariants', romArray);
   }
@@ -152,20 +172,16 @@ export class NewPhoneModelComponent implements OnInit {
     );
   }
 
-  async createNewMobilePhoneCpu(): Promise<void> {
-    const dialogRef = this.dialog.open(AppNewCpuComponent, {width: '600px'});
-    const cpu = await dialogRef.afterClosed().toPromise() as Cpu;
-    if (cpu) {
-      if (cpu.integratedGpu) {
-        cpu.integratedGpu.gpuType = GpuType.MOBILE;
-        cpu.integratedGpu.isIntegrated = true;
-      }
-      console.log(cpu);
-      await this.cpuService.save(cpu).toPromise();
-      this.cpus = await this.cpuService.getAll().toPromise();
-      console.log(this.cpus);
-    }
+  async createNewBodyColor(): Promise<void> {
+    this.bodyColors = await this.createNewBaseDataObjectAndReloadAll(
+      'Создать новый цвет корпуса', this.bodyColorService
+    );
+  }
 
+  async createNewConnectionSocket(): Promise<void> {
+    this.connectionSockets = await this.createNewBaseDataObjectAndReloadAll(
+      'Создать новый порт подключения', this.connectionSocketService
+    );
   }
 
   async createNewBaseDataObjectAndReloadAll(dialogTitle: string, baseDataObjectService: BaseDataObjectService<BaseDataObject>)
@@ -182,10 +198,36 @@ export class NewPhoneModelComponent implements OnInit {
     return data;
   }
 
+  async createNewMobilePhoneCpu(): Promise<void> {
+    const dialogRef = this.dialog.open(AppNewCpuComponent, {width: '600px'});
+    const cpu = await dialogRef.afterClosed().toPromise() as Cpu;
+    if (cpu) {
+      if (cpu.integratedGpu) {
+        cpu.integratedGpu.gpuType = GpuType.MOBILE;
+        cpu.integratedGpu.isIntegrated = true;
+      }
+      console.log(cpu);
+      await this.cpuService.save(cpu).toPromise();
+      this.cpus = await this.cpuService.getAll().toPromise();
+      console.log(this.cpus);
+    }
+  }
+
   async createNewPhoneModel(): Promise<void> {
     const rawValue = this.phoneModelForm.getRawValue();
-    console.log('poshel nahui');
-    console.log(rawValue);
+    const ramAndRomVariants = this.ramAndRomVariantsAmount.map(
+      (i) => new RamAndRomVariant(rawValue.ramVariants[i - 1], rawValue.romVariants[i - 1])
+    );
+    const mobilePhoneModel = new MobilePhoneModel(rawValue.name, rawValue.manufacturer, rawValue.marketLaunchYear, rawValue.operationSystem,
+      rawValue.screenDiagonalInInches, rawValue.horizontalScreenResolution, rawValue.verticalScreenResolution,
+      rawValue.screenTechnology, rawValue.screenRefreshRate, ramAndRomVariants, rawValue.isMemoryCardSupported,
+      rawValue.camerasAmount, rawValue.cameraInMp, rawValue.simCardsAmount, rawValue.simCardTypes, rawValue.is5GSupported,
+      rawValue.bodyColor, rawValue.dustAndMoistureProtection, rawValue.batteryCapacity, rawValue.fingerprintScannerLocation,
+      rawValue.screenProtection, rawValue.cpu, rawValue.hasAudioProcessor, rawValue.frontCameraInMp, rawValue.hasAudioOutput,
+      rawValue.connectionSocket, rawValue.length, rawValue.width, rawValue.thickness, rawValue.weight);
+    console.log('mobile phone model');
+    console.log(mobilePhoneModel);
+    await this.mobilePhoneModelService.save(mobilePhoneModel).toPromise();
   }
 
   nameDisplayFunction(object: BaseDataObject): string {

@@ -1,12 +1,18 @@
 <mat-card class="m-1" [formGroup]="phoneModelForm">
   <h2>Добавить новую модель телефона</h2>
   <div class="grid1fr1fr grid grid-col-gap2em">
+    <mat-form-field class="w-100">
+      <mat-label>Название</mat-label>
+      <input matInput type="text" formControlName="name">
+    </mat-form-field>
+
     <div class="row flex-align-center">
       <mat-form-field class="w-100">
         <mat-label>Производитель</mat-label>
         <input type="text" matInput [matAutocomplete]="auto" formControlName="manufacturer">
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="nameDisplayFunction">
-          <mat-option *ngFor="let manufacturer of manufacturers" [value]="manufacturer">{{manufacturer.name}}</mat-option>
+          <mat-option *ngFor="let manufacturer of manufacturers"
+                      [value]="manufacturer">{{manufacturer.name}}</mat-option>
         </mat-autocomplete>
       </mat-form-field>
       <mat-icon class="cursor-pointer" (click)="createNewManufacturer()">add</mat-icon>
@@ -14,7 +20,7 @@
 
     <mat-form-field class="w-100">
       <mat-label>Год выхода на рынок</mat-label>
-      <input matInput type="number" formControlName="releaseYear">
+      <input matInput type="number" formControlName="marketLaunchYear">
     </mat-form-field>
 
     <div class="row flex-align-center">
@@ -63,12 +69,13 @@
 
     <mat-form-field class="w-100">
       <mat-label>Количество вариантов оперативной и постоянной памяти</mat-label>
-      <input matInput type="number" [value]="ramAndRomVariants.length" (change)="changeRamAndRomVariants($event)">
+      <input matInput type="number" [value]="ramAndRomVariantsAmount.length"
+             (change)="changeRamAndRomVariantsAmount($event)">
     </mat-form-field>
 
     <div></div>
 
-    <div class="grid grid1fr1fr grid-col-2 grid-col-gap2em" *ngFor="let i of ramAndRomVariants">
+    <div class="grid grid1fr1fr grid-col-2 grid-col-gap2em" *ngFor="let i of ramAndRomVariantsAmount">
       <mat-form-field class="w-100" formArrayName="ramVariants">
         <mat-label class="block">Оперативня память {{i}}, МБ</mat-label>
         <input matInput type="number" [formControlName]="i - 1">
@@ -81,11 +88,11 @@
     </div>
 
     <section class="w-100 row flex-align-center">
-      <mat-checkbox>Поддержка карт памяти</mat-checkbox>
+      <mat-checkbox formControlName="isMemoryCardSupported">Поддержка карт памяти</mat-checkbox>
     </section>
 
     <mat-form-field class="w-100">
-      <mat-label>Количество основных камер</mat-label>
+      <mat-label>Количество модулей камеры</mat-label>
       <input matInput type="number" formControlName="camerasAmount">
     </mat-form-field>
 
@@ -113,10 +120,15 @@
       <mat-checkbox formControlName="is5GSupported">Поддержка 5G</mat-checkbox>
     </section>
 
-    <mat-form-field class="w-100">
-      <mat-label class="block">Цвет корпуса</mat-label>
-      <mat-select formControlName="bodyColor"></mat-select>
-    </mat-form-field>
+    <div class="row flex-align-center">
+      <mat-form-field class="w-100">
+        <mat-label class="block">Цвет корпуса</mat-label>
+        <mat-select formControlName="bodyColor">
+          <mat-option *ngFor="let color of bodyColors" [value]="color">{{color.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-icon class="cursor-pointer" (click)="createNewBodyColor()">add</mat-icon>
+    </div>
 
     <div class="row flex-align-center">
       <mat-form-field class="w-100">
@@ -176,22 +188,27 @@
     </div>
 
     <section class="w-100 flex-align-center row">
-      <mat-checkbox formControlName="audioProcessor">Аудиопроцессор</mat-checkbox>
+      <mat-checkbox formControlName="hasAudioProcessor">Аудиопроцессор</mat-checkbox>
     </section>
 
     <mat-form-field class="w-100">
       <mat-label>Фронтальная камера</mat-label>
-      <input matInput type="number" formControlName="frontCamera">
+      <input matInput type="number" formControlName="frontCameraInMp">
     </mat-form-field>
 
     <section class="w-100 row flex-align-center">
-      <mat-checkbox formControlName="audioOutput">Аудиовыход</mat-checkbox>
+      <mat-checkbox formControlName="hasAudioOutput">Аудиовыход</mat-checkbox>
     </section>
 
-    <mat-form-field class="w-100">
-      <mat-label>Разъём подключения</mat-label>
-      <mat-select formControlName="connectionSocket"></mat-select>
-    </mat-form-field>
+    <div class="row flex-align-center">
+      <mat-form-field class="w-100">
+        <mat-label>Разъём подключения</mat-label>
+        <mat-select formControlName="connectionSocket">
+          <mat-option *ngFor="let socket of connectionSockets" [value]="socket">{{socket.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-icon class="cursor-pointer" (click)="createNewConnectionSocket()">add</mat-icon>
+    </div>
 
     <mat-form-field class="w-100">
       <mat-label>Длина, мм</mat-label>
