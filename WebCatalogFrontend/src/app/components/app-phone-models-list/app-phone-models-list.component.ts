@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {PhoneModelFilterService} from '../../services/phone-model-filter.service';
 import {PhoneModelFilterVariants} from '../../model/phone-model-filter-variants';
 
 @Component({
@@ -48,7 +47,7 @@ export class AppPhoneModelsListComponent implements OnInit {
     gpu: []
   };
 
-  constructor(private phoneModelFilterService: PhoneModelFilterService) {
+  constructor() {
   }
 
   ngOnInit(): void {
