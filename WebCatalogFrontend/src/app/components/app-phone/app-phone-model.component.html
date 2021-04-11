@@ -64,75 +64,73 @@
   <mat-divider></mat-divider>
   <div class="grid pt-1 grid1fr1fr">
     <div>Дата выхода на рынок</div>
-    <div>2021 г.</div>
-    <div>Тип</div>
-    <div>смартфон</div>
+    <div>{{phoneModel.marketLaunchYear}}</div>
+<!--    <div>Тип</div>-->
+<!--    <div>смартфон</div>-->
     <div>Операционная система</div>
-    <div>Android</div>
+    <div>{{phoneModel.operationSystemWithVersion.operationSystem.name}}</div>
     <div>Версия операционной системы</div>
-    <div>Android 10.0</div>
+    <div>{{phoneModel.operationSystemWithVersion.version}}</div>
     <div>Размер экрана</div>
-    <div>6.53"</div>
+    <div>{{phoneModel.screenDiagonalInInches}}"</div>
     <div>Разрешение экрана</div>
-    <div>1080x2340</div>
+    <div>{{phoneModel.horizontalScreenResolution}}x{{phoneModel.verticalScreenResolution}}</div>
     <div>Оперативная память</div>
-    <div>4 ГБ  (LPDDR4X)</div>
+    <div>{{phoneModel.ramAndRomVariants.join(', ')}} ГБ</div>
     <div>Флэш-память</div>
-    <div>128 ГБ  (UFS 2.2)</div>
+    <div>128 ГБ</div>
     <div>Встроенная камера</div>
-    <div> 48 Мп + 8 Мп + 2 Мп + 2 Мп</div>
+    <div>{{phoneModel.cameraInMp}}</div>
     <div>Количество основных камер</div>
-    <div>4</div>
-    <div>Количество точек матрицы</div>
-    <div>48 Мп</div>
+    <div>{{phoneModel.camerasAmount}}</div>
     <div>Количество SIM-карт</div>
-    <div>2</div>
+    <div>{{phoneModel.simCardsAmount}}</div>
     <div>Формат SIM-карты</div>
-    <div>nano-SIM</div>
-    <div>Максимальное разрешение видео</div>
-    <div>1920x1080 (30 кадров/с)</div>
-    <div>Поддержка карт памяти</div>
-    <div> microSD, microSDHC, microSDXC  (до 512 ГБ)</div>
-    <div>Платформа</div>
-    <div>Qualcomm Snapdragon</div>
+    <div>{{phoneModel.simCardType}}</div>
+<!--    <div>Максимальное разрешение видео</div>-->
+<!--    <div>1920x1080 (30 кадров/с)</div>-->
+<!--    <div>Поддержка карт памяти</div>-->
+<!--    <div> microSD, microSDHC, microSDXC  (до 512 ГБ)</div>-->
+<!--    <div>Платформа</div>-->
+<!--    <div>Qualcomm Snapdragon</div>-->
     <div>Процессор</div>
-    <div>Qualcomm Snapdragon 662</div>
+    <div>{{phoneModel.cpu.name}}</div>
     <div>Тактовая частота процессора</div>
-    <div>2 000 МГц</div>
+    <div>{{phoneModel.cpu.clockSpeedImMHz}}</div>
     <div>Количество ядер</div>
-    <div>8 (4+4)</div>
+    <div>{{getCpuCoresAsString()}} 8 (4+4)</div>
     <div>Микроархитектура ЦПУ</div>
-    <div>Kryo 260 Performance 2000 МГц + Kryo 260 Efficiency 1800 МГц</div>
+    <div>{{getCpuMicroarchitectureAsString()}}Kryo 260 Performance 2000 МГц + Kryo 260 Efficiency 1800 МГц</div>
     <div>Разрядность процессора</div>
-    <div>64 бита</div>
+    <div>{{phoneModel.cpu.digitalCapacityInBits}} бита</div>
     <div>Техпроцесс</div>
-    <div>11 нм</div>
+    <div>{{phoneModel.cpu.techprocessInNm}} нм</div>
     <div>Графический ускоритель</div>
-    <div>Adreno 610</div>
-    <div>Конструкция корпуса</div>
-    <div>моноблок</div>
-    <div>Материал корпуса</div>
-    <div>пластик</div>
-    <div>Материал задней крышки</div>
-    <div>пластик</div>
-    <div>Цвет корпуса</div>
-    <div>оранжевый</div>
-    <div>Цвет фронтальной панели</div>
-    <div>черный</div>
+    <div>{{phoneModel.cpu?.integratedGpu?.name}}Adreno 610</div>
+<!--    <div>Конструкция корпуса</div>-->
+<!--    <div>моноблок</div>-->
+<!--    <div>Материал корпуса</div>-->
+<!--    <div>пластик</div>-->
+<!--    <div>Материал задней крышки</div>-->
+<!--    <div>пластик</div>-->
+<!--    <div>Цвет корпуса</div>-->
+<!--    <div>оранжевый</div>-->
+<!--    <div>Цвет фронтальной панели</div>-->
+<!--    <div>черный</div>-->
     <div>Длина</div>
-    <div>162.3 мм</div>
+    <div>{{phoneModel.length}} мм</div>
     <div>Ширина</div>
-    <div>77.3 мм</div>
+    <div>{{phoneModel.width}} мм</div>
     <div>Толщина</div>
-    <div>9.6 мм</div>
+    <div>{{phoneModel.thickness}} мм</div>
     <div>Вес</div>
-    <div>198 г</div>
+    <div>{{phoneModel.weight}} г</div>
     <div>Технология экрана</div>
-    <div>IPS</div>
-    <div>Количество цветов экрана</div>
-    <div>16 млн</div>
+    <div>{{phoneModel.screenTechnology}}</div>
+<!--    <div>Количество цветов экрана</div>-->
+<!--    <div>16 млн</div>-->
     <div>Разрешающая способность экрана</div>
-    <div>395 ppi</div>
+    <div>{{phoneModel.screenPpi}}</div>
     <div>Соотношение сторон</div>
     <div>19.5:9</div>
     <div>Частота обновления экрана</div>

@@ -1,4 +1,4 @@
-package com.cafebabe.model.mobilephone;
+package com.cafebabe.model;
 
 public enum ManufacturerType {
 

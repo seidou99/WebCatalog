@@ -1,15 +1,15 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Constants} from '../Constants';
+import {ApiConstants} from '../Constants';
 import {ScreenTechnology} from '../model/screen-technology';
-import {BaseDataObjectService} from "./base-data-object-service";
+import {BaseDataObjectRestService} from "./base-data-object-rest-service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class ScreenTechnologyService extends BaseDataObjectService<ScreenTechnology> {
+export class ScreenTechnologyService extends BaseDataObjectRestService<ScreenTechnology> {
 
-  apiUrl = Constants.SCREEN_TECHNOLOGIES_API_URL;
+  apiUrl = ApiConstants.SCREEN_TECHNOLOGIES_API_URL;
 
   constructor(public httpClient: HttpClient) {
     super(httpClient);

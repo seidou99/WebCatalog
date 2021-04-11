@@ -1,11 +1,7 @@
 package com.cafebabe.repository;
 
-import com.cafebabe.model.BaseDataObject;
-import com.cafebabe.model.Cpu;
-import org.springframework.stereotype.Repository;
-
-import java.util.List;
+import com.cafebabe.model.mobilephone.PhoneCpu;
 
 
-public interface CpuRepository extends BaseDataObjectRepository<Cpu> {
+public interface CpuRepository extends BaseDataObjectRepository<PhoneCpu> {
 }

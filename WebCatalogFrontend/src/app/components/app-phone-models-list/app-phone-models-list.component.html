@@ -257,7 +257,7 @@
     </mat-card>
   </div>
   <div class="col col-75 ml-1">
-    <mat-card>
+    <mat-card *ngFor="let phoneModel of phoneModels">
       <div class="row">
         <div class="col">
           <div class="product-image-preview-wrapper">
@@ -266,9 +266,18 @@
           </div>
         </div>
         <div class="col ml-1">
-          <a routerLink="1" class="mat-h2 phone-name-link">Смартфон Xiaomi Redmi 9T 4GB/128GB (оранжевый закат)</a>
-          <p>Android, экран 6.53" IPS (1080x2340), Qualcomm Snapdragon 662, ОЗУ 4 ГБ, флэш-память 128 ГБ, карты памяти,
-            камера 48 Мп, аккумулятор 6000 мАч, 2 SIM</p>
+          <a routerLink="{{phoneModel.id}}" class="mat-h2 phone-name-link">Xiaomi Redmi 9T 4GB/128GB (оранжевый
+            закат) {{phoneModel.name}}</a>
+          <p>Android {{phoneModel.operationSystemWithVersion.operationSystem.name}},
+            экран 6.53" {{phoneModel.screenDiagonalInInches}}"
+            IPS {{phoneModel.screenTechnology.name}}
+            (1080x2340) ({{phoneModel.horizontalScreenResolution}}x{{phoneModel.verticalScreenResolution}}),
+            Qualcomm Snapdragon 662 {{phoneModel.cpu.name}},
+            ОЗУ 4 {{phoneModel.ramAndRomVariants}} ГБ,
+            флэш-память 128 ГБ {{phoneModel.ramAndRomVariants}},
+            камера 48 {{phoneModel.cameraInMp}} Мп,
+            аккумулятор 6000 {{phoneModel.batteryCapacity}} мАч,
+            2 {{phoneModel.simCardsAmount}} SIM</p>
           <div>
             <mat-icon>star</mat-icon>
             <mat-icon>star</mat-icon>

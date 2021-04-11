@@ -13,7 +13,7 @@ import {ManufacturerType} from '../../model/manufacturer-type';
 import {BaseDataObject} from '../../model/base-data-object';
 import {SimCardTypeService} from '../../services/sim-card-type.service';
 import {DustAndMoistureProtectionService} from '../../services/dust-and-moisture-protection.service';
-import {BaseDataObjectService} from '../../services/base-data-object-service';
+import {BaseDataObjectRestService} from '../../services/base-data-object-rest-service';
 import {FingerprintScannerLocationService} from '../../services/fingerprint-scanner-location.service';
 import {ScreenProtectionService} from '../../services/screen-protection.service';
 import {Cpu} from '../../model/cpu';
@@ -22,17 +22,18 @@ import {CpuService} from '../../services/cpu.service';
 import {GpuType} from '../../model/gpu';
 import {FormBuilder} from '@angular/forms';
 import {RamAndRomVariant} from '../../model/ram-and-rom-variant';
-import {MobilePhoneModel} from '../../model/mobile-phone-model';
-import {MobilePhoneModelService} from '../../services/mobile-phone-model.service';
-import {ConnectionSocketService} from "../../services/connection-socket.service";
-import {BodyColorService} from "../../services/body-color.service";
+import {PhoneModel} from '../../model/phone-model';
+import {PhoneModelService} from '../../services/phone-model.service';
+import {ConnectionSocketService} from '../../services/connection-socket.service';
+import {BodyColorService} from '../../services/body-color.service';
+import {ApiConstants, FormControlNames} from '../../Constants';
 
 @Component({
   selector: 'app-new-phone-model',
-  templateUrl: './new-phone-model.component.html',
-  styleUrls: ['./new-phone-model.component.css']
+  templateUrl: './app-new-phone-model.component.html',
+  styleUrls: ['./app-new-phone-model.component.css']
 })
-export class NewPhoneModelComponent implements OnInit {
+export class AppNewPhoneModelComponent implements OnInit {
   constructor(public dialog: MatDialog, public manufacturerService: ManufacturerService,
               public screenTechnologyService: ScreenTechnologyService,
               public operationSystemWithVersionService: OperationSystemWithVersionService,
@@ -41,7 +42,7 @@ export class NewPhoneModelComponent implements OnInit {
               public fingerprintScannerLocationService: FingerprintScannerLocationService,
               public screenProtectionService: ScreenProtectionService,
               public cpuService: CpuService, private fb: FormBuilder,
-              private mobilePhoneModelService: MobilePhoneModelService,
+              private mobilePhoneModelService: PhoneModelService,
               public connectionSocketService: ConnectionSocketService,
               public bodyColorService: BodyColorService) {
     const mapper = () => this.fb.control([null]);
@@ -94,8 +95,11 @@ export class NewPhoneModelComponent implements OnInit {
   cpus: Array<Cpu> = [];
   connectionSockets: Array<BaseDataObject> = [];
   bodyColors: Array<BaseDataObject> = [];
+  FormControlNames = FormControlNames;
 
   async ngOnInit(): Promise<void> {
+    console.log('form control names');
+    console.log(ApiConstants);
     this.loadAllToField(this.manufacturerService, 'manufacturers');
     this.loadAllToField(this.operationSystemWithVersionService, 'operationSystemsWithVersions');
     this.loadAllToField(this.screenTechnologyService, 'screenTechnologies');
@@ -108,7 +112,7 @@ export class NewPhoneModelComponent implements OnInit {
     this.loadAllToField(this.bodyColorService, 'bodyColors');
   }
 
-  loadAllToField(service: BaseDataObjectService<any>, fieldName: string): void {
+  loadAllToField(service: BaseDataObjectRestService<any>, fieldName: string): void {
     service.getAll().subscribe(data => this[fieldName] = data);
   }
 
@@ -184,7 +188,7 @@ export class NewPhoneModelComponent implements OnInit {
     );
   }
 
-  async createNewBaseDataObjectAndReloadAll(dialogTitle: string, baseDataObjectService: BaseDataObjectService<BaseDataObject>)
+  async createNewBaseDataObjectAndReloadAll(dialogTitle: string, baseDataObjectService: BaseDataObjectRestService<BaseDataObject>)
     : Promise<Array<BaseDataObject>> {
     const dialogRef = this.dialog.open(AppDialogWithNameComponent, {
       width: '600px',
@@ -218,7 +222,7 @@ export class NewPhoneModelComponent implements OnInit {
     const ramAndRomVariants = this.ramAndRomVariantsAmount.map(
       (i) => new RamAndRomVariant(rawValue.ramVariants[i - 1], rawValue.romVariants[i - 1])
     );
-    const mobilePhoneModel = new MobilePhoneModel(rawValue.name, rawValue.manufacturer, rawValue.marketLaunchYear, rawValue.operationSystem,
+    const mobilePhoneModel = new PhoneModel(rawValue.name, rawValue.manufacturer, rawValue.marketLaunchYear, rawValue.operationSystem,
       rawValue.screenDiagonalInInches, rawValue.horizontalScreenResolution, rawValue.verticalScreenResolution,
       rawValue.screenTechnology, rawValue.screenRefreshRate, ramAndRomVariants, rawValue.isMemoryCardSupported,
       rawValue.camerasAmount, rawValue.cameraInMp, rawValue.simCardsAmount, rawValue.simCardTypes, rawValue.is5GSupported,

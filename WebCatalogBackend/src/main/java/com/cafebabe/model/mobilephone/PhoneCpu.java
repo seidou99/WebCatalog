@@ -1,5 +1,8 @@
-package com.cafebabe.model;
+package com.cafebabe.model.mobilephone;
 
+import com.cafebabe.model.BaseDataObject;
+import com.cafebabe.model.CpuCoresBlock;
+import com.cafebabe.model.Gpu;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Cpu extends BaseDataObject {
+public class PhoneCpu extends BaseDataObject {
 
     protected Integer clockSpeedImMHz;
     @ManyToOne

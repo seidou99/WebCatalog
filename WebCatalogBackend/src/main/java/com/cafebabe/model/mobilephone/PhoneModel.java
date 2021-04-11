@@ -1,6 +1,7 @@
 package com.cafebabe.model.mobilephone;
 
 import com.cafebabe.model.*;
+import com.cafebabe.model.digital_technology_common.AspectRatio;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class MobilePhoneModel extends BaseDataObject {
+public class PhoneModel extends BaseDataObject {
 
     @ManyToOne
     protected Manufacturer manufacturer;
@@ -21,7 +22,7 @@ public class MobilePhoneModel extends BaseDataObject {
     protected MobilePhoneType mobilePhoneType;
 
     @ManyToOne
-    protected OperationSystemWithVersion operationSystem;
+    protected OperationSystemWithVersion operationSystemWithVersion;
 
     protected Float screenDiagonalInInches;
 
@@ -59,6 +60,9 @@ public class MobilePhoneModel extends BaseDataObject {
 
     protected boolean is5GSupported;
 
+    @ManyToOne
+    protected PhoneCpu cpu;
+
 //    @ManyToMany
 //    protected List<MemoryCardType> supportedMemoryCardTypes;
 
@@ -72,6 +76,11 @@ public class MobilePhoneModel extends BaseDataObject {
 
     @ManyToOne
     protected ConnectionSocket connectionSocket;
+
+    protected int screenPpi;
+
+    @ManyToOne
+    protected AspectRatio aspectRatio;
 
     protected String bodyMaterial;
 

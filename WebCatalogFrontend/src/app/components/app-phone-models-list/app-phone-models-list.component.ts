@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PhoneModelFilterVariants} from '../../model/phone-model-filter-variants';
+import {PhoneModelService} from "../../services/phone-model.service";
+import {PhoneModel} from "../../model/phone-model";
 
 @Component({
   selector: 'app-app-phone-models-list',
@@ -47,10 +49,15 @@ export class AppPhoneModelsListComponent implements OnInit {
     gpu: []
   };
 
-  constructor() {
+  phoneModels: Array<PhoneModel> = [];
+
+  constructor(public phoneModelService: PhoneModelService) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.phoneModels = await this.phoneModelService.getAll().toPromise();
+    console.log('phone models');
+    console.log(this.phoneModels);
   }
 
 }

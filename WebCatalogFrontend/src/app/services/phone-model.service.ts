@@ -1,17 +1,17 @@
 import {Injectable} from '@angular/core';
 import {BaseDataObjectRestService} from './base-data-object-rest-service';
-import {BaseDataObject} from '../model/base-data-object';
+import {PhoneModel} from '../model/phone-model';
 import {HttpClient} from '@angular/common/http';
 import {ApiConstants} from '../Constants';
 
 @Injectable({
   providedIn: 'root'
 })
-export class FingerprintScannerLocationService extends BaseDataObjectRestService<BaseDataObject> {
+export class PhoneModelService extends BaseDataObjectRestService<PhoneModel> {
 
-  apiUrl = ApiConstants.FINGERPRINT_SCANNER_LOCATIONS_API_URL;
+  apiUrl = ApiConstants.PHONE_MODELS_API_URL;
 
-  constructor(public http: HttpClient) {
+  constructor(private http: HttpClient) {
     super(http);
   }
 }

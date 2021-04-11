@@ -17,9 +17,9 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import {AppPhoneComponent} from './components/app-phone/app-phone.component';
+import {AppPhoneModelComponent} from './components/app-phone/app-phone-model.component';
 import {MatDividerModule} from '@angular/material/divider';
-import {NewPhoneModelComponent} from './components/new-phone-model/new-phone-model.component';
+import {AppNewPhoneModelComponent} from './components/new-phone-model/app-new-phone-model.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {AppDialogWithNameComponent} from './components/app-dialog-with-name/app-dialog-with-name.component';
 import {HttpClientModule} from '@angular/common/http';
@@ -34,8 +34,8 @@ import { AppPhoneModelsListComponent } from './components/app-phone-models-list/
     AppComponent,
     AppPhonesListComponent,
     AppHomePageComponent,
-    AppPhoneComponent,
-    NewPhoneModelComponent,
+    AppPhoneModelComponent,
+    AppNewPhoneModelComponent,
     AppDialogWithNameComponent,
     AppNewOperationSystemWithVersionDialogComponent,
     AppNewCpuComponent,

@@ -1,18 +1,19 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Constants} from '../Constants';
+import {ApiConstants} from '../Constants';
 import {Manufacturer} from '../model/manufacturer';
 import {Observable} from 'rxjs';
-import {BaseDataObjectService} from './base-data-object-service';
+import {BaseDataObjectRestService} from './base-data-object-rest-service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ManufacturerService extends BaseDataObjectService<Manufacturer> {
+export class ManufacturerService extends BaseDataObjectRestService<Manufacturer> {
 
-  apiUrl = Constants.MANUFACTURERS_API_URL;
+  apiUrl = ApiConstants.MANUFACTURERS_API_URL;
 
   constructor(public httpClient: HttpClient) {
+
     super(httpClient);
   }
 }

@@ -1,7 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
-export class BaseDataObjectService<T> {
+export class BaseDataObjectRestService<T> {
 
   apiUrl: string;
 
@@ -10,6 +10,10 @@ export class BaseDataObjectService<T> {
 
   getAll(): Observable<Array<T>> {
     return this.httpClient.get<Array<T>>(this.apiUrl);
+  }
+
+  getById(id: string | number): Observable<T> {
+    return this.httpClient.get<T>(`${this.apiUrl}/${id}`);
   }
 
   save(entity: T): Observable<void> {

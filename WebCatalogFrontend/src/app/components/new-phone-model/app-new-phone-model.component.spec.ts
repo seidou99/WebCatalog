@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NewPhoneModelComponent } from './new-phone-model.component';
+import { AppNewPhoneModelComponent } from './app-new-phone-model.component';
 
 describe('NewPhoneModelComponent', () => {
-  let component: NewPhoneModelComponent;
-  let fixture: ComponentFixture<NewPhoneModelComponent>;
+  let component: AppNewPhoneModelComponent;
+  let fixture: ComponentFixture<AppNewPhoneModelComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NewPhoneModelComponent ]
+      declarations: [ AppNewPhoneModelComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NewPhoneModelComponent);
+    fixture = TestBed.createComponent(AppNewPhoneModelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

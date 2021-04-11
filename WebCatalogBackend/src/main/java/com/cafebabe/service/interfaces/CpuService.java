@@ -1,6 +1,6 @@
 package com.cafebabe.service.interfaces;
 
-import com.cafebabe.model.Cpu;
+import com.cafebabe.model.mobilephone.PhoneCpu;
 
-public interface CpuService extends BaseDataObjectService<Cpu>{
+public interface CpuService extends BaseDataObjectService<PhoneCpu>{
 }

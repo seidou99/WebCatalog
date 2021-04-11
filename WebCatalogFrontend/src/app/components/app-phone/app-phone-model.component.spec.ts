@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AppPhoneComponent } from './app-phone.component';
+import { AppPhoneModelComponent } from './app-phone-model.component';
 
 describe('AppPhoneComponent', () => {
-  let component: AppPhoneComponent;
-  let fixture: ComponentFixture<AppPhoneComponent>;
+  let component: AppPhoneModelComponent;
+  let fixture: ComponentFixture<AppPhoneModelComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AppPhoneComponent ]
+      declarations: [ AppPhoneModelComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AppPhoneComponent);
+    fixture = TestBed.createComponent(AppPhoneModelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

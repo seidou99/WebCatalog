@@ -1,16 +1,16 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Constants} from '../Constants';
+import {ApiConstants} from '../Constants';
 import {OperationSystemWithVersion} from '../model/operation-system-with-version';
-import {BaseDataObjectService} from './base-data-object-service';
+import {BaseDataObjectRestService} from './base-data-object-rest-service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class OperationSystemWithVersionService extends BaseDataObjectService<OperationSystemWithVersion> {
+export class OperationSystemWithVersionService extends BaseDataObjectRestService<OperationSystemWithVersion> {
 
-  apiUrl = Constants.OPERATION_SYSTEMS_WITH_VERSIONS_API_URL;
+  apiUrl = ApiConstants.OPERATION_SYSTEMS_WITH_VERSIONS_API_URL;
 
   constructor(public httpClient: HttpClient) {
     super(httpClient);

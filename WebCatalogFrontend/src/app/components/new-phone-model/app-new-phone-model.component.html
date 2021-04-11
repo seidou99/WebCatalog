@@ -3,13 +3,13 @@
   <div class="grid1fr1fr grid grid-col-gap2em">
     <mat-form-field class="w-100">
       <mat-label>Название</mat-label>
-      <input matInput type="text" formControlName="name">
+      <input matInput type="text" [formControlName]="FormControlNames.NAME">
     </mat-form-field>
 
     <div class="row flex-align-center">
       <mat-form-field class="w-100">
         <mat-label>Производитель</mat-label>
-        <input type="text" matInput [matAutocomplete]="auto" formControlName="manufacturer">
+        <input type="text" matInput [matAutocomplete]="auto" [formControlName]="FormControlNames.MANUFACTURER">
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="nameDisplayFunction">
           <mat-option *ngFor="let manufacturer of manufacturers"
                       [value]="manufacturer">{{manufacturer.name}}</mat-option>
@@ -20,13 +20,13 @@
 
     <mat-form-field class="w-100">
       <mat-label>Год выхода на рынок</mat-label>
-      <input matInput type="number" formControlName="marketLaunchYear">
+      <input matInput type="number" [formControlName]="FormControlNames.MARKET_LAUNCH_YEAR">
     </mat-form-field>
 
     <div class="row flex-align-center">
       <mat-form-field class="w-100">
         <mat-label>Операционная система</mat-label>
-        <mat-select formControlName="operationSystem">
+        <mat-select [formControlName]="FormControlNames.OPERATION_SYSTEM">
           <mat-option *ngFor="let operationSystemWithVersion of operationSystemsWithVersions"
                       [value]="operationSystemWithVersion">
             {{operationSystemWithVersion.operationSystem.name}} {{operationSystemWithVersion.version}}
@@ -38,23 +38,23 @@
 
     <mat-form-field class="w-100">
       <mat-label>Размер экрана в дюймах</mat-label>
-      <input matInput type="number" formControlName="screenDiagonalInInches">
+      <input matInput type="number" [formControlName]="FormControlNames.SCREEN_DIAGONAL_IN_INCHES">
     </mat-form-field>
 
     <mat-form-field class="w-100">
       <mat-label>Горизонтальное разрешение экрана</mat-label>
-      <input matInput type="number" formControlName="horizontalScreenResolution">
+      <input matInput type="number" [formControlName]="FormControlNames.HORIZONTAL_SCREEN_RESOLUTION">
     </mat-form-field>
 
     <mat-form-field class="w-100">
       <mat-label>Вертикальное разрешение экрана</mat-label>
-      <input matInput type="number" formControlName="verticalScreenResolution">
+      <input matInput type="number" [formControlName]="FormControlNames.VERTICAL_SCREEN_RESOLUTION">
     </mat-form-field>
 
     <div class="row flex-align-center">
       <mat-form-field class="w-100">
         <mat-label>Технология экрана</mat-label>
-        <mat-select formControlName="screenTechnology">
+        <mat-select [formControlName]="FormControlNames.SCREEN_TECHNOLOGY">
           <mat-option *ngFor="let screenTechnology of screenTechnologies"
                       [value]="screenTechnology">{{screenTechnology.name}}</mat-option>
         </mat-select>
@@ -64,7 +64,7 @@
 
     <mat-form-field class="w-100">
       <mat-label>Частота обновления экрана, Гц</mat-label>
-      <input matInput type="number" formControlName="screenRefreshRate">
+      <input matInput type="number" [formControlName]="FormControlNames.SCREEN_REFRESH_RATE">
     </mat-form-field>
 
     <mat-form-field class="w-100">
@@ -76,40 +76,40 @@
     <div></div>
 
     <div class="grid grid1fr1fr grid-col-2 grid-col-gap2em" *ngFor="let i of ramAndRomVariantsAmount">
-      <mat-form-field class="w-100" formArrayName="ramVariants">
+      <mat-form-field class="w-100" [formArrayName]="FormControlNames.RAM_VARIANTS">
         <mat-label class="block">Оперативня память {{i}}, МБ</mat-label>
         <input matInput type="number" [formControlName]="i - 1">
       </mat-form-field>
 
-      <mat-form-field class="w-100" formArrayName="romVariants">
+      <mat-form-field class="w-100" [formArrayName]="FormControlNames.RAM_VARIANTS">
         <mat-label>Флэш память {{i}}, МБ</mat-label>
         <input matInput [formControlName]="i - 1">
       </mat-form-field>
     </div>
 
     <section class="w-100 row flex-align-center">
-      <mat-checkbox formControlName="isMemoryCardSupported">Поддержка карт памяти</mat-checkbox>
+      <mat-checkbox [formControlName]="FormControlNames.IS_MEMORY_CARD_SUPPORTED">Поддержка карт памяти</mat-checkbox>
     </section>
 
     <mat-form-field class="w-100">
       <mat-label>Количество модулей камеры</mat-label>
-      <input matInput type="number" formControlName="camerasAmount">
+      <input matInput type="number" [formControlName]="FormControlNames.CAMERAS_AMOUNT">
     </mat-form-field>
 
     <mat-form-field class="w-100">
       <mat-label>Камера, Мп</mat-label>
-      <input matInput type="number" formControlName="cameraInMp">
+      <input matInput type="number" [formControlName]="FormControlNames.CAMERA_IN_MP">
     </mat-form-field>
 
     <mat-form-field class="w-100">
       <mat-label>Количество SIM-карт</mat-label>
-      <input matInput type="number" formControlName="simCardsAmount">
+      <input matInput type="number" [formControlName]="FormControlNames.SIM_CARDS_AMOUNT">
     </mat-form-field>
 
     <div class="row flex-align-center">
       <mat-form-field class="w-100">
         <mat-label class="block">Формат SIM-карты</mat-label>
-        <mat-select formControlName="simCardType">
+        <mat-select [formControlName]="FormControlNames.SIM_CARD_TYPE">
           <mat-option *ngFor="let simCardType of simCardTypes" value="simCardType">{{simCardType.name}}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -117,23 +117,23 @@
     </div>
 
     <section class="w-100 row flex-align-center">
-      <mat-checkbox formControlName="is5GSupported">Поддержка 5G</mat-checkbox>
+      <mat-checkbox [formControlName]="FormControlNames.IS_5G_SUPPORTED">Поддержка 5G</mat-checkbox>
     </section>
 
-    <div class="row flex-align-center">
-      <mat-form-field class="w-100">
-        <mat-label class="block">Цвет корпуса</mat-label>
-        <mat-select formControlName="bodyColor">
-          <mat-option *ngFor="let color of bodyColors" [value]="color">{{color.name}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-icon class="cursor-pointer" (click)="createNewBodyColor()">add</mat-icon>
-    </div>
+        <div class="row flex-align-center">
+          <mat-form-field class="w-100">
+            <mat-label class="block">Цвет корпуса</mat-label>
+            <mat-select formControlName="bodyColor">
+              <mat-option *ngFor="let color of bodyColors" [value]="color">{{color.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-icon class="cursor-pointer" (click)="createNewBodyColor()">add</mat-icon>
+        </div>
 
     <div class="row flex-align-center">
       <mat-form-field class="w-100">
         <mat-label class="block">Пыле- и влагозащита</mat-label>
-        <mat-select formControlName="dustAndMoistureProtection">
+        <mat-select [formControlName]="FormControlNames.DUST_AND_MOISTURE_PROTECTION">
           <mat-option *ngFor="let protection of dustAndMoistureProtections" [value]="protection">
             {{protection.name}}
           </mat-option>
@@ -144,13 +144,13 @@
 
     <mat-form-field class="w-100">
       <mat-label>Емкость аккумулятора, мАч</mat-label>
-      <input matInput type="number" formControlName="batteryCapacity">
+      <input matInput type="number" [formControlName]="FormControlNames.BATTERY_CAPACITY">
     </mat-form-field>
 
     <div class="row flex-align-center">
       <mat-form-field class="w-100">
         <mat-label class="block">Расположение сканера отпечатка пальца</mat-label>
-        <mat-select formControlName="fingerprintScannerLocation">
+        <mat-select [formControlName]="FormControlNames.FINGERPRINT_SCANNER_LOCATION">
           <mat-option *ngFor="let scannerLocation of fingerprintScannerLocations" [value]="scannerLocation">
             {{scannerLocation.name}}
           </mat-option>
@@ -159,15 +159,10 @@
       <mat-icon class="cursor-pointer" (click)="createNewFingerprintScannerLocation()">add</mat-icon>
     </div>
 
-    <mat-form-field class="w-100">
-      <mat-label class="block">Разрешающая способность экрана, ppi</mat-label>
-      <input matInput type="number" formControlName="screenResolutionPpi">
-    </mat-form-field>
-
     <div class="row flex-align-center">
       <mat-form-field class="w-100">
         <mat-label class="block">Защита от царапин</mat-label>
-        <mat-select formControlName="screenProtection">
+        <mat-select [formControlName]="FormControlNames.SCREEN_PROTECTION">
           <mat-option *ngFor="let screenProtection of screenProtections" [value]="screenProtection">
             {{screenProtection.name}}
           </mat-option>
@@ -179,8 +174,10 @@
     <div class="row flex-align-center">
       <mat-form-field class="w-100">
         <mat-label class="block">Процессор</mat-label>
-        <input type="text" matInput [matAutocomplete]="processorAutocomplete" formControlName="cpu">
-        <mat-autocomplete autoActiveFirstOption #processorAutocomplete="matAutocomplete">
+        <input type="text" matInput [matAutocomplete]="processorAutocomplete"
+               [formControlName]="FormControlNames.CPU">
+        <mat-autocomplete autoActiveFirstOption #processorAutocomplete="matAutocomplete"
+                          [displayWith]="nameDisplayFunction">
           <mat-option *ngFor="let cpu of cpus" [value]="cpu">{{cpu.name}}</mat-option>
         </mat-autocomplete>
       </mat-form-field>
@@ -188,22 +185,22 @@
     </div>
 
     <section class="w-100 flex-align-center row">
-      <mat-checkbox formControlName="hasAudioProcessor">Аудиопроцессор</mat-checkbox>
+      <mat-checkbox [formControlName]="FormControlNames.HAS_AUDIO_PROCESSOR">Аудиопроцессор</mat-checkbox>
     </section>
 
     <mat-form-field class="w-100">
       <mat-label>Фронтальная камера</mat-label>
-      <input matInput type="number" formControlName="frontCameraInMp">
+      <input matInput type="number" [formControlName]="FormControlNames.FRONT_CAMERA_IN_MP">
     </mat-form-field>
 
     <section class="w-100 row flex-align-center">
-      <mat-checkbox formControlName="hasAudioOutput">Аудиовыход</mat-checkbox>
+      <mat-checkbox [formControlName]="FormControlNames.HAS_AUDIO_OUTPUT">Аудиовыход</mat-checkbox>
     </section>
 
     <div class="row flex-align-center">
       <mat-form-field class="w-100">
         <mat-label>Разъём подключения</mat-label>
-        <mat-select formControlName="connectionSocket">
+        <mat-select [formControlName]="FormControlNames.CONNECTION_SOCKET">
           <mat-option *ngFor="let socket of connectionSockets" [value]="socket">{{socket.name}}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -212,22 +209,22 @@
 
     <mat-form-field class="w-100">
       <mat-label>Длина, мм</mat-label>
-      <input matInput type="number" formControlName="length">
+      <input matInput type="number" [formControlName]="FormControlNames.LENGTH">
     </mat-form-field>
 
     <mat-form-field class="w-100">
       <mat-label>Ширина, мм</mat-label>
-      <input matInput type="number" formControlName="width">
+      <input matInput type="number" [formControlName]="FormControlNames.WIDTH">
     </mat-form-field>
 
     <mat-form-field class="w-100">
       <mat-label>Толщина, мм</mat-label>
-      <input matInput type="number" formControlName="thickness">
+      <input matInput type="number" [formControlName]="FormControlNames.THICKNESS">
     </mat-form-field>
 
     <mat-form-field class="w-100">
       <mat-label>Вес, г</mat-label>
-      <input matInput type="number" formControlName="weight">
+      <input matInput type="number" [formControlName]="FormControlNames.WEIGHT">
     </mat-form-field>
   </div>
   <div class="row flex-justify-end">

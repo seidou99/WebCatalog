@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PhoneModelService } from './phone-model.service';
+import { CpuService } from './cpu.service';
 
-describe('MobilePhoneModelService', () => {
-  let service: PhoneModelService;
+describe('CpuService', () => {
+  let service: CpuService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(PhoneModelService);
+    service = TestBed.inject(CpuService);
   });
 
   it('should be created', () => {

@@ -7,11 +7,11 @@ import {DustAndMoistureProtection} from "./dust-and-moisture-protection";
 import {FingerprintScannerLocation} from "./fingerprint-scanner-location";
 import {Cpu} from "./cpu";
 
-export class MobilePhoneModel extends BaseDataObject {
+export class PhoneModel extends BaseDataObject {
 
   manufacturer: Manufacturer;
   marketLaunchYear: number;
-  operationSystem: OperationSystemWithVersion;
+  operationSystemWithVersion: OperationSystemWithVersion;
   screenDiagonalInInches: number;
   horizontalScreenResolution: number;
   verticalScreenResolution: number;
@@ -28,7 +28,7 @@ export class MobilePhoneModel extends BaseDataObject {
   dustAndMoistureProtection: DustAndMoistureProtection;
   batteryCapacity: number;
   fingerprintScannerLocation: FingerprintScannerLocation;
-  screenResolutionPpi: number;
+  screenPpi: number;
   screenProtection: BaseDataObject;
   cpu: Cpu;
   hasAudioProcessor: boolean;
@@ -45,7 +45,7 @@ export class MobilePhoneModel extends BaseDataObject {
     this.name = name;
     this.manufacturer = manufacturer;
     this.marketLaunchYear = marketLaunchYear;
-    this.operationSystem = operationSystem;
+    this.operationSystemWithVersion = operationSystem;
     this.screenDiagonalInInches = screenDiagonalInInches;
     this.horizontalScreenResolution = horizontalScreenResolution;
     this.verticalScreenResolution = verticalScreenResolution;

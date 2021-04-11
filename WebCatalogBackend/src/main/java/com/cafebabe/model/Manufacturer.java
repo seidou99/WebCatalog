@@ -1,6 +1,5 @@
 package com.cafebabe.model;
 
-import com.cafebabe.model.mobilephone.ManufacturerType;
 import lombok.Getter;
 import lombok.Setter;
 
