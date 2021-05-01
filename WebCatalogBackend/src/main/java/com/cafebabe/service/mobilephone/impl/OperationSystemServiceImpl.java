@@ -1,6 +1,6 @@
 package com.cafebabe.service.mobilephone.impl;
 
-import com.cafebabe.model.mobilephone.OperationSystem;
+import com.cafebabe.entity.mobilephone.OperationSystem;
 import com.cafebabe.repository.mobilephone.OperationSystemRepository;
 import com.cafebabe.service.impl.BaseDataObjectServiceImpl;
 import com.cafebabe.service.mobilephone.interfaces.OperationSystemService;

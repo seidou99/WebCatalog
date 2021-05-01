@@ -1,6 +1,6 @@
 package com.cafebabe.controller.mobilephone;
 
-import com.cafebabe.model.ScreenProtection;
+import com.cafebabe.entity.ScreenProtection;
 import com.cafebabe.service.interfaces.ScreenProtectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

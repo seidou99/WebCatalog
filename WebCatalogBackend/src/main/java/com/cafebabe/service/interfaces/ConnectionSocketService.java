@@ -1,6 +1,6 @@
 package com.cafebabe.service.interfaces;
 
-import com.cafebabe.model.ConnectionSocket;
+import com.cafebabe.entity.ConnectionSocket;
 
 public interface ConnectionSocketService extends BaseDataObjectService<ConnectionSocket>{
 }

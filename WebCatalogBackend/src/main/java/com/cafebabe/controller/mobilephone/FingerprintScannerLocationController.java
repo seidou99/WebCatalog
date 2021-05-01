@@ -1,6 +1,6 @@
 package com.cafebabe.controller.mobilephone;
 
-import com.cafebabe.model.FingerprintScannerLocation;
+import com.cafebabe.entity.FingerprintScannerLocation;
 import com.cafebabe.service.interfaces.FingerprintScannerLocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

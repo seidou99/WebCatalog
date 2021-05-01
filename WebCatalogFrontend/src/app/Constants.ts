@@ -17,9 +17,13 @@ export class ApiConstants {
   static readonly GPUS_PATH = 'gpus';
   static readonly CPUS_PATH = 'cpus';
   static readonly CONNECTION_SOCKETS_PATH = 'connection-sockets';
-  static readonly BODY_COLORS_PATH = 'body-colors';
+  static readonly COLORS_PATH = 'colors';
+  static readonly FILTER_PATH = 'filter';
+  static readonly FILTERED_PATH = 'filtered';
   static readonly PHONES_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.MOBILE_PHONES_PATH}`;
   static readonly PHONE_MODELS_API_URL = `${ApiConstants.PHONES_API_URL}/${ApiConstants.PHONE_MODELS_PATH}`;
+  static readonly PHONE_MODELS_FILTER_API_URL = `${ApiConstants.PHONE_MODELS_API_URL}/${ApiConstants.FILTER_PATH}`;
+  static readonly PHONE_MODELS_FILTERED_API_URL = `${ApiConstants.PHONE_MODELS_FILTER_API_URL}/${ApiConstants.FILTERED_PATH}`;
   static readonly MANUFACTURERS_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.MANUFACTURERS_PATH}`;
   static readonly OPERATION_SYSTEMS_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.OPERATION_SYSTEMS_PATH}`;
   static readonly SCREEN_TECHNOLOGIES_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.SCREEN_TECHNOLOGIES}`;
@@ -32,7 +36,7 @@ export class ApiConstants {
   static readonly MOBILE_GPUS_API_URL = `${ApiConstants.SERVER_API_URL}/mobile-integrated-gpus`;
   static readonly CPUS_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.CPUS_PATH}`;
   static readonly CONNECTION_SOCKETS_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.CONNECTION_SOCKETS_PATH}`;
-  static readonly BODY_COLORS_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.BODY_COLORS_PATH}`;
+  static readonly COLORS_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.COLORS_PATH}`;
 
 }
 
@@ -67,4 +71,11 @@ export class FormControlNames {
   static readonly WIDTH = 'width';
   static readonly THICKNESS = 'thickness';
   static readonly WEIGHT = 'weight';
+  static readonly BODY_COLORS = 'bodyColors';
+}
+
+export class StringConstants {
+  static readonly RAM = 'ОЗУ';
+  static readonly ROM = 'ПЗУ';
+  static readonly GB = 'ГБ';
 }

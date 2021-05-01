@@ -77,13 +77,13 @@
 
     <div class="grid grid1fr1fr grid-col-2 grid-col-gap2em" *ngFor="let i of ramAndRomVariantsAmount">
       <mat-form-field class="w-100" [formArrayName]="FormControlNames.RAM_VARIANTS">
-        <mat-label class="block">Оперативня память {{i}}, МБ</mat-label>
+        <mat-label class="block">Оперативня память {{i}}, ГБ</mat-label>
         <input matInput type="number" [formControlName]="i - 1">
       </mat-form-field>
 
       <mat-form-field class="w-100" [formArrayName]="FormControlNames.ROM_VARIANTS">
-        <mat-label>Флэш память {{i}}, МБ</mat-label>
-        <input matInput [formControlName]="i - 1">
+        <mat-label>Флэш память {{i}}, ГБ</mat-label>
+        <input matInput [formControlName]="i - 1" type="number">
       </mat-form-field>
     </div>
 
@@ -110,7 +110,7 @@
       <mat-form-field class="w-100">
         <mat-label class="block">Формат SIM-карты</mat-label>
         <mat-select [formControlName]="FormControlNames.SIM_CARD_TYPE">
-          <mat-option *ngFor="let simCardType of simCardTypes" value="simCardType">{{simCardType.name}}</mat-option>
+          <mat-option *ngFor="let simCardType of simCardTypes" [value]="simCardType">{{simCardType.name}}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-icon class="cursor-pointer" (click)="createNewSimCardType()">add</mat-icon>
@@ -120,15 +120,15 @@
       <mat-checkbox [formControlName]="FormControlNames.IS_5G_SUPPORTED">Поддержка 5G</mat-checkbox>
     </section>
 
-        <div class="row flex-align-center">
-          <mat-form-field class="w-100">
-            <mat-label class="block">Цвет корпуса</mat-label>
-            <mat-select formControlName="bodyColor">
-              <mat-option *ngFor="let color of bodyColors" [value]="color">{{color.name}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-icon class="cursor-pointer" (click)="createNewBodyColor()">add</mat-icon>
-        </div>
+    <div class="row flex-align-center">
+      <mat-form-field class="w-100">
+        <mat-label class="block">Цвет корпуса</mat-label>
+        <mat-select multiple [formControlName]="FormControlNames.BODY_COLORS">
+          <mat-option *ngFor="let color of bodyColors" [value]="color">{{color.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-icon class="cursor-pointer" (click)="createNewBodyColor()">add</mat-icon>
+    </div>
 
     <div class="row flex-align-center">
       <mat-form-field class="w-100">

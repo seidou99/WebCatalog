@@ -1,6 +1,6 @@
 package com.cafebabe.repository.mobilephone;
 
-import com.cafebabe.model.mobilephone.OperationSystem;
+import com.cafebabe.entity.mobilephone.OperationSystem;
 import com.cafebabe.repository.BaseDataObjectRepository;
 import org.springframework.stereotype.Repository;
 

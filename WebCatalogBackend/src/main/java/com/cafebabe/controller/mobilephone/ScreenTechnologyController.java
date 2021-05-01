@@ -1,6 +1,6 @@
 package com.cafebabe.controller.mobilephone;
 
-import com.cafebabe.model.ScreenTechnology;
+import com.cafebabe.entity.ScreenTechnology;
 import com.cafebabe.service.interfaces.ScreenTechnologyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

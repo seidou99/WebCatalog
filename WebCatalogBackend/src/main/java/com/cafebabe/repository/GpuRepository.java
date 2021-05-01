@@ -1,6 +1,6 @@
 package com.cafebabe.repository;
 
-import com.cafebabe.model.Gpu;
+import com.cafebabe.entity.Gpu;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;

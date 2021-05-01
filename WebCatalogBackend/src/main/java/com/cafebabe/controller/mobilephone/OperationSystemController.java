@@ -1,6 +1,6 @@
 package com.cafebabe.controller.mobilephone;
 
-import com.cafebabe.model.mobilephone.OperationSystem;
+import com.cafebabe.entity.mobilephone.OperationSystem;
 import com.cafebabe.service.mobilephone.interfaces.OperationSystemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

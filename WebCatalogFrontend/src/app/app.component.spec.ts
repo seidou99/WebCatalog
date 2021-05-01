@@ -3,7 +3,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {AppComponent} from './app.component';
 import {AppPhonesListComponent} from "./components/app-phones-list/app-phones-list.component";
 import {AppHomePageComponent} from "./components/app-home-page/app-home-page.component";
-import {AppPhoneModelComponent} from "./components/app-phone/app-phone-model.component";
+import {AppPhoneModelComponent} from "./components/app-phone-model/app-phone-model.component";
 import {AppNewPhoneModelComponent} from "./components/new-phone-model/app-new-phone-model.component";
 import {AppDialogWithNameComponent} from "./components/app-dialog-with-name/app-dialog-with-name.component";
 import {AppNewOperationSystemWithVersionDialogComponent} from "./components/app-new-operation-system-with-version-dialog/app-new-operation-system-with-version-dialog.component";
@@ -38,15 +38,15 @@ describe('Application integration test', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('WebCatalogFrontend app is running!');
-  });
-
-  it('should create phone model', () => {
+  it('should create phone model', async () => {
     const fixture = TestBed.createComponent(AppNewPhoneModelComponent);
     const newPhoneModelComponent = fixture.componentInstance;
+    await createAndCheckManufacturer(newPhoneModelComponent);
+    const s = '';
   });
+
+  async function createAndCheckManufacturer(component: AppNewPhoneModelComponent): Promise<void> {
+    await component.createNewManufacturer();
+  }
+
 });

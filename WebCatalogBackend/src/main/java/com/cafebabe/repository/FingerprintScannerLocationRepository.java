@@ -1,6 +1,6 @@
 package com.cafebabe.repository;
 
-import com.cafebabe.model.FingerprintScannerLocation;
+import com.cafebabe.entity.FingerprintScannerLocation;
 import org.springframework.stereotype.Repository;
 
 @Repository

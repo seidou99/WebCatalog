@@ -1,6 +1,6 @@
 package com.cafebabe.service.impl;
 
-import com.cafebabe.model.Gpu;
+import com.cafebabe.entity.Gpu;
 import com.cafebabe.repository.GpuRepository;
 import com.cafebabe.service.interfaces.GpuService;
 import org.springframework.stereotype.Service;

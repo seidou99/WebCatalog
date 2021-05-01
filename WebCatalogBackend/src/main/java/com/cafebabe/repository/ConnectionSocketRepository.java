@@ -1,6 +1,6 @@
 package com.cafebabe.repository;
 
-import com.cafebabe.model.ConnectionSocket;
+import com.cafebabe.entity.ConnectionSocket;
 import org.springframework.stereotype.Repository;
 
 @Repository

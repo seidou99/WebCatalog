@@ -1,6 +1,6 @@
 package com.cafebabe.service.impl;
 
-import com.cafebabe.model.FingerprintScannerLocation;
+import com.cafebabe.entity.FingerprintScannerLocation;
 import com.cafebabe.repository.FingerprintScannerLocationRepository;
 import com.cafebabe.service.interfaces.FingerprintScannerLocationService;
 import org.springframework.stereotype.Service;

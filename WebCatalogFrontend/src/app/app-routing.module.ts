@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AppPhonesListComponent} from './components/app-phones-list/app-phones-list.component';
 import {AppHomePageComponent} from './components/app-home-page/app-home-page.component';
-import {AppPhoneModelComponent} from './components/app-phone/app-phone-model.component';
+import {AppPhoneModelComponent} from './components/app-phone-model/app-phone-model.component';
 import {AppNewPhoneModelComponent} from './components/new-phone-model/app-new-phone-model.component';
 import {AppPhoneModelsListComponent} from './components/app-phone-models-list/app-phone-models-list.component';
 

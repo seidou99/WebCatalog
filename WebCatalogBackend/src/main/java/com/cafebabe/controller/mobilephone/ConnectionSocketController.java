@@ -1,6 +1,6 @@
 package com.cafebabe.controller.mobilephone;
 
-import com.cafebabe.model.ConnectionSocket;
+import com.cafebabe.entity.ConnectionSocket;
 import com.cafebabe.service.interfaces.ConnectionSocketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

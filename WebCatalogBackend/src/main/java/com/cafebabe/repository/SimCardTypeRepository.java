@@ -1,6 +1,6 @@
 package com.cafebabe.repository;
 
-import com.cafebabe.model.SimCardType;
+import com.cafebabe.entity.SimCardType;
 
 public interface SimCardTypeRepository extends BaseDataObjectRepository<SimCardType> {
 }

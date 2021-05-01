@@ -1,6 +1,6 @@
 package com.cafebabe.repository;
 
-import com.cafebabe.model.ScreenProtection;
+import com.cafebabe.entity.ScreenProtection;
 import org.springframework.stereotype.Repository;
 
 @Repository

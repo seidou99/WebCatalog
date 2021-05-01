@@ -1,9 +1,9 @@
 package com.cafebabe.controller.mobilephone;
 
-import com.cafebabe.model.mobilephone.PhoneCpu;
-import com.cafebabe.model.Gpu;
+import com.cafebabe.entity.mobilephone.PhoneCpu;
+import com.cafebabe.entity.Gpu;
 import com.cafebabe.service.interfaces.CpuCoresBlockService;
-import com.cafebabe.service.interfaces.CpuService;
+import com.cafebabe.service.interfaces.PhoneCpuService;
 import com.cafebabe.service.interfaces.GpuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,7 @@ import java.util.List;
 public class CpuController {
 
     @Autowired
-    protected CpuService cpuService;
+    protected PhoneCpuService phoneCpuService;
 
     @Autowired
     protected GpuService gpuService;
@@ -32,11 +32,11 @@ public class CpuController {
             gpuService.save(integratedGpu);
         }
         cpuCoresBlockService.save(cpu.getCoresBlocks());
-        cpuService.save(cpu);
+        phoneCpuService.save(cpu);
     }
 
     @GetMapping("api/cpus")
     public List<PhoneCpu> getAll() {
-        return cpuService.findAll();
+        return phoneCpuService.findAll();
     }
 }

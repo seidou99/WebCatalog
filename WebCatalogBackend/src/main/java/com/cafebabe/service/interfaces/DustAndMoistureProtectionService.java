@@ -1,6 +1,6 @@
 package com.cafebabe.service.interfaces;
 
-import com.cafebabe.model.DustAndMoistureProtection;
+import com.cafebabe.entity.DustAndMoistureProtection;
 
 public interface DustAndMoistureProtectionService extends BaseDataObjectService<DustAndMoistureProtection> {
 }

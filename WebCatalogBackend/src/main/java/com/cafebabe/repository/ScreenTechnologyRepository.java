@@ -1,6 +1,6 @@
 package com.cafebabe.repository;
 
-import com.cafebabe.model.ScreenTechnology;
+import com.cafebabe.entity.ScreenTechnology;
 
 public interface ScreenTechnologyRepository extends BaseDataObjectRepository<ScreenTechnology> {
 }

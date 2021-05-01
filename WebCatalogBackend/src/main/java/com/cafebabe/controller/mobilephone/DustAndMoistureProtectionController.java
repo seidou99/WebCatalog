@@ -1,6 +1,6 @@
 package com.cafebabe.controller.mobilephone;
 
-import com.cafebabe.model.DustAndMoistureProtection;
+import com.cafebabe.entity.DustAndMoistureProtection;
 import com.cafebabe.service.interfaces.DustAndMoistureProtectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

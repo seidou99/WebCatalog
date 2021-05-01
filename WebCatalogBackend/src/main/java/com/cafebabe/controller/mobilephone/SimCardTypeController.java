@@ -1,6 +1,6 @@
 package com.cafebabe.controller.mobilephone;
 
-import com.cafebabe.model.SimCardType;
+import com.cafebabe.entity.SimCardType;
 import com.cafebabe.service.interfaces.SimCardTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

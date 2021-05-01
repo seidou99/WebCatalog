@@ -1,5 +1,9 @@
-import { browser, logging } from 'protractor';
-import { AppPage } from './app.po';
+import 'zone.js/dist/zone-testing';
+import '@nativescript/zone-js';
+import {browser, logging} from 'protractor';
+import {AppPage} from './app.po';
+import {TestBed} from "@angular/core/testing";
+import {AppNewPhoneModelComponent} from "../../src/app/components/new-phone-model/app-new-phone-model.component";
 
 describe('workspace-project App', () => {
   let page: AppPage;
@@ -8,10 +12,16 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', async () => {
-    await page.navigateTo();
-    expect(await page.getTitleText()).toEqual('WebCatalogFrontend app is running!');
+  it('should create phone model', async () => {
+    const fixture = TestBed.createComponent(AppNewPhoneModelComponent);
+    const newPhoneModelComponent = fixture.componentInstance;
+    await createAndCheckManufacturer(newPhoneModelComponent);
+    const s = '';
   });
+
+  async function createAndCheckManufacturer(component: AppNewPhoneModelComponent): Promise<void> {
+    await component.createNewManufacturer();
+  }
 
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser

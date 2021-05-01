@@ -1,6 +1,6 @@
 package com.cafebabe.service.interfaces;
 
-import com.cafebabe.model.SimCardType;
+import com.cafebabe.entity.SimCardType;
 
 public interface SimCardTypeService extends BaseDataObjectService<SimCardType>{
 }

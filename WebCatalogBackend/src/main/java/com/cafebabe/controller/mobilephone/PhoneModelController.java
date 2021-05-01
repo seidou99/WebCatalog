@@ -1,9 +1,9 @@
 package com.cafebabe.controller.mobilephone;
 
-import com.cafebabe.model.mobilephone.PhoneModel;
+import com.cafebabe.dto.PhoneModelFilterDto;
+import com.cafebabe.entity.mobilephone.PhoneModel;
 import com.cafebabe.service.interfaces.RamAndRomVariantService;
 import com.cafebabe.service.mobilephone.interfaces.PhoneModelService;
-import com.cafebabe.util.Util;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +24,6 @@ public class PhoneModelController {
     @Autowired
     protected RamAndRomVariantService ramAndRomVariantService;
 
-    @Autowired
-    Util util;
-
     @GetMapping("api/phones/models")
     public List<PhoneModel> findAll() {
         return phoneModelService.findAll();
@@ -41,5 +38,10 @@ public class PhoneModelController {
     public PhoneModel findById(@PathVariable BigInteger id) {
         Optional<PhoneModel> phoneModel = phoneModelService.findById(id);
         return phoneModel.orElse(null);
+    }
+
+    @PostMapping("api/phones/models/filtered")
+    public List<PhoneModel> findFilteredModels(@RequestBody PhoneModelFilterDto filterDto) {
+        return phoneModelService.findFilteredPhoneModels(filterDto);
     }
 }

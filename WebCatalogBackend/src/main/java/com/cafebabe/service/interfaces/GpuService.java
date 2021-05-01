@@ -1,6 +1,6 @@
 package com.cafebabe.service.interfaces;
 
-import com.cafebabe.model.Gpu;
+import com.cafebabe.entity.Gpu;
 
 import java.util.List;
 

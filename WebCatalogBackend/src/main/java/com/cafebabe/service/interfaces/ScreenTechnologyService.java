@@ -1,6 +1,6 @@
 package com.cafebabe.service.interfaces;
 
-import com.cafebabe.model.ScreenTechnology;
+import com.cafebabe.entity.ScreenTechnology;
 
 public interface ScreenTechnologyService extends BaseDataObjectService<ScreenTechnology> {
 }

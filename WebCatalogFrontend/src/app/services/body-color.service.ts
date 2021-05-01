@@ -9,7 +9,7 @@ import {HttpClient} from '@angular/common/http';
 })
 export class BodyColorService extends BaseDataObjectRestService<BaseDataObject> {
 
-  apiUrl = ApiConstants.BODY_COLORS_API_URL;
+  apiUrl = ApiConstants.COLORS_API_URL;
 
   constructor(private http: HttpClient) {
     super(http);

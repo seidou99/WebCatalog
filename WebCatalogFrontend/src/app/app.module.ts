@@ -17,7 +17,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import {AppPhoneModelComponent} from './components/app-phone/app-phone-model.component';
+import {AppPhoneModelComponent} from './components/app-phone-model/app-phone-model.component';
 import {MatDividerModule} from '@angular/material/divider';
 import {AppNewPhoneModelComponent} from './components/new-phone-model/app-new-phone-model.component';
 import {MatDialogModule} from '@angular/material/dialog';

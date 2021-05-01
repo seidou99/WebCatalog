@@ -1,0 +1,45 @@
+import {Manufacturer} from './manufacturer';
+import {OperationSystemWithVersion} from './operation-system-with-version';
+import {ScreenResolution} from './screen-resolution';
+import {ScreenTechnology} from './screen-technology';
+import {BaseDataObject} from './base-data-object';
+import {DustAndMoistureProtection} from './dust-and-moisture-protection';
+import {FingerprintScannerLocation} from './fingerprint-scanner-location';
+import {Cpu} from './cpu';
+import {Gpu} from './gpu';
+
+export class PhoneModelFilter {
+  manufacturers: Array<Manufacturer> = [];
+  marketLaunchYears: Array<number> = [];
+  operationSystemsWithVersions: Array<OperationSystemWithVersion> = [];
+  screenDiagonalsInInches: Array<number> = [];
+  screenResolutions: Array<ScreenResolution> = [];
+  screenTechnologies: Array<ScreenTechnology> = [];
+  screenRefreshRates: Array<number> = [];
+  ramVariants: Array<number> = [];
+  romVariants: Array<number> = [];
+  isMemoryCardSupported: boolean;
+  camerasAmountVariants: Array<number> = [];
+  camerasInMp: Array<number>;
+  simCardsAmountVariants: Array<number>;
+  simCardTypes: Array<BaseDataObject> = [];
+  is5GSupported: boolean;
+  bodyColors: Array<BaseDataObject> = [];
+  dustAndMoistureProtections: Array<DustAndMoistureProtection> = [];
+  batteryCapacities: Array<number> = [];
+  fingerprintScannerLocations: Array<FingerprintScannerLocation> = [];
+  screenProtections: Array<BaseDataObject> = [];
+  cpuVariants: Array<Cpu> = [];
+  coresAmountVariants: Array<number> = [];
+  gpuVariants: Array<Gpu> = [];
+  cpuClockSpeedVariants: Array<number> = [];
+  cpuTechprocessVariants: Array<number> = [];
+  hasAudioProcessor: boolean;
+  frontCameraVariants: Array<number> = [];
+  hasAudioOutput: boolean;
+  connectionSocketVariants: Array<BaseDataObject> = [];
+  lengthVariants: Array<number> = [];
+  widthVariants: Array<number> = [];
+  thicknessVariants: Array<number> = [];
+  weightVariants: Array<number> = [];
+}

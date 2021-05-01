@@ -1,6 +1,6 @@
 package com.cafebabe.repository.digital_technology_common;
 
-import com.cafebabe.model.digital_technology_common.AspectRatio;
+import com.cafebabe.entity.digital_technology_common.AspectRatio;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

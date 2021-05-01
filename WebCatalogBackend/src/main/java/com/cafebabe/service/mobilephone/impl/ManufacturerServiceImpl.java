@@ -1,6 +1,6 @@
 package com.cafebabe.service.mobilephone.impl;
 
-import com.cafebabe.model.Manufacturer;
+import com.cafebabe.entity.Manufacturer;
 import com.cafebabe.repository.mobilephone.MobilePhoneManufacturerRepository;
 import com.cafebabe.service.impl.BaseDataObjectServiceImpl;
 import com.cafebabe.service.mobilephone.interfaces.ManufacturerService;

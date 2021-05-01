@@ -26,7 +26,7 @@ import {PhoneModel} from '../../model/phone-model';
 import {PhoneModelService} from '../../services/phone-model.service';
 import {ConnectionSocketService} from '../../services/connection-socket.service';
 import {BodyColorService} from '../../services/body-color.service';
-import {ApiConstants, FormControlNames} from '../../Constants';
+import {FormControlNames} from '../../Constants';
 
 @Component({
   selector: 'app-new-phone-model',
@@ -68,7 +68,7 @@ export class AppNewPhoneModelComponent implements OnInit {
     simCardsAmount: [1],
     simCardType: [null],
     is5GSupported: [false],
-    bodyColor: [null],
+    bodyColors: [],
     dustAndMoistureProtection: [null],
     batteryCapacity: [null],
     fingerprintScannerLocation: [null],
@@ -98,8 +98,6 @@ export class AppNewPhoneModelComponent implements OnInit {
   FormControlNames = FormControlNames;
 
   async ngOnInit(): Promise<void> {
-    console.log('form control names');
-    console.log(ApiConstants);
     this.loadAllToField(this.manufacturerService, 'manufacturers');
     this.loadAllToField(this.operationSystemWithVersionService, 'operationSystemsWithVersions');
     this.loadAllToField(this.screenTechnologyService, 'screenTechnologies');
@@ -222,15 +220,19 @@ export class AppNewPhoneModelComponent implements OnInit {
     const ramAndRomVariants = this.ramAndRomVariantsAmount.map(
       (i) => new RamAndRomVariant(rawValue.ramVariants[i - 1], rawValue.romVariants[i - 1])
     );
+    console.log('raw value sim card type');
+    console.log(rawValue.simCardType);
     const mobilePhoneModel = new PhoneModel(rawValue.name, rawValue.manufacturer, rawValue.marketLaunchYear, rawValue.operationSystem,
       rawValue.screenDiagonalInInches, rawValue.horizontalScreenResolution, rawValue.verticalScreenResolution,
       rawValue.screenTechnology, rawValue.screenRefreshRate, ramAndRomVariants, rawValue.isMemoryCardSupported,
-      rawValue.camerasAmount, rawValue.cameraInMp, rawValue.simCardsAmount, rawValue.simCardTypes, rawValue.is5GSupported,
-      rawValue.bodyColor, rawValue.dustAndMoistureProtection, rawValue.batteryCapacity, rawValue.fingerprintScannerLocation,
+      rawValue.camerasAmount, rawValue.cameraInMp, rawValue.simCardsAmount, rawValue.simCardType, rawValue.is5GSupported,
+      rawValue.dustAndMoistureProtection, rawValue.batteryCapacity, rawValue.fingerprintScannerLocation,
       rawValue.screenProtection, rawValue.cpu, rawValue.hasAudioProcessor, rawValue.frontCameraInMp, rawValue.hasAudioOutput,
-      rawValue.connectionSocket, rawValue.length, rawValue.width, rawValue.thickness, rawValue.weight);
+      rawValue.connectionSocket, rawValue.length, rawValue.width, rawValue.thickness, rawValue.weight, rawValue.bodyColors);
     console.log('mobile phone model');
     console.log(mobilePhoneModel);
+    console.log('mobile phone sim card type');
+    console.log(mobilePhoneModel.simCardType);
     await this.mobilePhoneModelService.save(mobilePhoneModel).toPromise();
   }
 
