@@ -34,7 +34,7 @@ public interface PhoneModelRepository extends BaseDataObjectRepository<PhoneMode
     @Query("select distinct p.batteryCapacity from PhoneModel p")
     List<Integer> findDistinctBatteryCapacities();
 
-    @Query("select distinct p.frontCamera from PhoneModel p")
+    @Query("select distinct p.frontCameraInMp from PhoneModel p")
     List<Float> findDistinctFrontCameraVariants();
 
     @Query("select distinct p.length from PhoneModel p")

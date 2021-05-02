@@ -69,7 +69,7 @@ public class PhoneModel extends BaseDataObject {
 
     protected boolean hasAudioProcessor;
 
-    protected float frontCamera;
+    protected float frontCameraInMp;
 
     protected boolean hasAudioOutput;
 

@@ -151,7 +151,7 @@ public class PhoneModelServiceImpl extends BaseDataObjectServiceImpl<PhoneModelR
         filterCpuClockSpeed(filterDto, criteriaBuilder, root, predicates, criteriaQuery);
         filterCpuTechprocess(filterDto, criteriaBuilder, root, predicates);
         filter(root, filterDto.getHasAudioProcessor(), predicates, PhoneModel_.HAS_AUDIO_PROCESSOR, criteriaBuilder);
-        filter(root, filterDto.getFrontCameraVariants(), predicates, PhoneModel_.FRONT_CAMERA, criteriaBuilder);
+        filter(root, filterDto.getFrontCameraVariants(), predicates, PhoneModel_.FRONT_CAMERA_IN_MP, criteriaBuilder);
         filter(root, filterDto.getHasAudioOutput(), predicates, PhoneModel_.HAS_AUDIO_OUTPUT, criteriaBuilder);
         joinAndFilter(root, filterDto.getConnectionSocketVariants(), predicates, PhoneModel_.CONNECTION_SOCKET, ConnectionSocket_.ID, criteriaBuilder);
         filter(root, filterDto.getLengthVariants(), predicates, PhoneModel_.LENGTH, criteriaBuilder);
@@ -241,29 +241,11 @@ public class PhoneModelServiceImpl extends BaseDataObjectServiceImpl<PhoneModelR
             Subquery<Integer> subquery = criteriaQuery.subquery(Integer.class);
             Root<PhoneCpu> subRoot = subquery.from(PhoneCpu.class);
             ListJoin<PhoneCpu, CpuCoresBlock> phoneCpuToCoresBlocksJoin = subRoot.join(PhoneCpu_.coresBlocks);
-            subquery.select(criteriaBuilder.sum(phoneCpuToCoresBlocksJoin.get(CpuCoresBlock_.CORES_AMOUNT)))
-                    .where(criteriaBuilder.equal(root.get(PhoneModel_.id), subRoot.get(PhoneModel_.id)));
+            subquery.select(criteriaBuilder.sum(phoneCpuToCoresBlocksJoin.get(CpuCoresBlock_.CORES_AMOUNT)));
             CriteriaBuilder.In<Integer> coresAmountPredicate = criteriaBuilder.in(subquery);
             filterDto.getCoresAmountVariants().forEach(coresAmountPredicate::value);
             predicates.add(coresAmountPredicate);
         }
-//        // create the outer query
-//        CriteriaBuilder cb = em.getCriteriaBuilder();
-//        CriteriaQuery cq = cb.createQuery(Author.class);
-//        Root root = cq.from(Author.class);
-//
-//// count books written by an author
-//        Subquery sub = cq.subquery(Long.class);
-//        Root subRoot = sub.from(Book.class);
-//        SetJoin<Book, Author> subAuthors = subRoot.join(Book_.authors);
-//        sub.select(cb.count(subRoot.get(Book_.id)));
-//        sub.where(cb.equal(root.get(Author_.id), subAuthors.get(Author_.id)));
-//
-//// check the result of the subquery
-//        criteriaQuery.where(criteriaBuilder.greaterThanOrEqualTo(subquery, 3));
-//
-//        TypedQuery query = em.createQuery(cq);
-//        List authors = query.getResultList();
     }
 
     protected void filterCpuClockSpeed(PhoneModelFilterDto filterDto, CriteriaBuilder criteriaBuilder, Root<PhoneModel> root, List<Predicate> predicates, CriteriaQuery<PhoneModel> criteriaQuery) {
@@ -271,8 +253,7 @@ public class PhoneModelServiceImpl extends BaseDataObjectServiceImpl<PhoneModelR
             Subquery<Integer> subquery = criteriaQuery.subquery(Integer.class);
             Root<PhoneCpu> subRoot = subquery.from(PhoneCpu.class);
             ListJoin<PhoneCpu, CpuCoresBlock> phoneCpuToCoresBlocksJoin = subRoot.join(PhoneCpu_.coresBlocks);
-            subquery.select(criteriaBuilder.max(subRoot.get(CpuCoresBlock_.CLOCK_SPEED_IN_MHZ)))
-                    .where(criteriaBuilder.equal(root.get(PhoneModel_.id), subRoot.get(PhoneModel_.id)));
+            subquery.select(criteriaBuilder.max(phoneCpuToCoresBlocksJoin.get(CpuCoresBlock_.CLOCK_SPEED_IN_MHZ)));
             CriteriaBuilder.In<Integer> clockSpeedPredicate = criteriaBuilder.in(subquery);
             filterDto.getCpuClockSpeedVariants().forEach(clockSpeedPredicate::value);
             predicates.add(clockSpeedPredicate);

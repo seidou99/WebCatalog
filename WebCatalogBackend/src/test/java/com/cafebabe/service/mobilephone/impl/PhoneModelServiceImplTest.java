@@ -2,6 +2,7 @@ package com.cafebabe.service.mobilephone.impl;
 
 import com.cafebabe.dto.PhoneModelFilterDto;
 import com.cafebabe.dto.ScreenResolutionDto;
+import com.cafebabe.entity.Gpu;
 import com.cafebabe.entity.Manufacturer;
 import com.cafebabe.entity.Manufacturer_;
 import com.cafebabe.entity.mobilephone.PhoneModel;
@@ -95,8 +96,51 @@ public class PhoneModelServiceImplTest {
 
     @Test
     public void filterRamAndRomVariantsTest() {
-
+        filterDto.setRamVariants(Collections.singletonList(6));
+        filterDto.setRomVariants(Collections.singletonList(4));
         phoneModelService.filterRamAndRomVariants(filterDto, criteriaBuilder, root, predicates);
+        criteriaQuery.where(predicates.toArray(new Predicate[0]));
+        TypedQuery<PhoneModel> query = entityManager.createQuery(criteriaQuery);
+        List<PhoneModel> resultList = query.getResultList();
+        String s = "";
+    }
+
+    @Test
+    public void filterGpu() {
+        Gpu gpu = new Gpu();
+        gpu.setId(BigInteger.valueOf(11L));
+        filterDto.setGpuVariants(Collections.singletonList(gpu));
+        phoneModelService.filterGpu(filterDto, criteriaBuilder, root, predicates);
+        criteriaQuery.where(predicates.toArray(new Predicate[0]));
+        TypedQuery<PhoneModel> query = entityManager.createQuery(criteriaQuery);
+        List<PhoneModel> resultList = query.getResultList();
+        String s = "";
+    }
+
+    @Test
+    public void filterCpuTechprocess() {
+        filterDto.setCpuTechprocessVariants(Collections.singletonList(7));
+        phoneModelService.filterCpuTechprocess(filterDto, criteriaBuilder, root, predicates);
+        criteriaQuery.where(predicates.toArray(new Predicate[0]));
+        TypedQuery<PhoneModel> query = entityManager.createQuery(criteriaQuery);
+        List<PhoneModel> resultList = query.getResultList();
+        String s = "";
+    }
+
+    @Test
+    public void filterCpuCoresAmount() {
+        filterDto.setCoresAmountVariants(Collections.singletonList(7));
+        phoneModelService.filterCpuCoresAmount(filterDto, criteriaBuilder, root, predicates, criteriaQuery);
+        criteriaQuery.where(predicates.toArray(new Predicate[0]));
+        TypedQuery<PhoneModel> query = entityManager.createQuery(criteriaQuery);
+        List<PhoneModel> resultList = query.getResultList();
+        String s = "";
+    }
+
+    @Test
+    public void filterCpuClockSpeed() {
+        filterDto.setCpuClockSpeedVariants(Collections.singletonList(1600));
+        phoneModelService.filterCpuClockSpeed(filterDto, criteriaBuilder, root, predicates, criteriaQuery);
         criteriaQuery.where(predicates.toArray(new Predicate[0]));
         TypedQuery<PhoneModel> query = entityManager.createQuery(criteriaQuery);
         List<PhoneModel> resultList = query.getResultList();
