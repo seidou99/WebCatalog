@@ -1,5 +1,5 @@
-import {BaseDataObject} from "./base-data-object";
+import {BaseDataObjectWithName} from "./base-data-object";
 
-export class DustAndMoistureProtection extends BaseDataObject {
+export class DustAndMoistureProtection extends BaseDataObjectWithName {
 
 }

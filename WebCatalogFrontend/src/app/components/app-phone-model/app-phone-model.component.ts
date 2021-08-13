@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {PhoneModelService} from "../../services/phone-model.service";
-import {PhoneModel} from "../../model/phone-model";
-import {ActivatedRoute} from "@angular/router";
-import {ApiConstants, StringConstants} from "../../Constants";
+import {PhoneModelService} from '../../services/phone-model.service';
+import {PhoneModel} from '../../model/phone-model';
+import {ActivatedRoute} from '@angular/router';
+import {ApiConstants, StringConstants} from '../../Constants';
 
 @Component({
   selector: 'app-app-phone',
@@ -72,6 +72,6 @@ export class AppPhoneModelComponent implements OnInit {
     return maxClockSpeed;
   }
 
-  //TODO добавить фронтальную камеру, которую где-то проебали
+  // TODO добавить фронтальную камеру, которую где-то проебали
 
 }

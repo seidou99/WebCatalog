@@ -45,7 +45,7 @@ public class PhoneModelFilterServiceImpl implements PhoneModelFilterService {
     protected PhoneCpuService phoneCpuService;
 
     @Autowired
-    protected GpuService gpuService;
+    protected PhoneGpuService phoneGpuService;
 
     @Autowired
     protected RamAndRomVariantService ramAndRomVariantService;
@@ -74,7 +74,7 @@ public class PhoneModelFilterServiceImpl implements PhoneModelFilterService {
                 filter -> filter.setFingerprintScannerLocations(fingerprintScannerLocationService.findAll()),
                 filter -> filter.setScreenProtections(screenProtectionService.findAll()),
                 filter -> filter.setCpuVariants(phoneCpuService.findAll()),
-                filter -> filter.setGpuVariants(gpuService.findAll()),
+                filter -> filter.setPhoneGpuVariants(phoneGpuService.findAll()),
                 filter -> filter.setCoresAmountVariants(phoneCpuService.findDistinctCoresAmountVariants()),
                 filter -> filter.setCpuClockSpeedVariants(phoneCpuService.findDistinctCpuClockSpeedVariants()),
                 filter -> filter.setCpuTechprocessVariants(phoneCpuService.findDistinctCpuTechprocessVariants()),

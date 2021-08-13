@@ -35,7 +35,9 @@ public interface PhoneModelService extends BaseDataObjectService<PhoneModel> {
 
     List<Integer> findDistinctWeightVariants();
 
-    List<PhoneModel> findFilteredPhoneModels(PhoneModelFilterDto filterDto);
+    List<PhoneModel> findFilteredPhoneModelsWithPagination(PhoneModelFilterDto filterDto, int pageIndex, int pageSize);
+
+    Long findFilteredPhoneModelsCount(PhoneModelFilterDto filterDto);
 
 }
 

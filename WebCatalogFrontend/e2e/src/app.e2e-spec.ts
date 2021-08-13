@@ -3,7 +3,7 @@ import '@nativescript/zone-js';
 import {browser, logging} from 'protractor';
 import {AppPage} from './app.po';
 import {TestBed} from "@angular/core/testing";
-import {AppNewPhoneModelComponent} from "../../src/app/components/new-phone-model/app-new-phone-model.component";
+import {AppNewPhoneModelComponent} from "../../src/app/components/app-new-phone-model/app-new-phone-model.component";
 
 describe('workspace-project App', () => {
   let page: AppPage;

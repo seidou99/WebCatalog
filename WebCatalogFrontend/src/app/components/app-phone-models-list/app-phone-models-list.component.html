@@ -3,24 +3,24 @@
     <mat-card>
       <mat-form-field class="w-100">
         <mat-label>Производитель</mat-label>
-        <mat-select multiple [(ngModel)]="fields.manufacturers">
-          <mat-option *ngFor="let manufacturer of phoneModelFilter.manufacturers"
+        <mat-select multiple [(ngModel)]="filterFields.manufacturers">
+          <mat-option *ngFor="let manufacturer of phoneModelFilterPossibleValues.manufacturers"
                       [value]="manufacturer">{{manufacturer.name}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="w-100">
         <mat-label>Год выхода на рынок</mat-label>
-        <mat-select multiple [(ngModel)]="fields.marketLaunchYears">
-          <mat-option *ngFor="let year of phoneModelFilter.marketLaunchYears"
+        <mat-select multiple [(ngModel)]="filterFields.marketLaunchYears">
+          <mat-option *ngFor="let year of phoneModelFilterPossibleValues.marketLaunchYears"
                       [value]="year">{{year}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="w-100">
         <mat-label>Операционная система</mat-label>
-        <mat-select multiple [(ngModel)]="fields.operationSystemsWithVersions">
-          <mat-option *ngFor="let os of phoneModelFilter.operationSystemsWithVersions"
+        <mat-select multiple [(ngModel)]="filterFields.operationSystemsWithVersions">
+          <mat-option *ngFor="let os of phoneModelFilterPossibleValues.operationSystemsWithVersions"
                       [value]="os"
           >{{os.operationSystem.name}} {{os.version}}</mat-option>
         </mat-select>
@@ -28,8 +28,8 @@
 
       <mat-form-field class="w-100">
         <mat-label>Размер экрана в дюймах</mat-label>
-        <mat-select multiple [(ngModel)]="fields.screenDiagonalsInInches">
-          <mat-option *ngFor="let diagonal of phoneModelFilter.screenDiagonalsInInches"
+        <mat-select multiple [(ngModel)]="filterFields.screenDiagonalsInInches">
+          <mat-option *ngFor="let diagonal of phoneModelFilterPossibleValues.screenDiagonalsInInches"
                       [value]="diagonal">{{diagonal}}"
           </mat-option>
         </mat-select>
@@ -37,16 +37,16 @@
 
       <mat-form-field class="w-100">
         <mat-label>Разрешение экрана</mat-label>
-        <mat-select multiple [(ngModel)]="fields.screenResolutions">
-          <mat-option *ngFor="let resolution of phoneModelFilter.screenResolutions"
+        <mat-select multiple [(ngModel)]="filterFields.screenResolutions">
+          <mat-option *ngFor="let resolution of phoneModelFilterPossibleValues.screenResolutions"
                       [value]="resolution">{{resolution.horizontal}}x{{resolution.vertical}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="w-100">
         <mat-label class="block">Технология экрана</mat-label>
-        <mat-select multiple [(ngModel)]="fields.screenTechnologies">
-          <mat-option *ngFor="let technology of phoneModelFilter.screenTechnologies" [value]="technology.name">
+        <mat-select multiple [(ngModel)]="filterFields.screenTechnologies">
+          <mat-option *ngFor="let technology of phoneModelFilterPossibleValues.screenTechnologies" [value]="technology.name">
             {{technology}}
           </mat-option>
         </mat-select>
@@ -54,29 +54,29 @@
 
       <mat-form-field class="w-100">
         <mat-label class="block">Частота обновления экрана</mat-label>
-        <mat-select multiple [value]="fields.screenRefreshRates">
-          <mat-option *ngFor="let refreshRate of phoneModelFilter.screenRefreshRates"
+        <mat-select multiple [value]="filterFields.screenRefreshRates">
+          <mat-option *ngFor="let refreshRate of phoneModelFilterPossibleValues.screenRefreshRates"
                       [value]="refreshRate">{{refreshRate}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="w-100">
         <mat-label>Оперативня память</mat-label>
-        <mat-select multiple [(ngModel)]="fields.ramVariants">
-          <mat-option *ngFor="let ram of phoneModelFilter.ramVariants" [value]="ram">{{ram}} ГБ</mat-option>
+        <mat-select multiple [(ngModel)]="filterFields.ramVariants">
+          <mat-option *ngFor="let ram of phoneModelFilterPossibleValues.ramVariants" [value]="ram">{{ram}} ГБ</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="w-100">
         <mat-label>Флэш память</mat-label>
-        <mat-select multiple [(ngModel)]="fields.romVariants">
-          <mat-option *ngFor="let rom of phoneModelFilter.romVariants" [value]="rom">{{rom}} ГБ</mat-option>
+        <mat-select multiple [(ngModel)]="filterFields.romVariants">
+          <mat-option *ngFor="let rom of phoneModelFilterPossibleValues.romVariants" [value]="rom">{{rom}} ГБ</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="w-100">
         <mat-label>Поддержка карт памяти</mat-label>
-        <mat-select [(ngModel)]="fields.isMemoryCardSupported">
+        <mat-select [(ngModel)]="filterFields.isMemoryCardSupported">
           <mat-option [value]="null">Неважно</mat-option>
           <mat-option [value]="true">Да</mat-option>
           <mat-option [value]="false">Нет</mat-option>
@@ -86,38 +86,38 @@
       <mat-form-field class="w-100">
         <mat-label>Количество модулей камеры</mat-label>
         <mat-select multiple>
-          <mat-option *ngFor="let camerasAmount of phoneModelFilter.camerasAmountVariants"
+          <mat-option *ngFor="let camerasAmount of phoneModelFilterPossibleValues.camerasAmountVariants"
                       [value]="camerasAmount">{{camerasAmount}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="w-100">
         <mat-label>Камера, Мп</mat-label>
-        <mat-select multiple [(ngModel)]="fields.camerasInMp">
-          <mat-option *ngFor="let camera of phoneModelFilter.camerasInMp"
+        <mat-select multiple [(ngModel)]="filterFields.camerasInMp">
+          <mat-option *ngFor="let camera of phoneModelFilterPossibleValues.camerasInMp"
                       [value]="camera">{{camera}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="w-100">
         <mat-label>Количество SIM-карт</mat-label>
-        <mat-select multiple [(ngModel)]="fields.simCardsAmountVariants">
-          <mat-option *ngFor="let simCardsAmount of phoneModelFilter.simCardsAmountVariants"
+        <mat-select multiple [(ngModel)]="filterFields.simCardsAmountVariants">
+          <mat-option *ngFor="let simCardsAmount of phoneModelFilterPossibleValues.simCardsAmountVariants"
                       [value]="simCardsAmount">{{simCardsAmount}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="w-100">
         <mat-label>Формат SIM-карты</mat-label>
-        <mat-select multiple [(ngModel)]="fields.simCardTypes">
-          <mat-option *ngFor="let type of phoneModelFilter.simCardTypes"
+        <mat-select multiple [(ngModel)]="filterFields.simCardTypes">
+          <mat-option *ngFor="let type of phoneModelFilterPossibleValues.simCardTypes"
                       [value]="type">{{type.name}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="w-100">
         <mat-label>Подержка 5G</mat-label>
-        <mat-select [(ngModel)]="fields.is5GSupported">
+        <mat-select [(ngModel)]="filterFields.is5GSupported">
           <mat-option [value]="null">Неважно</mat-option>
           <mat-option [value]="true">Да</mat-option>
           <mat-option [value]="false">Нет</mat-option>
@@ -126,85 +126,85 @@
 
       <mat-form-field class="w-100">
         <mat-label>Цвет корпуса</mat-label>
-        <mat-select multiple [(ngModel)]="fields.bodyColors">
-          <mat-option *ngFor="let bodyColor of phoneModelFilter.bodyColors"
+        <mat-select multiple [(ngModel)]="filterFields.bodyColors">
+          <mat-option *ngFor="let bodyColor of phoneModelFilterPossibleValues.bodyColors"
                       [value]="bodyColor">{{bodyColor.name}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="w-100">
         <mat-label>Пыле- и влагозащита</mat-label>
-        <mat-select multiple [(ngModel)]="fields.dustAndMoistureProtections">
-          <mat-option *ngFor="let protection of phoneModelFilter.dustAndMoistureProtections"
+        <mat-select multiple [(ngModel)]="filterFields.dustAndMoistureProtections">
+          <mat-option *ngFor="let protection of phoneModelFilterPossibleValues.dustAndMoistureProtections"
                       [value]="protection">{{protection.name}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="w-100">
         <mat-label>Емкость аккумулятора, мАч</mat-label>
-        <mat-select multiple [(ngModel)]="fields.batteryCapacities">
-          <mat-option *ngFor="let batteryCapacity of phoneModelFilter.batteryCapacities"
+        <mat-select multiple [(ngModel)]="filterFields.batteryCapacities">
+          <mat-option *ngFor="let batteryCapacity of phoneModelFilterPossibleValues.batteryCapacities"
                       [value]="batteryCapacity">{{batteryCapacity}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="w-100">
         <mat-label>Расположение сканера отпечатка пальца</mat-label>
-        <mat-select multiple [(ngModel)]="fields.fingerprintScannerLocations">
-          <mat-option *ngFor="let location of phoneModelFilter.fingerprintScannerLocations"
+        <mat-select multiple [(ngModel)]="filterFields.fingerprintScannerLocations">
+          <mat-option *ngFor="let location of phoneModelFilterPossibleValues.fingerprintScannerLocations"
                       [value]="location">{{location.name}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="w-100">
         <mat-label>Защита от царапин</mat-label>
-        <mat-select multiple [(ngModel)]="fields.screenProtections">
-          <mat-option *ngFor="let protection of phoneModelFilter.screenProtections"
+        <mat-select multiple [(ngModel)]="filterFields.screenProtections">
+          <mat-option *ngFor="let protection of phoneModelFilterPossibleValues.screenProtections"
                       [value]="protection">{{protection.name}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="w-100">
         <mat-label>Процессор</mat-label>
-        <mat-select multiple [(ngModel)]="fields.cpuVariants">
-          <mat-option *ngFor="let cpu of phoneModelFilter.cpuVariants" [value]="cpu">{{cpu.name}}</mat-option>
+        <mat-select multiple [(ngModel)]="filterFields.cpuVariants">
+          <mat-option *ngFor="let cpu of phoneModelFilterPossibleValues.cpuVariants" [value]="cpu">{{cpu.name}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="w-100">
         <mat-label>Количество ядер</mat-label>
-        <mat-select multiple [(ngModel)]="fields.coresAmountVariants">
-          <mat-option *ngFor="let coreAmount of phoneModelFilter.coresAmountVariants"
+        <mat-select multiple [(ngModel)]="filterFields.coresAmountVariants">
+          <mat-option *ngFor="let coreAmount of phoneModelFilterPossibleValues.coresAmountVariants"
                       [value]="coreAmount">{{coreAmount}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="w-100">
         <mat-label>Частота процессора, ГГц</mat-label>
-        <mat-select multiple [(ngModel)]="fields.cpuClockSpeedVariants">
-          <mat-option *ngFor="let cpuClockSpeed of phoneModelFilter.cpuClockSpeedVariants"
+        <mat-select multiple [(ngModel)]="filterFields.cpuClockSpeedVariants">
+          <mat-option *ngFor="let cpuClockSpeed of phoneModelFilterPossibleValues.cpuClockSpeedVariants"
                       [value]="cpuClockSpeed">{{cpuClockSpeed}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="w-100">
         <mat-label>Техпроцесс</mat-label>
-        <mat-select multiple [(ngModel)]="fields.cpuTechprocessVariants">
-          <mat-option *ngFor="let techprocess of phoneModelFilter.cpuTechprocessVariants"
+        <mat-select multiple [(ngModel)]="filterFields.cpuTechprocessVariants">
+          <mat-option *ngFor="let techprocess of phoneModelFilterPossibleValues.cpuTechprocessVariants"
                       [value]="techprocess">{{techprocess}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="w-100">
         <mat-label>Графический ускоритель</mat-label>
-        <mat-select multiple [(ngModel)]="fields.gpuVariants">
-          <mat-option *ngFor="let gpu of phoneModelFilter.gpuVariants" [value]="gpu">{{gpu.name}}</mat-option>
+        <mat-select multiple [(ngModel)]="filterFields.phoneGpuVariants">
+          <mat-option *ngFor="let gpu of phoneModelFilterPossibleValues.phoneGpuVariants" [value]="gpu">{{gpu.name}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="w-100">
         <mat-label>Аудиопроцессор</mat-label>
-        <mat-select [(ngModel)]="fields.hasAudioProcessor">
+        <mat-select [(ngModel)]="filterFields.hasAudioProcessor">
           <mat-option [value]="null">Неважно</mat-option>
           <mat-option [value]="true">Да</mat-option>
           <mat-option [value]="false">Нет</mat-option>
@@ -220,15 +220,15 @@
 
       <mat-form-field class="w-100">
         <mat-label>Фронтальная камера</mat-label>
-        <mat-select multiple [(ngModel)]="fields.frontCameraVariants">
-          <mat-option *ngFor="let frontCamera of phoneModelFilter.frontCameraVariants"
+        <mat-select multiple [(ngModel)]="filterFields.frontCameraVariants">
+          <mat-option *ngFor="let frontCamera of phoneModelFilterPossibleValues.frontCameraVariants"
                       [value]="frontCamera">{{frontCamera}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="w-100">
         <mat-label>Аудиовыход</mat-label>
-        <mat-select [(ngModel)]="fields.hasAudioOutput">
+        <mat-select [(ngModel)]="filterFields.hasAudioOutput">
           <mat-option [value]="null">Неважно</mat-option>
           <mat-option [value]="true">Да</mat-option>
           <mat-option [value]="false">Нет</mat-option>
@@ -237,43 +237,45 @@
 
       <mat-form-field class="w-100">
         <mat-label>Разъём подключения</mat-label>
-        <mat-select multiple [(ngModel)]="fields.connectionSocketVariants">
-          <mat-option *ngFor="let socket of phoneModelFilter.connectionSocketVariants"
+        <mat-select multiple [(ngModel)]="filterFields.connectionSocketVariants">
+          <mat-option *ngFor="let socket of phoneModelFilterPossibleValues.connectionSocketVariants"
                       [value]="socket">{{socket.name}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="w-100">
         <mat-label>Длина, мм</mat-label>
-        <mat-select multiple [(ngModel)]="fields.lengthVariants">
-          <mat-option *ngFor="let length of phoneModelFilter.lengthVariants"
+        <mat-select multiple [(ngModel)]="filterFields.lengthVariants">
+          <mat-option *ngFor="let length of phoneModelFilterPossibleValues.lengthVariants"
                       [value]="length">{{length}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="w-100">
         <mat-label>Ширина, мм</mat-label>
-        <mat-select multiple [(ngModel)]="fields.widthVariants">
-          <mat-option *ngFor="let width of phoneModelFilter.widthVariants"
+        <mat-select multiple [(ngModel)]="filterFields.widthVariants">
+          <mat-option *ngFor="let width of phoneModelFilterPossibleValues.widthVariants"
                       [value]="width">{{width}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="w-100">
         <mat-label>Толщина, мм</mat-label>
-        <mat-select multiple [(ngModel)]="fields.thicknessVariants">
-          <mat-option *ngFor="let thickness of phoneModelFilter.thicknessVariants"
+        <mat-select multiple [(ngModel)]="filterFields.thicknessVariants">
+          <mat-option *ngFor="let thickness of phoneModelFilterPossibleValues.thicknessVariants"
                       [value]="thickness">{{thickness}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="w-100">
         <mat-label>Вес, г</mat-label>
-        <mat-select multiple [(ngModel)]="fields.weightVariants">
-          <mat-option *ngFor="let weight of phoneModelFilter.weightVariants"
+        <mat-select multiple [(ngModel)]="filterFields.weightVariants">
+          <mat-option *ngFor="let weight of phoneModelFilterPossibleValues.weightVariants"
                       [value]="weight">{{weight}}</mat-option>
         </mat-select>
       </mat-form-field>
+
+      <button mat-raised-button class="w-100" color="primary" (click)="loadFilteredPhoneModels()">Фильтровать</button>
     </mat-card>
   </div>
   <div class="col col-75 ml-1">
@@ -292,7 +294,7 @@
             {{phoneModel.screenTechnology.name}}
             ({{phoneModel.horizontalScreenResolution}}x{{phoneModel.verticalScreenResolution}}),
             процессор {{phoneModel.cpu.name}},
-            {{getRamAndRomVariantsAsString(phoneModel)}},
+            {{utilService.getRamAndRomVariantsAsStringForPhoneModel(phoneModel)}},
             камера {{phoneModel.cameraInMp}} Мп,
             аккумулятор {{phoneModel.batteryCapacity}} мАч,
             {{phoneModel.simCardsAmount}} SIM</p>
@@ -310,5 +312,7 @@
         </div>
       </div>
     </mat-card>
+    <mat-paginator [length]="phoneModelsCount" [pageSize]="pageSize" (page)="onPageChanged($event)"
+                   [pageSizeOptions]="pageSizeOptions"></mat-paginator>
   </div>
 </div>

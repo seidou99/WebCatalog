@@ -1,6 +1,6 @@
-import {BaseDataObject} from './base-data-object';
+import {BaseDataObjectWithName} from './base-data-object';
 
-export class RamAndRomVariant extends BaseDataObject {
+export class RamAndRomVariant extends BaseDataObjectWithName {
 
   ramSizeInGb: number;
   romSizeInGb: number;

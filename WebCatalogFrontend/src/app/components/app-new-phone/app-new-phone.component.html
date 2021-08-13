@@ -1,0 +1,170 @@
+<mat-card class="m-1">
+  <h2>Добавить новую модель телефона</h2>
+  <div class="grid1fr1fr grid grid-col-gap2em">
+    <mat-form-field class="w-100" [formGroup]="phoneForm">
+      <mat-label>Название</mat-label>
+      <input matInput type="text" [formControlName]="FormControlNames.NAME">
+    </mat-form-field>
+
+    <mat-form-field class="w-100" [formGroup]="phoneForm">
+      <mat-label>Модель телефона</mat-label>
+      <input type="text" matInput [matAutocomplete]="auto" [formControlName]="FormControlNames.PHONE_MODEL"
+             (ngModelChange)="onPhoneModelChange($event)">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="nameDisplayFunction">
+        <mat-option *ngFor="let phoneModel of phoneModels"
+                    [value]="phoneModel">{{phoneModel.name}}</mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Производитель</mat-label>
+      <input type="text" matInput disabled [ngModel]="selectedPhoneModel?.manufacturer?.name">
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Год выхода на рынок</mat-label>
+      <input matInput type="number" disabled [ngModel]="selectedPhoneModel?.marketLaunchYear">
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Операционная система</mat-label>
+      <input matInput disabled [ngModel]="getOperationSystemName()">
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Размер экрана в дюймах</mat-label>
+      <input matInput type="number" disabled [ngModel]="selectedPhoneModel?.screenDiagonalInInches">
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Горизонтальное разрешение экрана</mat-label>
+      <input matInput type="number" disabled [ngModel]="selectedPhoneModel?.horizontalScreenResolution">
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Вертикальное разрешение экрана</mat-label>
+      <input matInput type="number" disabled [ngModel]="selectedPhoneModel?.verticalScreenResolution">
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Технология экрана</mat-label>
+      <input matInput disabled [ngModel]="selectedPhoneModel?.screenTechnology?.name"/>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Частота обновления экрана, Гц</mat-label>
+      <input matInput type="number" disabled [ngModel]="selectedPhoneModel?.screenRefreshRate"/>
+    </mat-form-field>
+
+    <mat-form-field class="w-100" [formGroup]="phoneForm">
+      <mat-label>Оперативная и постоянная память</mat-label>
+      <mat-select [formControlName]="FormControlNames.RAM_AND_ROM_VARIANT">
+        <mat-option *ngFor="let ramAndRomVariant of selectedPhoneModel?.ramAndRomVariants" [value]="ramAndRomVariant">
+          {{ramAndRomVariant.ramSizeInGb}} ГБ {{ramAndRomVariant.romSizeInGb}} ГБ
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <section class="w-100 row flex-align-center">
+      <mat-checkbox disabled [ngModel]="selectedPhoneModel?.isMemoryCardSupported">Поддержка карт памяти</mat-checkbox>
+    </section>
+
+    <mat-form-field class="w-100">
+      <mat-label>Количество модулей камеры</mat-label>
+      <input matInput type="number" disabled [ngModel]="selectedPhoneModel?.camerasAmount">
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Камера, Мп</mat-label>
+      <input matInput type="number" disabled [ngModel]="selectedPhoneModel?.cameraInMp"/>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Количество SIM-карт</mat-label>
+      <input matInput type="number" disabled [ngModel]="selectedPhoneModel?.simCardsAmount"/>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label class="block">Формат SIM-карты</mat-label>
+      <input matInput disabled [ngModel]="selectedPhoneModel?.simCardType?.name"/>
+    </mat-form-field>
+
+    <section class="w-100 row flex-align-center">
+      <mat-checkbox disabled [ngModel]="selectedPhoneModel?.is5GSupported">Поддержка 5G</mat-checkbox>
+    </section>
+
+    <mat-form-field class="w-100" [formGroup]="phoneForm">
+      <mat-label class="block">Цвет корпуса</mat-label>
+      <mat-select [formControlName]="FormControlNames.BODY_COLOR">
+        <mat-option *ngFor="let color of selectedPhoneModel?.bodyColors" [value]="color">{{color.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label class="block">Пыле- и влагозащита</mat-label>
+      <input matInput disabled [ngModel]="selectedPhoneModel?.dustAndMoistureProtection?.name">
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Емкость аккумулятора, мАч</mat-label>
+      <input matInput type="number" disabled [ngModel]="selectedPhoneModel?.batteryCapacity">
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label class="block">Расположение сканера отпечатка пальца</mat-label>
+      <input matInput disabled [ngModel]="selectedPhoneModel?.fingerprintScannerLocation?.name"/>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label class="block">Защита от царапин</mat-label>
+      <input matInput disabled [ngModel]="selectedPhoneModel?.screenProtection?.name"/>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label class="block">Процессор</mat-label>
+      <input matInput type="text" disabled [ngModel]="selectedPhoneModel?.cpu?.name">
+    </mat-form-field>
+
+    <section class="w-100 flex-align-center row">
+      <mat-checkbox disabled [ngModel]="selectedPhoneModel?.hasAudioProcessor">Аудиопроцессор</mat-checkbox>
+    </section>
+
+    <mat-form-field class="w-100">
+      <mat-label>Фронтальная камера</mat-label>
+      <input matInput type="number" disabled [ngModel]="selectedPhoneModel?.frontCameraInMp">
+    </mat-form-field>
+
+    <section class="w-100 row flex-align-center">
+      <mat-checkbox disabled [ngModel]="selectedPhoneModel?.hasAudioOutput">Аудиовыход</mat-checkbox>
+    </section>
+
+    <mat-form-field class="w-100">
+      <mat-label>Разъём подключения</mat-label>
+      <input matInput disabled [ngModel]="selectedPhoneModel?.connectionSocket?.name">
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Длина, мм</mat-label>
+      <input matInput type="number" disabled [ngModel]="selectedPhoneModel?.length">
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Ширина, мм</mat-label>
+      <input matInput type="number" disabled [ngModel]="selectedPhoneModel?.width">
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Толщина, мм</mat-label>
+      <input matInput type="number" disabled [ngModel]="selectedPhoneModel?.thickness">
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Вес, г</mat-label>
+      <input matInput type="number" disabled [ngModel]="selectedPhoneModel?.weight">
+    </mat-form-field>
+  </div>
+  <div class="row flex-justify-end">
+    <button mat-button (click)="createPhoneModel()">Добавить</button>
+  </div>
+</mat-card>
+

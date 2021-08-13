@@ -19,14 +19,17 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {AppPhoneModelComponent} from './components/app-phone-model/app-phone-model.component';
 import {MatDividerModule} from '@angular/material/divider';
-import {AppNewPhoneModelComponent} from './components/new-phone-model/app-new-phone-model.component';
+import {AppNewPhoneModelComponent} from './components/app-new-phone-model/app-new-phone-model.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {AppDialogWithNameComponent} from './components/app-dialog-with-name/app-dialog-with-name.component';
 import {HttpClientModule} from '@angular/common/http';
 import { AppNewOperationSystemWithVersionDialogComponent } from './components/app-new-operation-system-with-version-dialog/app-new-operation-system-with-version-dialog.component';
-import { AppNewCpuComponent } from './components/app-new-cpu/app-new-cpu.component';
+import { AppNewPhoneCpuComponent } from './components/app-new-cpu/app-new-phone-cpu.component';
 import {AppNewGpuComponent} from './components/app-new-gpu/app-new-gpu.component';
 import { AppPhoneModelsListComponent } from './components/app-phone-models-list/app-phone-models-list.component';
+import {MatPaginatorModule} from "@angular/material/paginator";
+import { AppNewPhoneComponent } from './components/app-new-phone/app-new-phone.component';
+import { AppPhoneComponent } from './components/app-phone/app-phone.component';
 
 
 @NgModule({
@@ -38,9 +41,11 @@ import { AppPhoneModelsListComponent } from './components/app-phone-models-list/
     AppNewPhoneModelComponent,
     AppDialogWithNameComponent,
     AppNewOperationSystemWithVersionDialogComponent,
-    AppNewCpuComponent,
+    AppNewPhoneCpuComponent,
     AppNewGpuComponent,
     AppPhoneModelsListComponent,
+    AppNewPhoneComponent,
+    AppPhoneComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +66,8 @@ import { AppPhoneModelsListComponent } from './components/app-phone-models-list/
     MatDialogModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

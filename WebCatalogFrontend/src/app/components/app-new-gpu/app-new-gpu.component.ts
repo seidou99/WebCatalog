@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {Gpu} from "../../model/gpu";
+import {Component, OnInit} from '@angular/core';
+import {MobileGpu} from "../../model/mobileGpu";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-app-new-gpu',
@@ -8,9 +9,19 @@ import {Gpu} from "../../model/gpu";
 })
 export class AppNewGpuComponent implements OnInit {
 
-  result = new Gpu();
+  result: FormGroup;
 
-  constructor() { }
+  constructor(protected fb: FormBuilder) {
+    this.result = this.fb.group({
+      name: [null, [Validators.required, Validators.minLength(1)]],
+      clockSpeedInMHz: [null, [Validators.required, Validators.min(1)]]
+    });
+  }
+
+  getResult(): MobileGpu {
+    const rawValue = this.result.getRawValue();
+    return new MobileGpu(rawValue.name, rawValue.clockSpeedInMHz);
+  }
 
   ngOnInit(): void {
   }

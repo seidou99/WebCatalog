@@ -1,5 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-app-dialog-with-name-and-description',
@@ -8,10 +9,17 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 })
 export class AppDialogWithNameComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data) {
+  nameFormGroup: FormGroup;
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data, public fb: FormBuilder) {
+    this.nameFormGroup = this.fb.group({
+      result: [null, [Validators.required, Validators.minLength(1)]]
+    });
   }
 
-  public result = {name: ''};
+  getResult(): any {
+    return {name: this.nameFormGroup.getRawValue().result};
+  }
 
   ngOnInit(): void {
   }

@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ApiConstants} from '../Constants';
 import {OperationSystemWithVersion} from '../model/operation-system-with-version';
-import {BaseDataObjectRestService} from './base-data-object-rest-service';
+import {BaseDataObjectRestService} from './base-data-object-rest.service';
 
 @Injectable({
   providedIn: 'root'

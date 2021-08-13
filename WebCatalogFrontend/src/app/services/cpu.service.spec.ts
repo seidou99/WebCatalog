@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CpuService } from './cpu.service';
+import { PhoneCpuService } from './phone-cpu.service';
 
 describe('CpuService', () => {
-  let service: CpuService;
+  let service: PhoneCpuService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(CpuService);
+    service = TestBed.inject(PhoneCpuService);
   });
 
   it('should be created', () => {

@@ -117,3 +117,7 @@
 /.idea/libraries/Maven__org_springframework_data_spring_data_jpa_2_4_5.xml
 /.idea/dataSources/0cff42df-4f87-4ef1-ae81-9998c6528b8f/storage_v2/_src_/database/DEMO.4_UfAA/schema/PUBLIC.aaZQjQ.meta
 /.idea/dataSources/0cff42df-4f87-4ef1-ae81-9998c6528b8f/storage_v2/_src_/database/DEMO.4_UfAA/schema/WEB_CATALOG.7m2jgw.meta
+/.idea/libraries/Maven__javax_activation_javax_activation_api_1_2_0.xml
+/.idea/libraries/Maven__javax_xml_bind_jaxb_api_2_3_1.xml
+/.idea/libraries/Maven__org_hibernate_hibernate_jpamodelgen_5_4_31_Final.xml
+/.idea/sqldialects.xml

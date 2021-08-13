@@ -8,5 +8,5 @@ import javax.persistence.Entity;
 @Entity
 @Getter
 @Setter
-public class FingerprintScannerLocation extends BaseDataObject {
+public class FingerprintScannerLocation extends BaseDataObjectWithName {
 }

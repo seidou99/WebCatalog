@@ -16,6 +16,4 @@ public class BaseDataObject {
     @Id
     @GeneratedValue
     protected BigInteger id;
-
-    protected String name;
 }

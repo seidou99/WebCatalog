@@ -15,15 +15,18 @@ export class ApiConstants {
   static readonly SCREEN_PROTECTIONS_PATH = 'screen-protections';
   static readonly PHONE_MODELS_PATH = 'models';
   static readonly GPUS_PATH = 'gpus';
-  static readonly CPUS_PATH = 'cpus';
+  static readonly PHONE_CPUS_PATH = 'phone-cpus';
   static readonly CONNECTION_SOCKETS_PATH = 'connection-sockets';
   static readonly COLORS_PATH = 'colors';
   static readonly FILTER_PATH = 'filter';
   static readonly FILTERED_PATH = 'filtered';
+  static readonly COUNT_PATH = 'count';
   static readonly PHONES_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.MOBILE_PHONES_PATH}`;
   static readonly PHONE_MODELS_API_URL = `${ApiConstants.PHONES_API_URL}/${ApiConstants.PHONE_MODELS_PATH}`;
   static readonly PHONE_MODELS_FILTER_API_URL = `${ApiConstants.PHONE_MODELS_API_URL}/${ApiConstants.FILTER_PATH}`;
-  static readonly PHONE_MODELS_FILTERED_API_URL = `${ApiConstants.PHONE_MODELS_FILTER_API_URL}/${ApiConstants.FILTERED_PATH}`;
+  static readonly PHONE_FILTER_API_URL = `${ApiConstants.PHONES_API_URL}/${ApiConstants.FILTER_PATH}`;
+  static readonly PHONE_MODELS_FILTERED_API_URL = `${ApiConstants.PHONE_MODELS_API_URL}/${ApiConstants.FILTERED_PATH}`;
+  static readonly PHONE_MODELS_FILTERED_COUNT_API_URL = `${ApiConstants.PHONE_MODELS_FILTERED_API_URL}/${ApiConstants.COUNT_PATH}`;
   static readonly MANUFACTURERS_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.MANUFACTURERS_PATH}`;
   static readonly OPERATION_SYSTEMS_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.OPERATION_SYSTEMS_PATH}`;
   static readonly SCREEN_TECHNOLOGIES_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.SCREEN_TECHNOLOGIES}`;
@@ -33,8 +36,8 @@ export class ApiConstants {
   static readonly FINGERPRINT_SCANNER_LOCATIONS_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.FINGERPRINT_SCANNER_LOCATIONS_PATH}`;
   static readonly SCREEN_PROTECTIONS_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.SCREEN_PROTECTIONS_PATH}`;
   static readonly GPUS_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.GPUS_PATH}`;
-  static readonly MOBILE_GPUS_API_URL = `${ApiConstants.SERVER_API_URL}/mobile-integrated-gpus`;
-  static readonly CPUS_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.CPUS_PATH}`;
+  static readonly PHONE_GPUS_API_URL = `${ApiConstants.SERVER_API_URL}/phone-integrated-gpus`;
+  static readonly PHONE_CPUS_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.PHONE_CPUS_PATH}`;
   static readonly CONNECTION_SOCKETS_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.CONNECTION_SOCKETS_PATH}`;
   static readonly COLORS_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.COLORS_PATH}`;
 
@@ -72,10 +75,20 @@ export class FormControlNames {
   static readonly THICKNESS = 'thickness';
   static readonly WEIGHT = 'weight';
   static readonly BODY_COLORS = 'bodyColors';
+  static readonly PHONE_MODEL = 'phoneModel';
+  static readonly BODY_COLOR = 'bodyColor';
+  static readonly RAM_AND_ROM_VARIANT = 'ramAndRomVariant';
+  static readonly INTEGRATED_GPU = 'integratedGpu';
+  static readonly DIGITAL_CAPACITY_IN_BITS = 'digitalCapacityInBits';
+  static readonly TECHPROCESS_IN_NM = 'techprocessInNm';
+  static readonly CORES_BLOCKS_AMOUNT = 'coresBlocksAmount';
+  static readonly CORES_AMOUNT = 'coresAmount';
+  static readonly CLOCK_SPEED_IN_MHZ = 'clockSpeedInMHz';
 }
 
 export class StringConstants {
   static readonly RAM = 'ОЗУ';
   static readonly ROM = 'ПЗУ';
   static readonly GB = 'ГБ';
+  static readonly MHz = 'МГц';
 }

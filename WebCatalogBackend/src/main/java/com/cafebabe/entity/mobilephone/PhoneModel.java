@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class PhoneModel extends BaseDataObject {
+public class PhoneModel extends BaseDataObjectWithName {
 
     @ManyToOne
     protected Manufacturer manufacturer;

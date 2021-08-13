@@ -1,13 +1,15 @@
 <h2 matDialogTitle>{{data.formTitle}}</h2>
 <mat-dialog-content>
-  <div class="block">
+  <div class="block" [formGroup]="nameFormGroup">
     <mat-form-field class="col w-100">
       <mat-label>Название</mat-label>
-      <input matInput [(ngModel)]="result.name" name="title">
+      <input matInput formControlName="result" name="title">
     </mat-form-field>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Отмена</button>
-  <button mat-button [mat-dialog-close]="result" cdkFocusInitial>Создать</button>
+  <button mat-button [mat-dialog-close]="getResult()" [disabled]="nameFormGroup.invalid">
+    Создать
+  </button>
 </mat-dialog-actions>

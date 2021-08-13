@@ -32,7 +32,7 @@ public class PhoneModelFilterDto {
     List<FingerprintScannerLocation> fingerprintScannerLocations;
     List<ScreenProtection> screenProtections;
     List<PhoneCpu> cpuVariants;
-    List<Gpu> gpuVariants;
+    List<PhoneGpu> phoneGpuVariants;
     List<Integer> coresAmountVariants;
     List<Integer> cpuClockSpeedVariants;
     List<Integer> cpuTechprocessVariants;

@@ -3,5 +3,5 @@ package com.cafebabe.entity;
 import javax.persistence.Entity;
 
 @Entity
-public class ScreenTechnology extends BaseDataObject {
+public class ScreenTechnology extends BaseDataObjectWithName {
 }

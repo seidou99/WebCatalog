@@ -1,4 +1,4 @@
-import {BaseDataObject} from './base-data-object';
+import {BaseDataObjectWithName} from './base-data-object';
 
-export class FingerprintScannerLocation extends BaseDataObject{
+export class FingerprintScannerLocation extends BaseDataObjectWithName{
 }

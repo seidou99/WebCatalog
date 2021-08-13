@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
-import {BaseDataObjectRestService} from './base-data-object-rest-service';
-import {BaseDataObject} from '../model/base-data-object';
+import {BaseDataObjectRestService} from './base-data-object-rest.service';
+import {BaseDataObjectWithName} from '../model/base-data-object';
 import {ApiConstants} from '../Constants';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DustAndMoistureProtectionService extends BaseDataObjectRestService<BaseDataObject> {
+export class DustAndMoistureProtectionService extends BaseDataObjectRestService<BaseDataObjectWithName> {
 
   apiUrl = ApiConstants.DUST_AND_MOISTURE_PROTECTION_API_URL;
 

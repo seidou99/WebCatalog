@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 @Getter
 @Setter
 @Entity
-public class CpuCoresBlock extends BaseDataObject{
+public class CpuCoresBlock extends BaseDataObjectWithName {
 
     protected Integer coresAmount;
     protected Integer clockSpeedInMHz;

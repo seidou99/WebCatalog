@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ApiConstants} from '../Constants';
 import {ScreenTechnology} from '../model/screen-technology';
-import {BaseDataObjectRestService} from "./base-data-object-rest-service";
+import {BaseDataObjectRestService} from "./base-data-object-rest.service";
 
 @Injectable({
   providedIn: 'root'

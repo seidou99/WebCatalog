@@ -10,7 +10,7 @@ import javax.persistence.Enumerated;
 @Entity
 @Getter
 @Setter
-public class Manufacturer extends BaseDataObject {
+public class Manufacturer extends BaseDataObjectWithName {
 
     @Enumerated(EnumType.STRING)
     protected ManufacturerType manufacturerType;

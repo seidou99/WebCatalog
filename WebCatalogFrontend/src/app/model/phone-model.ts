@@ -1,13 +1,13 @@
-import {BaseDataObject} from "./base-data-object";
+import {BaseDataObjectWithName} from "./base-data-object";
 import {Manufacturer} from "./manufacturer";
 import {OperationSystemWithVersion} from "./operation-system-with-version";
 import {ScreenTechnology} from "./screen-technology";
 import {RamAndRomVariant} from "./ram-and-rom-variant";
 import {DustAndMoistureProtection} from "./dust-and-moisture-protection";
 import {FingerprintScannerLocation} from "./fingerprint-scanner-location";
-import {Cpu} from "./cpu";
+import {MobileCpu} from "./mobileCpu";
 
-export class PhoneModel extends BaseDataObject {
+export class PhoneModel extends BaseDataObjectWithName {
 
   manufacturer: Manufacturer;
   marketLaunchYear: number;
@@ -22,25 +22,25 @@ export class PhoneModel extends BaseDataObject {
   camerasAmount: number;
   cameraInMp: number;
   simCardsAmount: number;
-  simCardType: BaseDataObject;
+  simCardType: BaseDataObjectWithName;
   is5GSupported: boolean;
   dustAndMoistureProtection: DustAndMoistureProtection;
   batteryCapacity: number;
   fingerprintScannerLocation: FingerprintScannerLocation;
   screenPpi: number;
-  screenProtection: BaseDataObject;
-  cpu: Cpu;
+  screenProtection: BaseDataObjectWithName;
+  cpu: MobileCpu;
   hasAudioProcessor: boolean;
   frontCameraInMp: number;
   hasAudioOutput: boolean;
-  connectionSocket: BaseDataObject;
+  connectionSocket: BaseDataObjectWithName;
   length: number;
   width: number;
   thickness: number;
   weight: number;
-  bodyColors: Array<BaseDataObject>;
+  bodyColors: Array<BaseDataObjectWithName>;
 
-  constructor(name: string, manufacturer: Manufacturer, marketLaunchYear: number, operationSystem: OperationSystemWithVersion, screenDiagonalInInches: number, horizontalScreenResolution: number, verticalScreenResolution: number, screenTechnology: ScreenTechnology, screenRefreshRate: number, ramAndRomVariants: Array<RamAndRomVariant>, isMemoryCardSupported: boolean, camerasAmount: number, cameraInMp: number, simCardsAmount: number, simCardType: BaseDataObject, is5GSupported: boolean, dustAndMoistureProtection: DustAndMoistureProtection, batteryCapacity: number, fingerprintScannerLocation: FingerprintScannerLocation, screenProtection: BaseDataObject, cpu: Cpu, hasAudioProcessor: boolean, frontCameraInMp: number, hasAudioOutput: boolean, connectionSocket: BaseDataObject, length: number, width: number, thickness: number, weight: number, bodyColors: Array<BaseDataObject>) {
+  constructor(name: string, manufacturer: Manufacturer, marketLaunchYear: number, operationSystem: OperationSystemWithVersion, screenDiagonalInInches: number, horizontalScreenResolution: number, verticalScreenResolution: number, screenTechnology: ScreenTechnology, screenRefreshRate: number, ramAndRomVariants: Array<RamAndRomVariant>, isMemoryCardSupported: boolean, camerasAmount: number, cameraInMp: number, simCardsAmount: number, simCardType: BaseDataObjectWithName, is5GSupported: boolean, dustAndMoistureProtection: DustAndMoistureProtection, batteryCapacity: number, fingerprintScannerLocation: FingerprintScannerLocation, screenProtection: BaseDataObjectWithName, cpu: MobileCpu, hasAudioProcessor: boolean, frontCameraInMp: number, hasAudioOutput: boolean, connectionSocket: BaseDataObjectWithName, length: number, width: number, thickness: number, weight: number, bodyColors: Array<BaseDataObjectWithName>) {
     super();
     this.name = name;
     this.manufacturer = manufacturer;

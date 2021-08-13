@@ -1,348 +1,296 @@
-<div class="ro">
+<div class="row">
   <button mat-button routerLink="new">Новая модель телефона</button>
 </div>
 <div class="row m-1 ">
   <div class="filters col col-25">
-    <mat-card class="col">
+    <mat-card>
       <mat-form-field class="w-100">
         <mat-label>Производитель</mat-label>
-        <input type="text" matInput [matAutocomplete]="auto">
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-          <mat-option>Samsung</mat-option>
-          <mat-option>Apple</mat-option>
-          <mat-option>Google</mat-option>
-          <mat-option>Xiaomi</mat-option>
-          <mat-option>Huawei</mat-option>
-        </mat-autocomplete>
+        <mat-select multiple [(ngModel)]="phoneFilterPossibleValues.manufacturers">
+          <mat-option *ngFor="let manufacturer of phoneFilter.manufacturers"
+                      [value]="manufacturer">{{manufacturer.name}}</mat-option>
+        </mat-select>
       </mat-form-field>
 
-      <mat-label class="block">Цена</mat-label>
-      <div class="row">
-        <mat-form-field class="col-50 mr-05">
-          <input matInput type="number" placeholder="От">
-        </mat-form-field>
-        <mat-form-field class="col-50">
-          <input matInput type="number" placeholder="До">
-        </mat-form-field>
-      </div>
-
-      <mat-label class="block">Дата выхода на рынок</mat-label>
-      <div class="row">
-        <mat-form-field class="col-50 mr-05">
-          <input matInput type="number" placeholder="От">
-        </mat-form-field>
-        <mat-form-field class="col-50">
-          <input matInput type="number" placeholder="До">
-        </mat-form-field>
-      </div>
-
-      <mat-label class="block">Операционная система</mat-label>
       <mat-form-field class="w-100">
-        <mat-select></mat-select>
+        <mat-label>Минимальная цена</mat-label>
+        <input matInput type="number" [(ngModel)]="phoneFilter.minPrice">
       </mat-form-field>
 
-      <mat-label class="block">Размер экрана</mat-label>
-      <div class="row">
-        <mat-form-field class="col-50 mr-05">
-          <mat-select placeholder="От"></mat-select>
-        </mat-form-field>
-        <mat-form-field class="col-50">
-          <mat-select placeholder="До"></mat-select>
-        </mat-form-field>
-      </div>
-
-      <mat-label>Разрешение экрана</mat-label>
-      <div class="row">
-        <mat-form-field class="col-50 mr-05">
-          <mat-select placeholder="От"></mat-select>
-        </mat-form-field>
-        <mat-form-field class="col-50">
-          <mat-select placeholder="До"></mat-select>
-        </mat-form-field>
-      </div>
-
-      <mat-label class="block">Технология экрана</mat-label>
       <mat-form-field class="w-100">
-        <mat-select></mat-select>
+        <mat-label>Максимальная цена</mat-label>
+        <input matInput type="number" [(ngModel)]="phoneFilter.maxPrice">
       </mat-form-field>
 
-      <mat-label class="block">Частота обновления экрана</mat-label>
       <mat-form-field class="w-100">
-        <mat-select></mat-select>
+        <mat-label>Год выхода на рынок</mat-label>
+        <mat-select multiple [(ngModel)]="phoneFilterPossibleValues.marketLaunchYears">
+          <mat-option *ngFor="let year of phoneFilter.marketLaunchYears"
+                      [value]="year">{{year}}</mat-option>
+        </mat-select>
       </mat-form-field>
 
-      <mat-label>Оперативня память</mat-label>
-      <div class="row">
-        <mat-form-field class="col-50 mr-05">
-          <mat-select placeholder="От">
-            <mat-option>3072</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field class="col-50">
-          <mat-select placeholder="До">
-            <mat-option>3072</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-
-      <mat-label>Флэш память</mat-label>
-      <div class="row">
-        <mat-form-field class="col-50 mr-05">
-          <mat-select placeholder="От">
-            <mat-option>3072</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field class="col-50">
-          <mat-select placeholder="До">
-            <mat-option>3072</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-
-      <section class="w-100">
-        <mat-checkbox>Подержка карт памяти</mat-checkbox>
-      </section>
-
-      <mat-label>Камера, Мп</mat-label>
-      <div class="row">
-        <mat-form-field class="col-50 mr-05">
-          <mat-select placeholder="От">
-            <mat-option>3072</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field class="col-50">
-          <mat-select placeholder="До">
-            <mat-option>3072</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-
-      <mat-label class="block">Количество основных камер</mat-label>
       <mat-form-field class="w-100">
-        <mat-select></mat-select>
+        <mat-label>Операционная система</mat-label>
+        <mat-select multiple [(ngModel)]="phoneFilterPossibleValues.operationSystemsWithVersions">
+          <mat-option *ngFor="let os of phoneFilter.operationSystemsWithVersions"
+                      [value]="os"
+          >{{os.operationSystem.name}} {{os.version}}</mat-option>
+        </mat-select>
       </mat-form-field>
 
-      <mat-label class="block">Количество SIM-карт</mat-label>
       <mat-form-field class="w-100">
-        <mat-select></mat-select>
+        <mat-label>Размер экрана в дюймах</mat-label>
+        <mat-select multiple [(ngModel)]="phoneFilterPossibleValues.screenDiagonalsInInches">
+          <mat-option *ngFor="let diagonal of phoneFilter.screenDiagonalsInInches"
+                      [value]="diagonal">{{diagonal}}"
+          </mat-option>
+        </mat-select>
       </mat-form-field>
 
-      <mat-label class="block">Формат SIM-карты</mat-label>
       <mat-form-field class="w-100">
-        <mat-select></mat-select>
+        <mat-label>Разрешение экрана</mat-label>
+        <mat-select multiple [(ngModel)]="phoneFilterPossibleValues.screenResolutions">
+          <mat-option *ngFor="let resolution of phoneFilter.screenResolutions"
+                      [value]="resolution">{{resolution.horizontal}}x{{resolution.vertical}}</mat-option>
+        </mat-select>
       </mat-form-field>
 
-      <section class="w-100">
-        <mat-checkbox>Подержка LTE</mat-checkbox>
-      </section>
-
-      <section class="w-100">
-        <mat-checkbox>Подержка 5G</mat-checkbox>
-      </section>
-
-      <mat-label class="block">Цвет корпуса</mat-label>
       <mat-form-field class="w-100">
-        <mat-select></mat-select>
+        <mat-label class="block">Технология экрана</mat-label>
+        <mat-select multiple [(ngModel)]="phoneFilterPossibleValues.screenTechnologies">
+          <mat-option *ngFor="let technology of phoneFilter.screenTechnologies" [value]="technology.name">
+            {{technology}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
 
-      <mat-label class="block">Пыле- и влагозащита</mat-label>
       <mat-form-field class="w-100">
-        <mat-select></mat-select>
+        <mat-label class="block">Частота обновления экрана</mat-label>
+        <mat-select multiple [value]="phoneFilterPossibleValues.screenRefreshRates">
+          <mat-option *ngFor="let refreshRate of phoneFilter.screenRefreshRates"
+                      [value]="refreshRate">{{refreshRate}}</mat-option>
+        </mat-select>
       </mat-form-field>
 
-      <mat-label>Емкость аккумулятора, мАч</mat-label>
-      <div class="row">
-        <mat-form-field class="col-50 mr-05">
-          <mat-select placeholder="От">
-            <mat-option>3072</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field class="col-50">
-          <mat-select placeholder="До">
-            <mat-option>3072</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-
-      <mat-label class="block">Расположение сканера отпечатка пальца</mat-label>
       <mat-form-field class="w-100">
-        <mat-select></mat-select>
+        <mat-label>Оперативня память</mat-label>
+        <mat-select multiple [(ngModel)]="phoneFilterPossibleValues.ramVariants">
+          <mat-option *ngFor="let ram of phoneFilter.ramVariants" [value]="ram">{{ram}} ГБ</mat-option>
+        </mat-select>
       </mat-form-field>
 
-      <mat-label class="block">Версия операционной системы</mat-label>
       <mat-form-field class="w-100">
-        <mat-select></mat-select>
+        <mat-label>Флэш память</mat-label>
+        <mat-select multiple [(ngModel)]="phoneFilterPossibleValues.romVariants">
+          <mat-option *ngFor="let rom of phoneFilter.romVariants" [value]="rom">{{rom}} ГБ</mat-option>
+        </mat-select>
       </mat-form-field>
 
-      <mat-label class="block">Разрешающая способность экрана, ppi</mat-label>
       <mat-form-field class="w-100">
-        <mat-select></mat-select>
+        <mat-label>Поддержка карт памяти</mat-label>
+        <mat-select [(ngModel)]="phoneFilterPossibleValues.isMemoryCardSupported">
+          <mat-option [value]="null">Неважно</mat-option>
+          <mat-option [value]="true">Да</mat-option>
+          <mat-option [value]="false">Нет</mat-option>
+        </mat-select>
       </mat-form-field>
 
-      <mat-label class="block">Защита от царапин</mat-label>
       <mat-form-field class="w-100">
-        <mat-select></mat-select>
+        <mat-label>Количество модулей камеры</mat-label>
+        <mat-select multiple>
+          <mat-option *ngFor="let camerasAmount of phoneFilter.camerasAmountVariants"
+                      [value]="camerasAmount">{{camerasAmount}}</mat-option>
+        </mat-select>
       </mat-form-field>
 
-      <mat-label class="block">Процессор</mat-label>
       <mat-form-field class="w-100">
-        <input type="text" matInput [matAutocomplete]="processorAutocomplete">
-        <mat-autocomplete autoActiveFirstOption #processorAutocomplete="matAutocomplete">
-        </mat-autocomplete>
+        <mat-label>Камера, Мп</mat-label>
+        <mat-select multiple [(ngModel)]="phoneFilterPossibleValues.camerasInMp">
+          <mat-option *ngFor="let camera of phoneFilter.camerasInMp"
+                      [value]="camera">{{camera}}</mat-option>
+        </mat-select>
       </mat-form-field>
 
-      <mat-label class="block">Количество ядер</mat-label>
       <mat-form-field class="w-100">
-        <mat-select></mat-select>
+        <mat-label>Количество SIM-карт</mat-label>
+        <mat-select multiple [(ngModel)]="phoneFilterPossibleValues.simCardsAmountVariants">
+          <mat-option *ngFor="let simCardsAmount of phoneFilter.simCardsAmountVariants"
+                      [value]="simCardsAmount">{{simCardsAmount}}</mat-option>
+        </mat-select>
       </mat-form-field>
 
-      <mat-label>Частота процессора, ГГц</mat-label>
-      <div class="row">
-        <mat-form-field class="col-50 mr-05">
-          <mat-select placeholder="От">
-            <mat-option>3072</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field class="col-50">
-          <mat-select placeholder="До">
-            <mat-option>3072</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-
-      <mat-label class="block">Техпроцесс</mat-label>
       <mat-form-field class="w-100">
-        <mat-select></mat-select>
+        <mat-label>Формат SIM-карты</mat-label>
+        <mat-select multiple [(ngModel)]="phoneFilterPossibleValues.simCardTypes">
+          <mat-option *ngFor="let type of phoneFilter.simCardTypes"
+                      [value]="type">{{type.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Подержка 5G</mat-label>
+        <mat-select [(ngModel)]="phoneFilterPossibleValues.is5GSupported">
+          <mat-option [value]="null">Неважно</mat-option>
+          <mat-option [value]="true">Да</mat-option>
+          <mat-option [value]="false">Нет</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Цвет корпуса</mat-label>
+        <mat-select multiple [(ngModel)]="phoneFilterPossibleValues.bodyColors">
+          <mat-option *ngFor="let bodyColor of phoneFilter.bodyColors"
+                      [value]="bodyColor">{{bodyColor.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Пыле- и влагозащита</mat-label>
+        <mat-select multiple [(ngModel)]="phoneFilterPossibleValues.dustAndMoistureProtections">
+          <mat-option *ngFor="let protection of phoneFilter.dustAndMoistureProtections"
+                      [value]="protection">{{protection.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Емкость аккумулятора, мАч</mat-label>
+        <mat-select multiple [(ngModel)]="phoneFilterPossibleValues.batteryCapacities">
+          <mat-option *ngFor="let batteryCapacity of phoneFilter.batteryCapacities"
+                      [value]="batteryCapacity">{{batteryCapacity}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Расположение сканера отпечатка пальца</mat-label>
+        <mat-select multiple [(ngModel)]="phoneFilterPossibleValues.fingerprintScannerLocations">
+          <mat-option *ngFor="let location of phoneFilter.fingerprintScannerLocations"
+                      [value]="location">{{location.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Защита от царапин</mat-label>
+        <mat-select multiple [(ngModel)]="phoneFilterPossibleValues.screenProtections">
+          <mat-option *ngFor="let protection of phoneFilter.screenProtections"
+                      [value]="protection">{{protection.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Процессор</mat-label>
+        <mat-select multiple [(ngModel)]="phoneFilterPossibleValues.cpuVariants">
+          <mat-option *ngFor="let cpu of phoneFilter.cpuVariants" [value]="cpu">{{cpu.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Количество ядер</mat-label>
+        <mat-select multiple [(ngModel)]="phoneFilterPossibleValues.coresAmountVariants">
+          <mat-option *ngFor="let coreAmount of phoneFilter.coresAmountVariants"
+                      [value]="coreAmount">{{coreAmount}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Частота процессора, ГГц</mat-label>
+        <mat-select multiple [(ngModel)]="phoneFilterPossibleValues.cpuClockSpeedVariants">
+          <mat-option *ngFor="let cpuClockSpeed of phoneFilter.cpuClockSpeedVariants"
+                      [value]="cpuClockSpeed">{{cpuClockSpeed}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Техпроцесс</mat-label>
+        <mat-select multiple [(ngModel)]="phoneFilterPossibleValues.cpuTechprocessVariants">
+          <mat-option *ngFor="let techprocess of phoneFilter.cpuTechprocessVariants"
+                      [value]="techprocess">{{techprocess}}</mat-option>
+        </mat-select>
       </mat-form-field>
 
       <mat-form-field class="w-100">
         <mat-label>Графический ускоритель</mat-label>
-        <input type="text" matInput [matAutocomplete]="gpuAutocomplete">
-        <mat-autocomplete autoActiveFirstOption #gpuAutocomplete="matAutocomplete">
-        </mat-autocomplete>
+        <mat-select multiple [(ngModel)]="phoneFilterPossibleValues.phoneGpuVariants">
+          <mat-option *ngFor="let gpu of phoneFilter.phoneGpuVariants" [value]="gpu">{{gpu.name}}</mat-option>
+        </mat-select>
       </mat-form-field>
 
-      <section class="w-100">
-        <mat-checkbox>Аудиопроцессор</mat-checkbox>
-      </section>
-
-      <mat-label class="block">Дополнительные модули камеры</mat-label>
       <mat-form-field class="w-100">
-        <mat-select></mat-select>
+        <mat-label>Аудиопроцессор</mat-label>
+        <mat-select [(ngModel)]="phoneFilterPossibleValues.hasAudioProcessor">
+          <mat-option [value]="null">Неважно</mat-option>
+          <mat-option [value]="true">Да</mat-option>
+          <mat-option [value]="false">Нет</mat-option>
+        </mat-select>
       </mat-form-field>
 
-      <mat-label class="block">Оптический зум, X</mat-label>
+      <!--      <mat-form-field class="w-100">-->
+      <!--        <mat-label class="block">Дополнительные модули камеры</mat-label>-->
+      <!--        <mat-select multiple>-->
+      <!--          <mat-option></mat-option>-->
+      <!--        </mat-select>-->
+      <!--      </mat-form-field>-->
+
       <mat-form-field class="w-100">
-        <mat-select></mat-select>
+        <mat-label>Фронтальная камера</mat-label>
+        <mat-select multiple [(ngModel)]="phoneFilterPossibleValues.frontCameraVariants">
+          <mat-option *ngFor="let frontCamera of phoneFilter.frontCameraVariants"
+                      [value]="frontCamera">{{frontCamera}}</mat-option>
+        </mat-select>
       </mat-form-field>
 
-      <mat-label class="block">Диафрагма основной камеры</mat-label>
       <mat-form-field class="w-100">
-        <mat-select></mat-select>
+        <mat-label>Аудиовыход</mat-label>
+        <mat-select [(ngModel)]="phoneFilterPossibleValues.hasAudioOutput">
+          <mat-option [value]="null">Неважно</mat-option>
+          <mat-option [value]="true">Да</mat-option>
+          <mat-option [value]="false">Нет</mat-option>
+        </mat-select>
       </mat-form-field>
 
-      <mat-label>Максимальное разрешение видео</mat-label>
-      <div class="row">
-        <mat-form-field class="col-50 mr-05">
-          <mat-select placeholder="От">
-            <mat-option>3072</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field class="col-50">
-          <mat-select placeholder="До">
-            <mat-option>3072</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-
-      <mat-label>Фронтальная камера</mat-label>
-      <div class="row">
-        <mat-form-field class="col-50 mr-05">
-          <mat-select placeholder="От">
-            <mat-option>3072</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field class="col-50">
-          <mat-select placeholder="До">
-            <mat-option>3072</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-
-      <mat-label class="block">Разрешение видео фронтальной камеры</mat-label>
       <mat-form-field class="w-100">
-        <mat-select></mat-select>
+        <mat-label>Разъём подключения</mat-label>
+        <mat-select multiple [(ngModel)]="phoneFilterPossibleValues.connectionSocketVariants">
+          <mat-option *ngFor="let socket of phoneFilter.connectionSocketVariants"
+                      [value]="socket">{{socket.name}}</mat-option>
+        </mat-select>
       </mat-form-field>
 
-      <mat-label class="block">Аудиовыход</mat-label>
       <mat-form-field class="w-100">
-        <mat-select></mat-select>
+        <mat-label>Длина, мм</mat-label>
+        <mat-select multiple [(ngModel)]="phoneFilterPossibleValues.lengthVariants">
+          <mat-option *ngFor="let length of phoneFilter.lengthVariants"
+                      [value]="length">{{length}}</mat-option>
+        </mat-select>
       </mat-form-field>
 
-      <mat-label class="block">Разъём подключения</mat-label>
       <mat-form-field class="w-100">
-        <mat-select></mat-select>
+        <mat-label>Ширина, мм</mat-label>
+        <mat-select multiple [(ngModel)]="phoneFilterPossibleValues.widthVariants">
+          <mat-option *ngFor="let width of phoneFilter.widthVariants"
+                      [value]="width">{{width}}</mat-option>
+        </mat-select>
       </mat-form-field>
 
-      <mat-label>Длина, мм</mat-label>
-      <div class="row">
-        <mat-form-field class="col-50 mr-05">
-          <mat-select placeholder="От">
-            <mat-option>3072</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field class="col-50">
-          <mat-select placeholder="До">
-            <mat-option>3072</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
+      <mat-form-field class="w-100">
+        <mat-label>Толщина, мм</mat-label>
+        <mat-select multiple [(ngModel)]="phoneFilterPossibleValues.thicknessVariants">
+          <mat-option *ngFor="let thickness of phoneFilter.thicknessVariants"
+                      [value]="thickness">{{thickness}}</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-      <mat-label>Ширина, мм</mat-label>
-      <div class="row">
-        <mat-form-field class="col-50 mr-05">
-          <mat-select placeholder="От">
-            <mat-option>3072</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field class="col-50">
-          <mat-select placeholder="До">
-            <mat-option>3072</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-
-      <mat-label>Толщина, мм</mat-label>
-      <div class="row">
-        <mat-form-field class="col-50 mr-05">
-          <mat-select placeholder="От">
-            <mat-option>3072</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field class="col-50">
-          <mat-select placeholder="До">
-            <mat-option>3072</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-
-      <mat-label>Вес, г</mat-label>
-      <div class="row">
-        <mat-form-field class="col-50 mr-05">
-          <mat-select placeholder="От">
-            <mat-option>3072</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field class="col-50">
-          <mat-select placeholder="До">
-            <mat-option>3072</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
+      <mat-form-field class="w-100">
+        <mat-label>Вес, г</mat-label>
+        <mat-select multiple [(ngModel)]="phoneFilterPossibleValues.weightVariants">
+          <mat-option *ngFor="let weight of phoneFilter.weightVariants"
+                      [value]="weight">{{weight}}</mat-option>
+        </mat-select>
+      </mat-form-field>
     </mat-card>
   </div>
   <div class="col col-75 ml-1">
-    <mat-card>
+    <mat-card *ngFor="let phone of phones" class="mb-1">
       <div class="row">
         <div class="col">
           <div class="product-image-preview-wrapper">
@@ -351,22 +299,31 @@
           </div>
         </div>
         <div class="col ml-1">
-          <a routerLink="1" class="mat-h2 phone-name-link">Смартфон Xiaomi Redmi 9T 4GB/128GB (оранжевый закат)</a>
-          <p>Android, экран 6.53" IPS (1080x2340), Qualcomm Snapdragon 662, ОЗУ 4 ГБ, флэш-память 128 ГБ, карты памяти,
-            камера 48 Мп, аккумулятор 6000 мАч, 2 SIM</p>
-          <div>
-            <mat-icon>star</mat-icon>
-            <mat-icon>star</mat-icon>
-            <mat-icon>star</mat-icon>
-            <mat-icon>star</mat-icon>
-            <mat-icon>star_outline</mat-icon>
-            <p>36 отзывов</p>
-          </div>
+          <a routerLink="{{phone.id}}" class="mat-h2 phone-name-link">{{phone.name}}</a>
+          <p>Операционная система {{phone.phoneModel.operationSystemWithVersion.operationSystem.name}},
+            экран {{phone.phoneModel.screenDiagonalInInches}}"
+            {{phone.phoneModel.screenTechnology.name}}
+            ({{phone.phoneModel.horizontalScreenResolution}}x{{phone.phoneModel.verticalScreenResolution}}),
+            процессор {{phone.phoneModel.cpu.name}},
+            ОЗУ {{phone.ramAndRomVariant.ramSizeInGb}} ГБ ПЗУ {{phone.ramAndRomVariant.romSizeInGb}} ГБ,
+            камера {{phone.phoneModel.cameraInMp}} Мп,
+            аккумулятор {{phone.phoneModel.batteryCapacity}} мАч,
+            {{phone.phoneModel.simCardsAmount}} SIM</p>
+          <!--          <div>-->
+          <!--            <mat-icon>star</mat-icon>-->
+          <!--            <mat-icon>star</mat-icon>-->
+          <!--            <mat-icon>star</mat-icon>-->
+          <!--            <mat-icon>star</mat-icon>-->
+          <!--            <mat-icon>star_outline</mat-icon>-->
+          <!--            <p>36 отзывов</p>-->
+          <!--          </div>-->
         </div>
         <div class="col ml-1">
-          <h2 class="product-price">от 549 р.</h2>
+          <!--          <h2 class="product-price">от 549 р.</h2>-->
         </div>
       </div>
     </mat-card>
+    <mat-paginator [length]="phoneModelsCount" [pageSize]="pageSize" (page)="onPageChanged($event)"
+                   [pageSizeOptions]="pageSizeOptions"></mat-paginator>
   </div>
 </div>

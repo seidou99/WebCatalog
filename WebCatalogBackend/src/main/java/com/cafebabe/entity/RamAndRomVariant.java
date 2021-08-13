@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 @Entity
 @Getter
 @Setter
-public class RamAndRomVariant extends BaseDataObject {
+public class RamAndRomVariant extends BaseDataObjectWithName {
 
     protected int ramSizeInGb;
     protected int romSizeInGb;
