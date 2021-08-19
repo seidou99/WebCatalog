@@ -54,7 +54,7 @@ public class PhoneModelFilterServiceImpl implements PhoneModelFilterService {
     protected ConnectionSocketService connectionSocketService;
 
     @Override
-    public PhoneModelFilterDto loadPhoneModelFilter() {
+    public PhoneModelFilterDto loadPhoneModelFilterPossibleValues() {
         Stream<Consumer<PhoneModelFilterDto>> loadFilterCallbackStream = Stream.of(
                 filter -> filter.setManufacturers(manufacturerService.findAll()),
                 filter -> filter.setMarketLaunchYears(phoneModelService.findDistinctMarketLaunchYears()),
@@ -90,6 +90,4 @@ public class PhoneModelFilterServiceImpl implements PhoneModelFilterService {
         loadFilterCallbackStream.parallel().forEach(callback -> callback.accept(result));
         return result;
     }
-
-
 }

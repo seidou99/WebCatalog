@@ -1,9 +1,9 @@
 package com.cafebabe.controller.phone_model;
 
-import com.cafebabe.dto.PhoneModelFilterDto;
+import com.cafebabe.dto.PhoneFilterDto;
 import com.cafebabe.entity.Phone;
-import com.cafebabe.entity.mobilephone.PhoneModel;
-import com.cafebabe.service.interfaces.PhoneService;
+import com.cafebabe.service.interfaces.PhoneFilterService;
+import com.cafebabe.service.mobilephone.interfaces.PhoneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +16,14 @@ public class PhoneController {
 
     @Autowired
     protected PhoneService phoneService;
+
+    @Autowired
+    protected PhoneFilterService phoneFilterService;
+
+    @GetMapping("/api/phones/filter")
+    protected PhoneFilterDto getPhoneFilter() {
+        return phoneFilterService.loadPhoneFilterPossibleValues();
+    }
 
     @GetMapping("api/phones")
     public List<Phone> findAll() {
@@ -33,10 +41,10 @@ public class PhoneController {
         return phoneModel.orElse(null);
     }
 
-//    @PostMapping("api/phones/models/filtered")
-//    public List<PhoneModel> findFilteredPhoneModels(@RequestBody PhoneModelFilterDto filterDto, @RequestParam int pageIndex, @RequestParam int pageSize) {
-//        return phoneModelService.findFilteredPhoneModels(filterDto, pageIndex, pageSize);
-//    }
+    @PostMapping("api/phones/filtered")
+    public List<Phone> findFilteredPhoneModels(@RequestBody PhoneFilterDto filterDto, @RequestParam int pageIndex, @RequestParam int pageSize) {
+        return phoneService.findFilteredPhoneModels(filterDto, pageIndex, pageSize);
+    }
 //
 //    @PostMapping("api/phones/models/filtered/count")
 //    public Long findFilteredPhoneModelsCount(@RequestBody PhoneModelFilterDto filterDto) {

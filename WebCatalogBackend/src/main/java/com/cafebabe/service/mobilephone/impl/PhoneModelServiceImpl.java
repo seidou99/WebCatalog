@@ -127,8 +127,7 @@ public class PhoneModelServiceImpl extends BaseDataObjectServiceImpl<PhoneModelR
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<PhoneModel> criteriaQuery = criteriaBuilder.createQuery(PhoneModel.class);
         Root<PhoneModel> root = criteriaQuery.from(PhoneModel.class);
-        buildCriteriaQuery(root, filterDto, criteriaBuilder, criteriaQuery, PhoneModel.class);
-        List<Predicate> predicates = new ArrayList<>(40);
+        buildCriteriaQuery(root, filterDto, criteriaBuilder, criteriaQuery);
         TypedQuery<PhoneModel> query = entityManager.createQuery(criteriaQuery);
         query.setFirstResult(pageIndex * pageSize);
         query.setMaxResults(pageSize);
@@ -139,13 +138,13 @@ public class PhoneModelServiceImpl extends BaseDataObjectServiceImpl<PhoneModelR
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
         Root<PhoneModel> root = criteriaQuery.from(PhoneModel.class);
-        buildCriteriaQuery(root, filterDto, criteriaBuilder, criteriaQuery, Long.class);
+        buildCriteriaQuery(root, filterDto, criteriaBuilder, criteriaQuery);
         CriteriaQuery<Long> select = criteriaQuery.select(criteriaBuilder.countDistinct(root));
         TypedQuery<Long> query = entityManager.createQuery(select);
         return query.getResultList().stream().count();
     }
 
-    protected <T> void buildCriteriaQuery(Root<PhoneModel> root, PhoneModelFilterDto filterDto, CriteriaBuilder criteriaBuilder, CriteriaQuery<T> criteriaQuery, Class<T> clazz) {
+    public <T> void buildCriteriaQuery(From<?, PhoneModel> root, PhoneModelFilterDto filterDto, CriteriaBuilder criteriaBuilder, CriteriaQuery<T> criteriaQuery) {
         List<Predicate> predicates = new ArrayList<>(40);
         joinAndFilter(root, filterDto.getManufacturers(), predicates, PhoneModel_.MANUFACTURER, Manufacturer_.ID, criteriaBuilder);
         filter(root, filterDto.getMarketLaunchYears(), predicates, PhoneModel_.MARKET_LAUNCH_YEAR, criteriaBuilder);
@@ -166,8 +165,8 @@ public class PhoneModelServiceImpl extends BaseDataObjectServiceImpl<PhoneModelR
         joinAndFilter(root, filterDto.getScreenProtections(), predicates, PhoneModel_.SCREEN_PROTECTION, ScreenProtection_.ID, criteriaBuilder);
         joinAndFilter(root, filterDto.getCpuVariants(), predicates, PhoneModel_.CPU, PhoneCpu_.ID, criteriaBuilder);
         filterGpu(filterDto, criteriaBuilder, root, predicates);
-        filterCpuCoresAmount(filterDto, criteriaBuilder, root, predicates, criteriaQuery);
-        filterCpuClockSpeed(filterDto, criteriaBuilder, root, predicates, criteriaQuery);
+        filterCpuCoresAmount(filterDto, criteriaBuilder, predicates, criteriaQuery);
+        filterCpuClockSpeed(filterDto, criteriaBuilder, predicates, criteriaQuery);
         filterCpuTechprocess(filterDto, criteriaBuilder, root, predicates);
         filter(root, filterDto.getHasAudioProcessor(), predicates, PhoneModel_.HAS_AUDIO_PROCESSOR, criteriaBuilder);
         filter(root, filterDto.getFrontCameraVariants(), predicates, PhoneModel_.FRONT_CAMERA_IN_MP, criteriaBuilder);
@@ -181,7 +180,7 @@ public class PhoneModelServiceImpl extends BaseDataObjectServiceImpl<PhoneModelR
         criteriaQuery.groupBy(root.get(PhoneModel_.id));
     }
 
-    protected <T extends BaseDataObjectWithName> void joinAndFilter(Root<?> root, List<T> entities, List<Predicate> predicates, String joinEntityPath, String joinEntityIdPath, CriteriaBuilder criteriaBuilder) {
+    protected <T extends BaseDataObjectWithName> void joinAndFilter(From<?, ?> root, List<T> entities, List<Predicate> predicates, String joinEntityPath, String joinEntityIdPath, CriteriaBuilder criteriaBuilder) {
         Join<Object, Object> join = root.join(joinEntityPath);
         if (entities.size() != 0) {
             CriteriaBuilder.In<BigInteger> inPredicate = criteriaBuilder.in(join.get(joinEntityIdPath));
@@ -190,7 +189,7 @@ public class PhoneModelServiceImpl extends BaseDataObjectServiceImpl<PhoneModelR
         }
     }
 
-    protected <T extends Number> void filter(Root<?> root, List<T> filter, List<Predicate> predicates, String fieldPath, CriteriaBuilder criteriaBuilder) {
+    protected <T extends Number> void filter(From<?, ?> root, List<T> filter, List<Predicate> predicates, String fieldPath, CriteriaBuilder criteriaBuilder) {
         if (filter.size() != 0) {
             CriteriaBuilder.In<Number> in = criteriaBuilder.in(root.get(fieldPath));
             filter.forEach(in::value);
@@ -198,14 +197,14 @@ public class PhoneModelServiceImpl extends BaseDataObjectServiceImpl<PhoneModelR
         }
     }
 
-    protected void filter(Root<?> root, Boolean filter, List<Predicate> predicates, String fieldPath, CriteriaBuilder criteriaBuilder) {
+    protected void filter(From<?, ?> root, Boolean filter, List<Predicate> predicates, String fieldPath, CriteriaBuilder criteriaBuilder) {
         if (filter != null) {
             Predicate equalPredicate = criteriaBuilder.equal(root.get(fieldPath), filter);
             predicates.add(equalPredicate);
         }
     }
 
-    protected void filterScreenResolution(PhoneModelFilterDto filterDto, CriteriaBuilder criteriaBuilder, Root<PhoneModel> root, List<Predicate> predicates) {
+    protected void filterScreenResolution(PhoneModelFilterDto filterDto, CriteriaBuilder criteriaBuilder, From<?, PhoneModel> root, List<Predicate> predicates) {
         if (filterDto.getScreenResolutions().size() != 0) {
             List<Predicate> horizontalAndVerticalScreenResolutionPredicates = new ArrayList<>(filterDto.getScreenResolutions().size());
             for (ScreenResolutionDto screenResolutionDto : filterDto.getScreenResolutions()) {
@@ -219,7 +218,7 @@ public class PhoneModelServiceImpl extends BaseDataObjectServiceImpl<PhoneModelR
         }
     }
 
-    protected void filterRamAndRomVariants(PhoneModelFilterDto filterDto, CriteriaBuilder criteriaBuilder, Root<PhoneModel> root, List<Predicate> predicates) {
+    protected void filterRamAndRomVariants(PhoneModelFilterDto filterDto, CriteriaBuilder criteriaBuilder, From<?, PhoneModel> root, List<Predicate> predicates) {
         List<Integer> ramVariants = filterDto.getRamVariants();
         List<Integer> romVariants = filterDto.getRomVariants();
         ListJoin<PhoneModel, RamAndRomVariant> join = root.join(PhoneModel_.ramAndRomVariants);
@@ -235,7 +234,7 @@ public class PhoneModelServiceImpl extends BaseDataObjectServiceImpl<PhoneModelR
         }
     }
 
-    protected void filterGpu(PhoneModelFilterDto filterDto, CriteriaBuilder criteriaBuilder, Root<PhoneModel> root, List<Predicate> predicates) {
+    protected void filterGpu(PhoneModelFilterDto filterDto, CriteriaBuilder criteriaBuilder, From<?, PhoneModel> root, List<Predicate> predicates) {
         if (filterDto.getPhoneGpuVariants().size() != 0) {
             Join<PhoneModel, PhoneCpu> phoneModelToPhoneCpuJoin = root.join(PhoneModel_.cpu);
             Join<PhoneCpu, PhoneGpu> phoneCpuToPhoneGpuJoin = phoneModelToPhoneCpuJoin.join(PhoneCpu_.integratedGpu);
@@ -245,7 +244,7 @@ public class PhoneModelServiceImpl extends BaseDataObjectServiceImpl<PhoneModelR
         }
     }
 
-    protected void filterCpuTechprocess(PhoneModelFilterDto filterDto, CriteriaBuilder criteriaBuilder, Root<PhoneModel> root, List<Predicate> predicates) {
+    protected void filterCpuTechprocess(PhoneModelFilterDto filterDto, CriteriaBuilder criteriaBuilder, From<?, PhoneModel> root, List<Predicate> predicates) {
         if (filterDto.getCpuTechprocessVariants().size() != 0) {
             Join<PhoneModel, PhoneCpu> phoneModelToPhoneCpuJoin = root.join(PhoneModel_.cpu);
             CriteriaBuilder.In<Integer> cpuTechprocessPredicate = criteriaBuilder.in(phoneModelToPhoneCpuJoin.get(PhoneCpu_.TECHPROCESS_IN_NM));
@@ -254,7 +253,7 @@ public class PhoneModelServiceImpl extends BaseDataObjectServiceImpl<PhoneModelR
         }
     }
 
-    protected void filterCpuCoresAmount(PhoneModelFilterDto filterDto, CriteriaBuilder criteriaBuilder, Root<PhoneModel> root, List<Predicate> predicates, CriteriaQuery<?> criteriaQuery) {
+    protected void filterCpuCoresAmount(PhoneModelFilterDto filterDto, CriteriaBuilder criteriaBuilder, List<Predicate> predicates, CriteriaQuery<?> criteriaQuery) {
         if (filterDto.getCoresAmountVariants().size() != 0) {
             Subquery<Integer> subquery = criteriaQuery.subquery(Integer.class);
             Root<PhoneCpu> subRoot = subquery.from(PhoneCpu.class);
@@ -266,7 +265,7 @@ public class PhoneModelServiceImpl extends BaseDataObjectServiceImpl<PhoneModelR
         }
     }
 
-    protected void filterCpuClockSpeed(PhoneModelFilterDto filterDto, CriteriaBuilder criteriaBuilder, Root<PhoneModel> root, List<Predicate> predicates, CriteriaQuery<?> criteriaQuery) {
+    protected void filterCpuClockSpeed(PhoneModelFilterDto filterDto, CriteriaBuilder criteriaBuilder, List<Predicate> predicates, CriteriaQuery<?> criteriaQuery) {
         if (filterDto.getCpuClockSpeedVariants().size() != 0) {
             Subquery<Integer> subquery = criteriaQuery.subquery(Integer.class);
             Root<PhoneCpu> subRoot = subquery.from(PhoneCpu.class);

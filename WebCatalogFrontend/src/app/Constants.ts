@@ -22,9 +22,10 @@ export class ApiConstants {
   static readonly FILTERED_PATH = 'filtered';
   static readonly COUNT_PATH = 'count';
   static readonly PHONES_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.MOBILE_PHONES_PATH}`;
+  static readonly PHONES_FILTER_API_URL = `${ApiConstants.PHONES_API_URL}/${ApiConstants.FILTER_PATH}`;
+  static readonly PHONES_FILTERED_API_URL = `${ApiConstants.PHONES_API_URL}/${ApiConstants.FILTERED_PATH}`;
   static readonly PHONE_MODELS_API_URL = `${ApiConstants.PHONES_API_URL}/${ApiConstants.PHONE_MODELS_PATH}`;
   static readonly PHONE_MODELS_FILTER_API_URL = `${ApiConstants.PHONE_MODELS_API_URL}/${ApiConstants.FILTER_PATH}`;
-  static readonly PHONE_FILTER_API_URL = `${ApiConstants.PHONES_API_URL}/${ApiConstants.FILTER_PATH}`;
   static readonly PHONE_MODELS_FILTERED_API_URL = `${ApiConstants.PHONE_MODELS_API_URL}/${ApiConstants.FILTERED_PATH}`;
   static readonly PHONE_MODELS_FILTERED_COUNT_API_URL = `${ApiConstants.PHONE_MODELS_FILTERED_API_URL}/${ApiConstants.COUNT_PATH}`;
   static readonly MANUFACTURERS_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.MANUFACTURERS_PATH}`;

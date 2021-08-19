@@ -5,6 +5,10 @@ import com.cafebabe.dto.ScreenResolutionDto;
 import com.cafebabe.entity.mobilephone.PhoneModel;
 import com.cafebabe.service.interfaces.BaseDataObjectService;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.From;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 public interface PhoneModelService extends BaseDataObjectService<PhoneModel> {
@@ -39,5 +43,6 @@ public interface PhoneModelService extends BaseDataObjectService<PhoneModel> {
 
     Long findFilteredPhoneModelsCount(PhoneModelFilterDto filterDto);
 
+    <T> void buildCriteriaQuery(From<?, PhoneModel> root, PhoneModelFilterDto filterDto, CriteriaBuilder criteriaBuilder, CriteriaQuery<T> criteriaQuery);
 }
 

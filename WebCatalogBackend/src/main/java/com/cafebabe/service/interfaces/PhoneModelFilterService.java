@@ -4,5 +4,5 @@ import com.cafebabe.dto.PhoneModelFilterDto;
 
 public interface PhoneModelFilterService {
 
-    PhoneModelFilterDto loadPhoneModelFilter();
+    PhoneModelFilterDto loadPhoneModelFilterPossibleValues();
 }

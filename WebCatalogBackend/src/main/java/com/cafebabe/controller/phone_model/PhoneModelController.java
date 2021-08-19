@@ -23,14 +23,11 @@ public class PhoneModelController {
     protected PhoneModelService phoneModelService;
 
     @Autowired
-    protected RamAndRomVariantService ramAndRomVariantService;
-
-    @Autowired
     protected PhoneModelFilterService phoneModelFilterService;
 
     @GetMapping("/api/phones/models/filter")
     protected PhoneModelFilterDto getPhoneModelFilter() {
-        return phoneModelFilterService.loadPhoneModelFilter();
+        return phoneModelFilterService.loadPhoneModelFilterPossibleValues();
     }
 
     @GetMapping("api/phones/models")

@@ -139,7 +139,7 @@ public class PhoneModelServiceImplTest {
     @Disabled
     public void filterCpuCoresAmount() {
         filterDto.setCoresAmountVariants(Collections.singletonList(7));
-        phoneModelService.filterCpuCoresAmount(filterDto, criteriaBuilder, root, predicates, criteriaQuery);
+        phoneModelService.filterCpuCoresAmount(filterDto, criteriaBuilder, predicates, criteriaQuery);
         criteriaQuery.where(predicates.toArray(new Predicate[0]));
         TypedQuery<PhoneModel> query = entityManager.createQuery(criteriaQuery);
         List<PhoneModel> resultList = query.getResultList();
@@ -150,7 +150,7 @@ public class PhoneModelServiceImplTest {
     @Disabled
     public void filterCpuClockSpeed() {
         filterDto.setCpuClockSpeedVariants(Collections.singletonList(1600));
-        phoneModelService.filterCpuClockSpeed(filterDto, criteriaBuilder, root, predicates, criteriaQuery);
+        phoneModelService.filterCpuClockSpeed(filterDto, criteriaBuilder, predicates, criteriaQuery);
         criteriaQuery.where(predicates.toArray(new Predicate[0]));
         TypedQuery<PhoneModel> query = entityManager.createQuery(criteriaQuery);
         List<PhoneModel> resultList = query.getResultList();

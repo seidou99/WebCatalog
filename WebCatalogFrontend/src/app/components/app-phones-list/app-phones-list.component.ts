@@ -23,19 +23,22 @@ export class AppPhonesListComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.phoneService.getPhoneFilterPossibleValues().subscribe(data => this.phoneFilterPossibleValues = data);
-    this.phoneService.getAll().subscribe(data => this.phones = data);
+    this.loadFilteredPhones();
+    this.phoneService.getFilterPossibleValues().subscribe(data => {
+      this.phoneFilterPossibleValues = data;
+      console.log(this.phoneFilterPossibleValues);
+    });
   }
 
   onPageChanged($event: PageEvent): void {
     this.pageSize = $event.pageSize;
     this.pageIndex = $event.pageIndex;
     console.log('page changed');
-    this.loadFilteredPhoneModels();
+    this.loadFilteredPhones();
   }
 
-  loadFilteredPhoneModels(): void {
-
+  loadFilteredPhones(): void {
+    this.phoneService.getFilteredDataObjects(this.phoneFilter, this.pageIndex, this.pageSize).subscribe(data => this.phones = data);
   }
 
 }
