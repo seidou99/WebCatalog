@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {ApiConstants} from '../Constants';
 import {PhoneModelFilter} from '../model/phone-model-filter';
 import {BaseDataObjectWithFilteringAndPaginationRestService} from './base-data-object-with-filtering-and-pagination-rest.service';
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +18,9 @@ export class PhoneModelService extends BaseDataObjectWithFilteringAndPaginationR
 
   constructor(private http: HttpClient) {
     super(http);
+  }
+
+  send(data: FormData): Observable<void> {
+    return this.http.post<void>(this.apiUrl, data);
   }
 }

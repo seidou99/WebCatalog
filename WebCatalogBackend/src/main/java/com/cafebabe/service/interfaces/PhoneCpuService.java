@@ -1,10 +1,10 @@
 package com.cafebabe.service.interfaces;
 
-import com.cafebabe.entity.mobilephone.PhoneCpu;
+import com.cafebabe.entity.PhoneCpu;
 
 import java.util.List;
 
-public interface PhoneCpuService extends BaseDataObjectService<PhoneCpu>{
+public interface PhoneCpuService extends BaseDataObjectWithUniqueNameService<PhoneCpu> {
 
     List<Integer> findDistinctCoresAmountVariants();
 

@@ -1,11 +1,7 @@
 <mat-card class="m-1">
   <div class="row mb-1">
-    <div class="col">
-      <div class="product-image-full-wrapper">
-        <img src="https://content2.onliner.by/catalog/device/main/4569504868eb0c41952c484333a4b3c4.jpeg"
-             class="product-image mlr-auto block">
-      </div>
-    </div>
+    <img class="square-picture-25em border-radius-05"
+         src="http://localhost:8080/api/images/{{bigPictureName}}">
     <div class="col ml-1">
       <a routerLink="1" class="mat-h2 phone-name-link">Смартфон {{phoneModel?.name}}</a>
       <p>Операционная система {{phoneModel?.operationSystemWithVersion.operationSystem.name}},
@@ -27,45 +23,11 @@
       <!--      <h2 class="product-price">549 - 600 р.</h2>-->
       <!--      <button mat-raised-button color="primary" class="mw-12">8 предложений</button>-->
     </div>
-    <div class="row">
-    </div>
   </div>
   <mat-divider></mat-divider>
-  <div class="row pt-1 mb-1">
-    <div class="product-image-small-wrapper row">
-      <img src="https://content2.onliner.by/catalog/device/main/eb06fdbcb8f3f638cfccab238c29f7c7.jpeg"
-           class="product-image mlr-auto block">
-    </div>
-    <div class="pl-1"></div>
-    <div class="product-image-small-wrapper row">
-      <img src="https://content2.onliner.by/catalog/device/main/37dff694fdb7cadf0141f6664d393e27.jpeg"
-           class="product-image mlr-auto block">
-    </div>
-    <div class="pl-1"></div>
-    <div class="product-image-small-wrapper row">
-      <img src="https://content2.onliner.by/catalog/device/main/ed6ca01b024ae78b1d9228dbd87d6149.jpeg"
-           class="product-image mlr-auto block">
-    </div>
-    <div class="pl-1"></div>
-    <div class="product-image-small-wrapper row">
-      <img src="https://content2.onliner.by/catalog/device/main/bf89a1c4ad0fec5810467ebb6ceef564.jpeg"
-           class="product-image mlr-auto block">
-    </div>
-    <div class="pl-1"></div>
-    <div class="product-image-small-wrapper row">
-      <img src="https://content2.onliner.by/catalog/device/main/140a75ea9b5296d79f53a7a4021dee68.jpeg"
-           class="product-image mlr-auto block middle">
-    </div>
-    <div class="pl-1"></div>
-    <div class="product-image-small-wrapper row">
-      <img src="https://content2.onliner.by/catalog/device/main/43d98331cc7f0ef2ac8ff6b3f3f8bbdd.jpeg"
-           class="product-image mlr-auto block">
-    </div>
-    <div class="pl-1"></div>
-    <div class="product-image-small-wrapper row">
-      <img src="https://content2.onliner.by/catalog/device/main/10237c1fb05a4ab0c153736c134ac670.jpeg"
-           class="product-image mlr-auto block">
-    </div>
+  <div class="row pt-1 mb-1 flex-gap-1em" *ngIf="phoneModel">
+    <img class="square-picture-10em border-radius-05 cursor-pointer" *ngFor="let image of phoneModel.images"
+         src="http://localhost:8080/api/images/{{image.imageName}}" (click)="changeBigPicture(image)">
   </div>
   <mat-divider></mat-divider>
   <div class="grid pt-1 grid1fr1fr product-full-info-grid">

@@ -34,7 +34,6 @@ export class PhoneModelFilter {
   phoneGpuVariants: Array<MobileGpu> = [];
   cpuClockSpeedVariants: Array<number> = [];
   cpuTechprocessVariants: Array<number> = [];
-  hasAudioProcessor: boolean = null;
   frontCameraVariants: Array<number> = [];
   hasAudioOutput: boolean = null;
   connectionSocketVariants: Array<BaseDataObjectWithName> = [];

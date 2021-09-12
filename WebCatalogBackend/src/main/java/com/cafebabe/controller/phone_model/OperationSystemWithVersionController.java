@@ -1,7 +1,7 @@
 package com.cafebabe.controller.phone_model;
 
-import com.cafebabe.entity.mobilephone.OperationSystemWithVersion;
-import com.cafebabe.service.mobilephone.interfaces.OperationSystemWithVersionService;
+import com.cafebabe.entity.OperationSystemWithVersion;
+import com.cafebabe.service.interfaces.OperationSystemWithVersionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

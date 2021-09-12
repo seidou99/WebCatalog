@@ -1,10 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
-import {OperationSystem} from "../../model/operation-system";
-import {AppDialogWithNameComponent} from "../app-dialog-with-name/app-dialog-with-name.component";
-import {OperationSystemService} from "../../services/operation-system.service";
-import {OperationSystemWithVersion} from "../../model/operation-system-with-version";
-import {OperationSystemType} from "../../model/operation-system-type";
+import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
+import {OperationSystem} from '../../model/operation-system';
+import {AppDialogWithNameComponent} from '../app-dialog-with-name/app-dialog-with-name.component';
+import {OperationSystemService} from '../../services/operation-system.service';
+import {OperationSystemWithVersion} from '../../model/operation-system-with-version';
 
 @Component({
   selector: 'app-app-new-operation-system-with-version-dialog',
@@ -25,16 +24,18 @@ export class AppNewOperationSystemWithVersionDialogComponent implements OnInit {
     return new Promise(null);
   }
 
-  async createNewOperationSystem(): Promise<null> {
+  async createNewOperationSystem(): Promise<void> {
     const dialogRef = this.dialog.open(AppDialogWithNameComponent, {
       width: '600px',
       data: {formTitle: 'Создать новую операционную систему'}
     });
     const operationSystem: OperationSystem = await dialogRef.afterClosed().toPromise();
+    if (operationSystem === undefined) {
+      return;
+    }
     this.result.operationSystem = operationSystem;
     this.result.operationSystem.type = this.data.operationSystemType;
     this.operationSystems.push(operationSystem);
-    return new Promise(null);
   }
 
 }

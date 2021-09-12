@@ -1,15 +1,21 @@
 package com.cafebabe.controller.phone_model;
 
 import com.cafebabe.dto.PhoneModelFilterDto;
-import com.cafebabe.entity.mobilephone.PhoneModel;
+import com.cafebabe.entity.PhoneModel;
 import com.cafebabe.service.interfaces.PhoneModelFilterService;
-import com.cafebabe.service.interfaces.RamAndRomVariantService;
-import com.cafebabe.service.mobilephone.interfaces.PhoneModelService;
+import com.cafebabe.service.interfaces.PhoneModelService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
@@ -35,9 +41,11 @@ public class PhoneModelController {
         return phoneModelService.findAll();
     }
 
-    @PostMapping("api/phones/models")
-    public void save(@RequestBody PhoneModel phoneModel) {
-        phoneModelService.save(phoneModel);
+    @PostMapping(value = "api/phones/models", consumes = {MediaType.ALL_VALUE})
+    public void save(@ModelAttribute(name = "images") List<MultipartFile> images, @ModelAttribute(name = "phoneModelJson") String phoneModelJson) throws IOException {
+        ObjectMapper objectMapper = Jackson2ObjectMapperBuilder.json().build();
+        PhoneModel phoneModel = objectMapper.readValue(phoneModelJson, PhoneModel.class);
+        phoneModelService.save(phoneModel, images);
     }
 
     @GetMapping("api/phones/models/{id}")

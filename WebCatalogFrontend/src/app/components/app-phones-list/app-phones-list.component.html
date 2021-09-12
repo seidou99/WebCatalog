@@ -1,6 +1,3 @@
-<div class="row">
-  <button mat-button routerLink="new">Новая модель телефона</button>
-</div>
 <div class="row m-1 ">
   <div class="filters col col-25">
     <mat-card>
@@ -215,15 +212,6 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field class="w-100">
-        <mat-label>Аудиопроцессор</mat-label>
-        <mat-select [(ngModel)]="phoneFilter.hasAudioProcessor">
-          <mat-option [value]="null">Неважно</mat-option>
-          <mat-option [value]="true">Да</mat-option>
-          <mat-option [value]="false">Нет</mat-option>
-        </mat-select>
-      </mat-form-field>
-
       <!--      <mat-form-field class="w-100">-->
       <!--        <mat-label class="block">Дополнительные модули камеры</mat-label>-->
       <!--        <mat-select multiple>-->
@@ -324,7 +312,7 @@
         </div>
       </div>
     </mat-card>
-    <mat-paginator [length]="phoneModelsCount" [pageSize]="pageSize" (page)="onPageChanged($event)"
+    <mat-paginator [length]="phonesCount" [pageSize]="pageSize" (page)="onPageChanged($event)"
                    [pageSizeOptions]="pageSizeOptions"></mat-paginator>
   </div>
 </div>

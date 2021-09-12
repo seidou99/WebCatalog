@@ -4,5 +4,5 @@ import com.cafebabe.entity.FingerprintScannerLocation;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FingerprintScannerLocationRepository extends BaseDataObjectRepository<FingerprintScannerLocation> {
+public interface FingerprintScannerLocationRepository extends BaseDataObjectWithUniqueNameRepository<FingerprintScannerLocation> {
 }

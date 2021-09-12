@@ -1,7 +1,14 @@
 package com.cafebabe.entity;
 
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Entity;
 
 @Entity
-public class Color extends BaseDataObjectWithName {
+@NoArgsConstructor
+public class Color extends BaseDataObjectWithUniqueName {
+
+    public Color(String name) {
+        super(name);
+    }
 }

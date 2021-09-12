@@ -1,12 +1,12 @@
 package com.cafebabe.repository;
 
-import com.cafebabe.entity.mobilephone.PhoneCpu;
+import com.cafebabe.entity.PhoneCpu;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
 
-public interface CpuRepository extends BaseDataObjectRepository<PhoneCpu> {
+public interface CpuRepository extends BaseDataObjectWithUniqueNameRepository<PhoneCpu> {
 
     //    @Query("select distinct sum(block.coresAmount) from PhoneCpu cpu join CpuCoresBlock block group by cpu.id")
     @Query(nativeQuery = true,

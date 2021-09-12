@@ -1,6 +1,18 @@
 package com.cafebabe.entity;
 
-public enum ManufacturerType {
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-    MOBILE_PHONE, NOTEBOOK, GPU, CPU
+import javax.persistence.Entity;
+
+@Entity
+@NoArgsConstructor
+@Getter
+@Setter
+public class ManufacturerType extends BaseDataObjectWithUniqueName {
+
+    public ManufacturerType(String name) {
+        super(name);
+    }
 }

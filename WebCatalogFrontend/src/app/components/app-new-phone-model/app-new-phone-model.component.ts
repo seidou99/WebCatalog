@@ -41,7 +41,7 @@ export class AppNewPhoneModelComponent implements OnInit {
               public fingerprintScannerLocationService: FingerprintScannerLocationService,
               public screenProtectionService: ScreenProtectionService,
               public mobileCpuService: PhoneCpuService, private fb: FormBuilder,
-              private mobilePhoneModelService: PhoneModelService,
+              private phoneModelService: PhoneModelService,
               public connectionSocketService: ConnectionSocketService,
               public bodyColorService: BodyColorService) {
     const mapper = () => this.fb.control([null]);
@@ -68,14 +68,14 @@ export class AppNewPhoneModelComponent implements OnInit {
     simCardType: [null, [Validators.required]],
     is5GSupported: [false],
     bodyColors: [null, [Validators.required]],
-    dustAndMoistureProtection: [null, [Validators.required]],
+    dustAndMoistureProtection: [null],
     batteryCapacity: [null, [Validators.required]],
     fingerprintScannerLocation: [null, [Validators.required]],
     screenProtection: [null, [Validators.required]],
     cpu: [null, [Validators.required]],
-    hasAudioProcessor: [false],
     frontCameraInMp: [null, [Validators.required]],
     hasAudioOutput: [false],
+    hasNfc: [false],
     connectionSocket: [null, [Validators.required]],
     length: [null, [Validators.required]],
     width: [null, [Validators.required]],
@@ -94,6 +94,7 @@ export class AppNewPhoneModelComponent implements OnInit {
   connectionSockets: Array<BaseDataObjectWithName> = [];
   bodyColors: Array<BaseDataObjectWithName> = [];
   FormControlNames = FormControlNames;
+  images: Array<File>;
 
   async ngOnInit(): Promise<void> {
     this.loadAllToField(this.manufacturerService, 'manufacturers');
@@ -130,7 +131,10 @@ export class AppNewPhoneModelComponent implements OnInit {
       data: {formTitle: 'Создать нового производителя'}
     });
     const dialogData = await dialogRef.afterClosed().toPromise() as Manufacturer;
-    dialogData.manufacturerType = ManufacturerType.MOBILE_PHONE;
+    if (dialogData === undefined) {
+      return;
+    }
+    dialogData.manufacturerTypes = [ManufacturerType.MOBILE_PHONE];
     await this.manufacturerService.save(dialogData).toPromise();
     this.manufacturers = await this.manufacturerService.getAll().toPromise();
   }
@@ -141,7 +145,9 @@ export class AppNewPhoneModelComponent implements OnInit {
       data: {operationSystemType: OperationSystemType.MOBILE}
     });
     const dialogData: OperationSystemWithVersion = await dialogRef.afterClosed().toPromise();
-    console.log(dialogData);
+    if (dialogData === undefined) {
+      return;
+    }
     await this.operationSystemWithVersionService.save(dialogData).toPromise();
     this.operationSystemsWithVersions = await this.operationSystemWithVersionService.getAll().toPromise();
     console.log(this.operationSystemsWithVersions);
@@ -191,11 +197,10 @@ export class AppNewPhoneModelComponent implements OnInit {
       data: {formTitle: dialogTitle}
     });
     const dialogData: BaseDataObjectWithName = await dialogRef.afterClosed().toPromise();
-    // lock field and set loading
-    await baseDataObjectService.save(dialogData).toPromise();
-    const data = await baseDataObjectService.getAll().toPromise();
-    // unlock field
-    return data;
+    if (dialogData !== undefined) {
+      await baseDataObjectService.save(dialogData).toPromise();
+    }
+    return await baseDataObjectService.getAll().toPromise();
   }
 
   async createNewMobilePhoneCpu(): Promise<void> {
@@ -225,18 +230,22 @@ export class AppNewPhoneModelComponent implements OnInit {
     );
     console.log('raw value sim card type');
     console.log(rawValue.simCardType);
-    const mobilePhoneModel = new PhoneModel(rawValue.name, rawValue.manufacturer, rawValue.marketLaunchYear, rawValue.operationSystem,
+    const phoneModel = new PhoneModel(rawValue.name, rawValue.manufacturer, rawValue.marketLaunchYear, rawValue.operationSystem,
       rawValue.screenDiagonalInInches, rawValue.horizontalScreenResolution, rawValue.verticalScreenResolution,
       rawValue.screenTechnology, rawValue.screenRefreshRate, ramAndRomVariants, rawValue.isMemoryCardSupported,
       rawValue.camerasAmount, rawValue.cameraInMp, rawValue.simCardsAmount, rawValue.simCardType, rawValue.is5GSupported,
       rawValue.dustAndMoistureProtection, rawValue.batteryCapacity, rawValue.fingerprintScannerLocation,
-      rawValue.screenProtection, rawValue.cpu, rawValue.hasAudioProcessor, rawValue.frontCameraInMp, rawValue.hasAudioOutput,
-      rawValue.connectionSocket, rawValue.length, rawValue.width, rawValue.thickness, rawValue.weight, rawValue.bodyColors);
+      rawValue.screenProtection, rawValue.cpu, rawValue.frontCameraInMp, rawValue.hasAudioOutput,
+      rawValue.connectionSocket, rawValue.length, rawValue.width, rawValue.thickness, rawValue.weight, rawValue.bodyColors, rawValue.hasNfc);
     console.log('mobile phone model');
-    console.log(mobilePhoneModel);
-    console.log('mobile phone sim card type');
-    console.log(mobilePhoneModel.simCardType);
-    await this.mobilePhoneModelService.save(mobilePhoneModel).toPromise();
+    console.log(phoneModel);
+    const formData = new FormData();
+    console.log('this.images');
+    console.log(this.images);
+    this.images.forEach(image => formData.append('images', image));
+    formData.append('phoneModelJson', JSON.stringify(phoneModel));
+    await this.phoneModelService.send(formData).toPromise();
+    // await this.phoneModelService.save(phoneModel).toPromise();
   }
 
   getFormValidationErrors(): void {
@@ -256,6 +265,16 @@ export class AppNewPhoneModelComponent implements OnInit {
       result = object.name;
     }
     return result;
+  }
+
+  onImagesChanged(event: Array<File>): void {
+    this.images = event;
+  }
+
+  async sendImages(): Promise<void> {
+    const formData = new FormData();
+    this.images.forEach(image => formData.append('images', image));
+    await this.phoneModelService.send(formData).toPromise();
   }
 
 }

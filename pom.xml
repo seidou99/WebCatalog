@@ -6,7 +6,7 @@
     <groupId>com.cafebabe</groupId>
     <artifactId>WebCatalog</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>WebCatalogBackend</name>
+    <name>WebCatalog</name>
     <description>Web catalog backend project</description>
 
     <packaging>pom</packaging>

@@ -1,6 +1,6 @@
 package com.cafebabe.service.interfaces;
 
-import com.cafebabe.entity.digital_technology_common.AspectRatio;
+import com.cafebabe.entity.AspectRatio;
 
 import java.math.BigInteger;
 import java.util.Optional;

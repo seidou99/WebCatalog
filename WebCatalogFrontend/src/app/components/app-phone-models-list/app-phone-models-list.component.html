@@ -46,8 +46,9 @@
       <mat-form-field class="w-100">
         <mat-label class="block">Технология экрана</mat-label>
         <mat-select multiple [(ngModel)]="filterFields.screenTechnologies">
-          <mat-option *ngFor="let technology of phoneModelFilterPossibleValues.screenTechnologies" [value]="technology.name">
-            {{technology}}
+          <mat-option *ngFor="let technology of phoneModelFilterPossibleValues.screenTechnologies"
+                      [value]="technology.name">
+            {{technology.name}}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -63,14 +64,16 @@
       <mat-form-field class="w-100">
         <mat-label>Оперативня память</mat-label>
         <mat-select multiple [(ngModel)]="filterFields.ramVariants">
-          <mat-option *ngFor="let ram of phoneModelFilterPossibleValues.ramVariants" [value]="ram">{{ram}} ГБ</mat-option>
+          <mat-option *ngFor="let ram of phoneModelFilterPossibleValues.ramVariants" [value]="ram">{{ram}}ГБ
+          </mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="w-100">
         <mat-label>Флэш память</mat-label>
         <mat-select multiple [(ngModel)]="filterFields.romVariants">
-          <mat-option *ngFor="let rom of phoneModelFilterPossibleValues.romVariants" [value]="rom">{{rom}} ГБ</mat-option>
+          <mat-option *ngFor="let rom of phoneModelFilterPossibleValues.romVariants" [value]="rom">{{rom}}ГБ
+          </mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -167,7 +170,8 @@
       <mat-form-field class="w-100">
         <mat-label>Процессор</mat-label>
         <mat-select multiple [(ngModel)]="filterFields.cpuVariants">
-          <mat-option *ngFor="let cpu of phoneModelFilterPossibleValues.cpuVariants" [value]="cpu">{{cpu.name}}</mat-option>
+          <mat-option *ngFor="let cpu of phoneModelFilterPossibleValues.cpuVariants"
+                      [value]="cpu">{{cpu.name}}</mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -198,16 +202,8 @@
       <mat-form-field class="w-100">
         <mat-label>Графический ускоритель</mat-label>
         <mat-select multiple [(ngModel)]="filterFields.phoneGpuVariants">
-          <mat-option *ngFor="let gpu of phoneModelFilterPossibleValues.phoneGpuVariants" [value]="gpu">{{gpu.name}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field class="w-100">
-        <mat-label>Аудиопроцессор</mat-label>
-        <mat-select [(ngModel)]="filterFields.hasAudioProcessor">
-          <mat-option [value]="null">Неважно</mat-option>
-          <mat-option [value]="true">Да</mat-option>
-          <mat-option [value]="false">Нет</mat-option>
+          <mat-option *ngFor="let gpu of phoneModelFilterPossibleValues.phoneGpuVariants"
+                      [value]="gpu">{{gpu.name}}</mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -280,13 +276,9 @@
   </div>
   <div class="col col-75 ml-1">
     <mat-card *ngFor="let phoneModel of phoneModels; let i = index" class="mb-1">
-      <div class="row">
-        <div class="col">
-          <div class="product-image-preview-wrapper">
-            <img src="https://content2.onliner.by/catalog/device/main/4569504868eb0c41952c484333a4b3c4.jpeg"
-                 class="product-image mlr-auto block">
-          </div>
-        </div>
+      <div class="row flex-gap-1em">
+        <img src="https://content2.onliner.by/catalog/device/main/4569504868eb0c41952c484333a4b3c4.jpeg"
+             class="square-picture-15em">
         <div class="col ml-1">
           <a routerLink="{{phoneModel.id}}" class="mat-h2 phone-name-link">{{phoneModel.name}}</a>
           <p>Операционная система {{phoneModel.operationSystemWithVersion.operationSystem.name}},
@@ -306,9 +298,6 @@
           <!--            <mat-icon>star_outline</mat-icon>-->
           <!--            <p>36 отзывов</p>-->
           <!--          </div>-->
-        </div>
-        <div class="col ml-1">
-          <!--          <h2 class="product-price">от 549 р.</h2>-->
         </div>
       </div>
     </mat-card>

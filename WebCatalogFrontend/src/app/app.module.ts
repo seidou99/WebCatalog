@@ -27,9 +27,14 @@ import { AppNewOperationSystemWithVersionDialogComponent } from './components/ap
 import { AppNewPhoneCpuComponent } from './components/app-new-cpu/app-new-phone-cpu.component';
 import {AppNewGpuComponent} from './components/app-new-gpu/app-new-gpu.component';
 import { AppPhoneModelsListComponent } from './components/app-phone-models-list/app-phone-models-list.component';
-import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatPaginatorModule} from '@angular/material/paginator';
 import { AppNewPhoneComponent } from './components/app-new-phone/app-new-phone.component';
 import { AppPhoneComponent } from './components/app-phone/app-phone.component';
+import { AppGeneratorComponent } from './components/app-generator/app-generator.component';
+import { AppErrorComponent } from './components/app-error/app-error.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { SelectImagesComponent } from './components/select-images/select-images.component';
 
 
 @NgModule({
@@ -46,6 +51,10 @@ import { AppPhoneComponent } from './components/app-phone/app-phone.component';
     AppPhoneModelsListComponent,
     AppNewPhoneComponent,
     AppPhoneComponent,
+    AppGeneratorComponent,
+    AppErrorComponent,
+    NavbarComponent,
+    SelectImagesComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +76,8 @@ import { AppPhoneComponent } from './components/app-phone/app-phone.component';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

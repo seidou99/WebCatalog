@@ -71,48 +71,20 @@ body {
   margin-right: 0.5em;
 }
 
+.mr-05-important {
+  margin-right: 0.5em !important;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.align-items-baseline {
+  align-items: baseline;
+}
+
 .border-radius-05 {
   border-radius: 0.5em;
-}
-
-.product-image {
-  border-radius: 4px;
-  object-fit: contain;
-  max-width: 100%;
-  max-height: 100%;
-}
-
-.product-image-preview-wrapper {
-  width: 15em;
-  height: 15em;
-}
-
-.product-image-full-wrapper {
-  width: 25em;
-  height: 25em;
-}
-
-.product-image-small-wrapper {
-  width: 8em;
-  height: 8em;
-  cursor: pointer;
-  position: relative;
-}
-
-.product-image-small-wrapper .product-image-small-wrapper {
-  margin-left: 1em;
-}
-
-.product-image-small-wrapper:hover:after {
-  background: rgba(0, 0, 0, .05);
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  display: block;
-  z-index: 100;
 }
 
 .mlr-auto {
@@ -195,4 +167,39 @@ app-app-phones-list {
   border-top: 1px solid rgba(0, 0, 0, 0.12);
   padding-top: 0.5em;
   padding-bottom: 0.5em;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.display-none {
+  display: none;
+}
+
+.upload-image {
+  height: 10em;
+  object-fit: contain;
+}
+
+.flex-gap-1em {
+  gap: 1em;
+}
+
+.square-picture-25em {
+  width: 25em;
+  height: 25em;
+  object-fit: cover;
+}
+
+.square-picture-10em {
+  width: 10em;
+  height: 10em;
+  object-fit: cover;
+}
+
+.square-picture-15em {
+  width: 15em;
+  height: 15em;
+  object-fit: cover;
 }

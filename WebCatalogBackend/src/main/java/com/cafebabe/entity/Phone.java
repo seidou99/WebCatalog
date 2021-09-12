@@ -1,23 +1,35 @@
 package com.cafebabe.entity;
 
-import com.cafebabe.entity.mobilephone.PhoneModel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 @Entity
 @Getter
 @Setter
-public class Phone extends BaseDataObjectWithName {
+@NoArgsConstructor
+public class Phone extends ShopItem {
 
-    @ManyToOne
+    @Column(unique = true)
+    protected String name;
+
+    @ManyToOne(optional = false)
     protected PhoneModel phoneModel;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     protected Color color;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     protected RamAndRomVariant ramAndRomVariant;
+
+    public Phone(String name, PhoneModel phoneModel, Color color, RamAndRomVariant ramAndRomVariant) {
+        this.name = name;
+        this.phoneModel = phoneModel;
+        this.color = color;
+        this.ramAndRomVariant = ramAndRomVariant;
+    }
 }

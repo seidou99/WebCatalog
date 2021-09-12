@@ -21,9 +21,11 @@ export class ApiConstants {
   static readonly FILTER_PATH = 'filter';
   static readonly FILTERED_PATH = 'filtered';
   static readonly COUNT_PATH = 'count';
+
   static readonly PHONES_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.MOBILE_PHONES_PATH}`;
   static readonly PHONES_FILTER_API_URL = `${ApiConstants.PHONES_API_URL}/${ApiConstants.FILTER_PATH}`;
   static readonly PHONES_FILTERED_API_URL = `${ApiConstants.PHONES_API_URL}/${ApiConstants.FILTERED_PATH}`;
+  static readonly PHONES_FILTERED_COUNT_API_URL = `${ApiConstants.PHONES_FILTERED_API_URL}/${ApiConstants.COUNT_PATH}`;
   static readonly PHONE_MODELS_API_URL = `${ApiConstants.PHONES_API_URL}/${ApiConstants.PHONE_MODELS_PATH}`;
   static readonly PHONE_MODELS_FILTER_API_URL = `${ApiConstants.PHONE_MODELS_API_URL}/${ApiConstants.FILTER_PATH}`;
   static readonly PHONE_MODELS_FILTERED_API_URL = `${ApiConstants.PHONE_MODELS_API_URL}/${ApiConstants.FILTERED_PATH}`;
@@ -42,6 +44,21 @@ export class ApiConstants {
   static readonly CONNECTION_SOCKETS_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.CONNECTION_SOCKETS_PATH}`;
   static readonly COLORS_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.COLORS_PATH}`;
 
+}
+
+export class GeneratorApiConstants {
+  static readonly GENERATOR_PATH = 'generator';
+  static readonly GENERATOR_ALL_PATH = 'all';
+  static readonly GENERATOR_MANUFACTURERS_PATH = 'manufacturer';
+  static readonly GENERATOR_MOBILE_OS_PATH = 'mobile/os';
+  static readonly GENERATOR_SCREEN_TECHNOLOGIES_PATH = 'screen-technology';
+  static readonly GENERATOR_COLOR_PATH = 'color';
+  static readonly GENERATOR_API_URL = `${ApiConstants.SERVER_API_URL}/${GeneratorApiConstants.GENERATOR_PATH}`;
+  static readonly GENERATE_ALL_API_URL = `${GeneratorApiConstants.GENERATOR_API_URL}/${GeneratorApiConstants.GENERATOR_ALL_PATH}`;
+  static readonly GENERATE_MANUFACTURERS_API_URL = `${GeneratorApiConstants.GENERATOR_API_URL}/${GeneratorApiConstants.GENERATOR_MANUFACTURERS_PATH}`;
+  static readonly GENERATE_MOBILE_OS_API_URL = `${GeneratorApiConstants.GENERATOR_API_URL}/${GeneratorApiConstants.GENERATOR_MOBILE_OS_PATH}`;
+  static readonly GENERATE_SCREEN_TECHNOLOGIES_API_URL = `${GeneratorApiConstants.GENERATOR_API_URL}/${GeneratorApiConstants.GENERATOR_SCREEN_TECHNOLOGIES_PATH}`;
+  static readonly GENERATE_COLORS_API_URL = `${GeneratorApiConstants.GENERATOR_API_URL}/${GeneratorApiConstants.GENERATOR_COLOR_PATH}`;
 }
 
 export class FormControlNames {
@@ -67,9 +84,9 @@ export class FormControlNames {
   static readonly FINGERPRINT_SCANNER_LOCATION = 'fingerprintScannerLocation';
   static readonly SCREEN_PROTECTION = 'screenProtection';
   static readonly CPU = 'cpu';
-  static readonly HAS_AUDIO_PROCESSOR = 'hasAudioProcessor';
   static readonly FRONT_CAMERA_IN_MP = 'frontCameraInMp';
   static readonly HAS_AUDIO_OUTPUT = 'hasAudioOutput';
+  static readonly HAS_NFC = 'hasNfc';
   static readonly CONNECTION_SOCKET = 'connectionSocket';
   static readonly LENGTH = 'length';
   static readonly WIDTH = 'width';

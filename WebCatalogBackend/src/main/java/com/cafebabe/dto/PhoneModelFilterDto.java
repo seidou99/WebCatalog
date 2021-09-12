@@ -1,8 +1,8 @@
 package com.cafebabe.dto;
 
 import com.cafebabe.entity.*;
-import com.cafebabe.entity.mobilephone.OperationSystemWithVersion;
-import com.cafebabe.entity.mobilephone.PhoneCpu;
+import com.cafebabe.entity.OperationSystemWithVersion;
+import com.cafebabe.entity.PhoneCpu;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,7 +36,6 @@ public class PhoneModelFilterDto {
     List<Integer> coresAmountVariants;
     List<Integer> cpuClockSpeedVariants;
     List<Integer> cpuTechprocessVariants;
-    Boolean hasAudioProcessor;
     List<Float> frontCameraVariants;
     Boolean hasAudioOutput;
     List<ConnectionSocket> connectionSocketVariants;

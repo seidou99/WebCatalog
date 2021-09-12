@@ -1,4 +1,4 @@
-import {BaseDataObjectWithName} from "./base-data-object";
+import {BaseDataObjectWithName, Image} from "./base-data-object";
 import {Manufacturer} from "./manufacturer";
 import {OperationSystemWithVersion} from "./operation-system-with-version";
 import {ScreenTechnology} from "./screen-technology";
@@ -30,7 +30,6 @@ export class PhoneModel extends BaseDataObjectWithName {
   screenPpi: number;
   screenProtection: BaseDataObjectWithName;
   cpu: MobileCpu;
-  hasAudioProcessor: boolean;
   frontCameraInMp: number;
   hasAudioOutput: boolean;
   connectionSocket: BaseDataObjectWithName;
@@ -39,8 +38,10 @@ export class PhoneModel extends BaseDataObjectWithName {
   thickness: number;
   weight: number;
   bodyColors: Array<BaseDataObjectWithName>;
+  hasNfc: boolean;
+  images: Array<Image>;
 
-  constructor(name: string, manufacturer: Manufacturer, marketLaunchYear: number, operationSystem: OperationSystemWithVersion, screenDiagonalInInches: number, horizontalScreenResolution: number, verticalScreenResolution: number, screenTechnology: ScreenTechnology, screenRefreshRate: number, ramAndRomVariants: Array<RamAndRomVariant>, isMemoryCardSupported: boolean, camerasAmount: number, cameraInMp: number, simCardsAmount: number, simCardType: BaseDataObjectWithName, is5GSupported: boolean, dustAndMoistureProtection: DustAndMoistureProtection, batteryCapacity: number, fingerprintScannerLocation: FingerprintScannerLocation, screenProtection: BaseDataObjectWithName, cpu: MobileCpu, hasAudioProcessor: boolean, frontCameraInMp: number, hasAudioOutput: boolean, connectionSocket: BaseDataObjectWithName, length: number, width: number, thickness: number, weight: number, bodyColors: Array<BaseDataObjectWithName>) {
+  constructor(name: string, manufacturer: Manufacturer, marketLaunchYear: number, operationSystem: OperationSystemWithVersion, screenDiagonalInInches: number, horizontalScreenResolution: number, verticalScreenResolution: number, screenTechnology: ScreenTechnology, screenRefreshRate: number, ramAndRomVariants: Array<RamAndRomVariant>, isMemoryCardSupported: boolean, camerasAmount: number, cameraInMp: number, simCardsAmount: number, simCardType: BaseDataObjectWithName, is5GSupported: boolean, dustAndMoistureProtection: DustAndMoistureProtection, batteryCapacity: number, fingerprintScannerLocation: FingerprintScannerLocation, screenProtection: BaseDataObjectWithName, cpu: MobileCpu, frontCameraInMp: number, hasAudioOutput: boolean, connectionSocket: BaseDataObjectWithName, length: number, width: number, thickness: number, weight: number, bodyColors: Array<BaseDataObjectWithName>, hasNfc: boolean) {
     super();
     this.name = name;
     this.manufacturer = manufacturer;
@@ -63,7 +64,6 @@ export class PhoneModel extends BaseDataObjectWithName {
     this.fingerprintScannerLocation = fingerprintScannerLocation;
     this.screenProtection = screenProtection;
     this.cpu = cpu;
-    this.hasAudioProcessor = hasAudioProcessor;
     this.frontCameraInMp = frontCameraInMp;
     this.hasAudioOutput = hasAudioOutput;
     this.connectionSocket = connectionSocket;
@@ -72,11 +72,7 @@ export class PhoneModel extends BaseDataObjectWithName {
     this.thickness = thickness;
     this.weight = weight;
     this.bodyColors = bodyColors;
+    this.hasNfc = hasNfc;
 
   }
-}
-
-export enum MobilePhoneType {
-
-  SMARTPHONE = 'SMARTPHONE', SIMPLE_MOBILE_PHONE = 'SIMPLE_MOBILE_PHONE'
 }

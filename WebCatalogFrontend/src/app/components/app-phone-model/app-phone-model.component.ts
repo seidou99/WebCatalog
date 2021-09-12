@@ -3,6 +3,7 @@ import {PhoneModelService} from '../../services/phone-model.service';
 import {PhoneModel} from '../../model/phone-model';
 import {ActivatedRoute} from '@angular/router';
 import {ApiConstants, StringConstants} from '../../Constants';
+import {Image} from "../../model/base-data-object";
 
 @Component({
   selector: 'app-app-phone',
@@ -12,6 +13,7 @@ import {ApiConstants, StringConstants} from '../../Constants';
 export class AppPhoneModelComponent implements OnInit {
 
   phoneModel: PhoneModel;
+  bigPictureName = 'image-2550005505636353865.jpg';
 
   constructor(public phoneModelService: PhoneModelService, public route: ActivatedRoute) {
   }
@@ -70,6 +72,10 @@ export class AppPhoneModelComponent implements OnInit {
       }
     }
     return maxClockSpeed;
+  }
+
+  changeBigPicture(image: Image): void {
+    this.bigPictureName = image.imageName;
   }
 
   // TODO добавить фронтальную камеру, которую где-то проебали

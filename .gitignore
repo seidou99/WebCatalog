@@ -121,3 +121,5 @@
 /.idea/libraries/Maven__javax_xml_bind_jaxb_api_2_3_1.xml
 /.idea/libraries/Maven__org_hibernate_hibernate_jpamodelgen_5_4_31_Final.xml
 /.idea/sqldialects.xml
+/images/
+/generator_images/

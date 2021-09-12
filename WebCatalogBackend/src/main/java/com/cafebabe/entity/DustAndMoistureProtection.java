@@ -1,7 +1,14 @@
 package com.cafebabe.entity;
 
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Entity;
 
 @Entity
-public class DustAndMoistureProtection extends BaseDataObjectWithName {
+@NoArgsConstructor
+public class DustAndMoistureProtection extends BaseDataObjectWithUniqueName {
+
+    public DustAndMoistureProtection(String name) {
+        super(name);
+    }
 }

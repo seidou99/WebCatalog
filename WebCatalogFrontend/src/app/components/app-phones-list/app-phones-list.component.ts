@@ -14,7 +14,7 @@ export class AppPhonesListComponent implements OnInit {
   phones: Array<Phone> = [];
   phoneFilter = new PhoneFilter();
   phoneFilterPossibleValues = new PhoneFilter();
-  phoneModelsCount = 0;
+  phonesCount = 0;
   pageSize = 10;
   pageSizeOptions = [10, 25, 50, 100];
   pageIndex = 0;
@@ -39,6 +39,7 @@ export class AppPhonesListComponent implements OnInit {
 
   loadFilteredPhones(): void {
     this.phoneService.getFilteredDataObjects(this.phoneFilter, this.pageIndex, this.pageSize).subscribe(data => this.phones = data);
+    this.phoneService.getFilteredDataObjectsCount(this.phoneFilter).subscribe(data => this.phonesCount = data);
   }
 
 }

@@ -1,11 +1,10 @@
 package com.cafebabe.service.impl;
 
 import com.cafebabe.dto.PhoneFilterDto;
-import com.cafebabe.dto.PhoneModelFilterDto;
 import com.cafebabe.service.interfaces.*;
-import com.cafebabe.service.mobilephone.interfaces.ManufacturerService;
-import com.cafebabe.service.mobilephone.interfaces.OperationSystemWithVersionService;
-import com.cafebabe.service.mobilephone.interfaces.PhoneModelService;
+import com.cafebabe.service.interfaces.ManufacturerService;
+import com.cafebabe.service.interfaces.OperationSystemWithVersionService;
+import com.cafebabe.service.interfaces.PhoneModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

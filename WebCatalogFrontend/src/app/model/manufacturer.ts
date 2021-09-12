@@ -3,5 +3,5 @@ import {ManufacturerType} from './manufacturer-type';
 
 export class Manufacturer extends BaseDataObjectWithName {
 
-  manufacturerType: ManufacturerType;
+  manufacturerTypes: Array<ManufacturerType>;
 }

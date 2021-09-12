@@ -1,7 +1,14 @@
 package com.cafebabe.entity;
 
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Entity;
 
 @Entity
-public class ScreenProtection extends BaseDataObjectWithName {
+@NoArgsConstructor
+public class ScreenProtection extends BaseDataObjectWithUniqueName {
+
+    public ScreenProtection(String name) {
+        super(name);
+    }
 }

@@ -16,6 +16,7 @@ export class AppNewPhoneComponent implements OnInit {
   FormControlNames = FormControlNames;
   phoneModels: Array<PhoneModel> = [];
   selectedPhoneModel: PhoneModel = null;
+  selectedFiles: Array<any>;
   phoneForm = this.fb.group({
     name: [null, [Validators.required]],
     phoneModel: [null, [Validators.required]],

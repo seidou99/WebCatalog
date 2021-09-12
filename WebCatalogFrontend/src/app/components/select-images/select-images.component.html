@@ -1,0 +1,12 @@
+<div>
+  <input type="file" multiple accept="image/*" (change)="onFileChanged($event)" #fileInput class="display-none">
+  <button mat-button (click)="fileInput.click()">Добавить изображения</button>
+</div>
+<div class="row flex-gap-1em flex-wrap">
+  <mat-card *ngFor="let image of selectedImages; let i = index">
+    <img mat-card-image [src]="image.dataUrl" class="upload-image">
+    <mat-card-actions>
+      <button mat-button (click)="delete(i)">Удалить</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

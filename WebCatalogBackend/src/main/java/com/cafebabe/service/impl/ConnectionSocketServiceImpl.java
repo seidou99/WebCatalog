@@ -6,5 +6,5 @@ import com.cafebabe.service.interfaces.ConnectionSocketService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ConnectionSocketServiceImpl extends BaseDataObjectServiceImpl<ConnectionSocketRepository, ConnectionSocket> implements ConnectionSocketService {
+public class ConnectionSocketServiceImpl extends BaseDataObjectWithUniqueNameServiceImpl<ConnectionSocketRepository, ConnectionSocket> implements ConnectionSocketService {
 }

@@ -5,8 +5,6 @@ import com.cafebabe.repository.PhoneGpuRepository;
 import com.cafebabe.service.interfaces.PhoneGpuService;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
-public class PhoneGpuServiceImpl extends BaseDataObjectServiceImpl<PhoneGpuRepository, PhoneGpu> implements PhoneGpuService {
+public class PhoneGpuServiceImpl extends BaseDataObjectWithUniqueNameServiceImpl<PhoneGpuRepository, PhoneGpu> implements PhoneGpuService {
 }

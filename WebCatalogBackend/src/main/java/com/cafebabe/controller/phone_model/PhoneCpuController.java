@@ -1,7 +1,7 @@
 package com.cafebabe.controller.phone_model;
 
 import com.cafebabe.entity.PhoneGpu;
-import com.cafebabe.entity.mobilephone.PhoneCpu;
+import com.cafebabe.entity.PhoneCpu;
 import com.cafebabe.service.interfaces.CpuCoresBlockService;
 import com.cafebabe.service.interfaces.PhoneCpuService;
 import com.cafebabe.service.interfaces.PhoneGpuService;
@@ -27,9 +27,6 @@ public class PhoneCpuController {
 
     @PostMapping("api/phone-cpus")
     public void save(@RequestBody PhoneCpu cpu) {
-        PhoneGpu integratedPhoneGpu = cpu.getIntegratedGpu();
-        phoneGpuService.save(integratedPhoneGpu);
-        cpuCoresBlockService.save(cpu.getCoresBlocks());
         phoneCpuService.save(cpu);
     }
 

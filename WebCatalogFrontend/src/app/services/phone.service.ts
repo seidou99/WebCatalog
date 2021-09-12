@@ -13,6 +13,7 @@ export class PhoneService extends BaseDataObjectWithFilteringAndPaginationRestSe
   apiUrl = ApiConstants.PHONES_API_URL;
   filterApiUrl = ApiConstants.PHONES_FILTER_API_URL;
   filteredDtoApiUrl = ApiConstants.PHONES_FILTERED_API_URL;
+  filteredDtoCountApiUrl = ApiConstants.PHONES_FILTERED_COUNT_API_URL;
 
   constructor(private http: HttpClient) {
     super(http);

@@ -6,5 +6,5 @@ import com.cafebabe.service.interfaces.FingerprintScannerLocationService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class FingerprintScannerLocationServiceImpl extends BaseDataObjectServiceImpl<FingerprintScannerLocationRepository, FingerprintScannerLocation> implements FingerprintScannerLocationService {
+public class FingerprintScannerLocationServiceImpl extends BaseDataObjectWithUniqueNameServiceImpl<FingerprintScannerLocationRepository, FingerprintScannerLocation> implements FingerprintScannerLocationService {
 }

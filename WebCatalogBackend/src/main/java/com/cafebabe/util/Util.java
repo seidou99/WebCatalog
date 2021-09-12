@@ -1,7 +1,7 @@
 package com.cafebabe.util;
 
-import com.cafebabe.entity.digital_technology_common.AspectRatio;
-import com.cafebabe.entity.mobilephone.PhoneModel;
+import com.cafebabe.entity.AspectRatio;
+import com.cafebabe.entity.PhoneModel;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

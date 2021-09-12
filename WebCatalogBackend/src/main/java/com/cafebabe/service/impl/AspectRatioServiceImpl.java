@@ -1,7 +1,7 @@
 package com.cafebabe.service.impl;
 
-import com.cafebabe.entity.digital_technology_common.AspectRatio;
-import com.cafebabe.repository.digital_technology_common.AspectRatioRepository;
+import com.cafebabe.entity.AspectRatio;
+import com.cafebabe.repository.AspectRatioRepository;
 import com.cafebabe.service.interfaces.AspectRatioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

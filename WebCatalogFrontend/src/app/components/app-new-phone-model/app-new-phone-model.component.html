@@ -184,10 +184,6 @@
       <mat-icon class="cursor-pointer" (click)="createNewMobilePhoneCpu()">add</mat-icon>
     </div>
 
-    <section class="w-100 flex-align-center row">
-      <mat-checkbox [formControlName]="FormControlNames.HAS_AUDIO_PROCESSOR">Аудиопроцессор</mat-checkbox>
-    </section>
-
     <mat-form-field class="w-100">
       <mat-label>Фронтальная камера</mat-label>
       <input matInput type="number" [formControlName]="FormControlNames.FRONT_CAMERA_IN_MP">
@@ -195,6 +191,10 @@
 
     <section class="w-100 row flex-align-center">
       <mat-checkbox [formControlName]="FormControlNames.HAS_AUDIO_OUTPUT">Аудиовыход</mat-checkbox>
+    </section>
+
+    <section class="w-100 row flex-align-center">
+      <mat-checkbox [formControlName]="FormControlNames.HAS_NFC">NFC</mat-checkbox>
     </section>
 
     <div class="row flex-align-center">
@@ -227,8 +227,12 @@
       <input matInput type="number" [formControlName]="FormControlNames.WEIGHT">
     </mat-form-field>
   </div>
+  <app-select-images (imagesChanged)="onImagesChanged($event)"></app-select-images>
   <div class="row flex-justify-end">
     <button mat-button (click)="createNewPhoneModel()">Добавить</button>
+  </div>
+  <div class="row flex-justify-end">
+    <button mat-button (click)="sendImages()">Послать картинки</button>
   </div>
 </mat-card>
 

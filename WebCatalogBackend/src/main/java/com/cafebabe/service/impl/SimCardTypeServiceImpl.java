@@ -6,5 +6,5 @@ import com.cafebabe.service.interfaces.SimCardTypeService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SimCardTypeServiceImpl extends BaseDataObjectServiceImpl<SimCardTypeRepository, SimCardType> implements SimCardTypeService {
+public class SimCardTypeServiceImpl extends BaseDataObjectWithUniqueNameServiceImpl<SimCardTypeRepository, SimCardType> implements SimCardTypeService {
 }

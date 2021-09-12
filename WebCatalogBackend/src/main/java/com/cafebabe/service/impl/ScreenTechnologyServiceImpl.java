@@ -6,5 +6,5 @@ import com.cafebabe.service.interfaces.ScreenTechnologyService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ScreenTechnologyServiceImpl extends BaseDataObjectServiceImpl<ScreenTechnologyRepository, ScreenTechnology> implements ScreenTechnologyService {
+public class ScreenTechnologyServiceImpl extends BaseDataObjectWithUniqueNameServiceImpl<ScreenTechnologyRepository, ScreenTechnology> implements ScreenTechnologyService {
 }
