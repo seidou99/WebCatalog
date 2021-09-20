@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {PhoneModel} from "../model/phone-model";
 import {StringConstants} from "../Constants";
 import {Phone} from "../model/phone";
+import {BaseDataObjectWithName} from "../model/base-data-object";
 
 @Injectable({
   providedIn: 'root'
@@ -55,5 +56,13 @@ export class UtilService {
       }
     }
     return maxClockSpeed;
+  }
+
+  nameDisplayFunction(object: BaseDataObjectWithName): string {
+    let result = '';
+    if (object && object.name) {
+      result = object.name;
+    }
+    return result;
   }
 }

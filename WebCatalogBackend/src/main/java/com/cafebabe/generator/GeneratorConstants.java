@@ -2,11 +2,11 @@ package com.cafebabe.generator;
 
 import com.cafebabe.entity.*;
 
-import java.io.File;
-import java.nio.file.Files;
 import java.util.*;
 
 public interface GeneratorConstants {
+
+    public static final String GENERATOR_IMAGES_DIRECTORY = "generator_images";
 
     interface ManufacturerTypes {
         ManufacturerType MOBILE_PHONE = new ManufacturerType("MOBILE_PHONE");
@@ -94,218 +94,221 @@ public interface GeneratorConstants {
         List<ConnectionSocket> ALL = Arrays.asList(LIGHTNING, MICRO_USB, USB_TYPE_C);
     }
 
-    interface PhoneModels {
-        PhoneModel XIAOMI_REDMI_9_GLOBAL_WITH_NFC = new PhoneModel(
-                "Xiaomi Redmi 9 международная версия с NFC",
-                Manufacturers.XIAOMI,
-                2020,
-                OperationSystems.ANDROID_TEN_DOT_ZERO,
-                6.53f,
-                Arrays.asList(new RamAndRomVariant(3, 32), new RamAndRomVariant(4, 64)),
-                1080,
-                2340,
-                ScreenTechnologies.IPS,
-                60,
-                FingerprintScannerLocations.ON_THE_BACK_PANEL,
-                2,
-                SimCardTypes.NANO_SIM,
-                true,
-                4,
-                13,
-                false,
-                PhoneCpus.MEDIATEK_HELIO_G80,
-                8,
-                true,
-                ConnectionSockets.USB_TYPE_C,
-                Arrays.asList(Colors.GREEN, Colors.GREY, Colors.PURPLE),
-                null,
-                163.3f,
-                77f,
-                9.1f,
-                198f,
-                5020,
-                ScreenProtections.GORILLA_GLASS_V3,
-                true
-        ), XIAOMI_REDMI_9C_GLOBAL = new PhoneModel(
-                "Xiaomi Redmi 9C международная версия",
-                Manufacturers.XIAOMI,
-                2020,
-                OperationSystems.ANDROID_TEN_DOT_ZERO,
-                6.53f,
-                Arrays.asList(new RamAndRomVariant(2, 32), new RamAndRomVariant(3, 64), new RamAndRomVariant(4, 64)),
-                720,
-                1600,
-                ScreenTechnologies.IPS,
-                60,
-                FingerprintScannerLocations.ON_THE_BACK_PANEL,
-                2,
-                SimCardTypes.NANO_SIM,
-                true,
-                3,
-                13,
-                false,
-                PhoneCpus.MEDIATEK_HELIO_G35,
-                5,
-                true,
-                ConnectionSockets.MICRO_USB,
-                Arrays.asList(Colors.ORANGE, Colors.GREY, Colors.BLUE),
-                null,
-                164.9f,
-                77.07f,
-                9f,
-                196f,
-                5000,
-                null,
-                false
-        ), XIAOMI_REDMI_NOTE_9T = new PhoneModel(
-                "Xiaomi Redmi Note 9T международная версия",
-                Manufacturers.XIAOMI,
-                2021,
-                OperationSystems.ANDROID_TEN_DOT_ZERO,
-                6.53f,
-                Arrays.asList(new RamAndRomVariant(4, 64), new RamAndRomVariant(4, 128)),
-                1080,
-                2340,
-                ScreenTechnologies.IPS,
-                60,
-                FingerprintScannerLocations.ON_THE_SIDE_END,
-                2,
-                SimCardTypes.NANO_SIM,
-                true,
-                3,
-                48,
-                true,
-                PhoneCpus.MEDIATEK_DIMENSITY_800,
-                13,
-                true,
-                ConnectionSockets.USB_TYPE_C,
-                Arrays.asList(Colors.BLACK, Colors.PURPLE),
-                null,
-                161.9f,
-                77.3f,
-                9.05f,
-                199f,
-                5000,
-                ScreenProtections.GORILLA_GLASS_V5,
-                true
-        ), POCO_X3_PRO_GLOBAL = new PhoneModel(
-                "POCO X3 Pro международная версия",
-                Manufacturers.XIAOMI,
-                2021,
-                OperationSystems.ANDROID_ELEVEN,
-                6.67f,
-                Arrays.asList(new RamAndRomVariant(6, 128), new RamAndRomVariant(8, 256)),
-                1080,
-                2400,
-                ScreenTechnologies.IPS,
-                120,
-                FingerprintScannerLocations.ON_THE_SIDE_END,
-                2,
-                SimCardTypes.NANO_SIM,
-                true,
-                4,
-                48,
-                false,
-                PhoneCpus.QUALCOMM_SNAPDRAGON_860,
-                20,
-                true,
-                ConnectionSockets.USB_TYPE_C,
-                Arrays.asList(Colors.BLACK, Colors.BRONZE, Colors.BLUE),
-                DustAndMoistureProtectionTypes.IP53,
-                165.3f,
-                76.8f,
-                9.4f,
-                215f,
-                5160,
-                ScreenProtections.GORILLA_GLASS_V6,
-                true
-        ), SAMSUNG_GALAXY_S20_FE = new PhoneModel(
-                "Samsung Galaxy S20 FE",
-                Manufacturers.SAMSUNG,
-                2020,
-                OperationSystems.ANDROID_TEN_DOT_ZERO,
-                6.5f,
-                Arrays.asList(new RamAndRomVariant(6, 128), new RamAndRomVariant(8, 256)),
-                1080,
-                2400,
-                ScreenTechnologies.AMOLED,
-                120,
-                FingerprintScannerLocations.ON_THE_SIDE_END,
-                2,
-                SimCardTypes.NANO_SIM,
-                true,
-                3,
-                12,
-                false,
-                PhoneCpus.QUALCOMM_SNAPDRAGON_865,
-                32,
-                true,
-                ConnectionSockets.USB_TYPE_C,
-                Arrays.asList(Colors.WHITE, Colors.RED, Colors.MINT, Colors.ORANGE, Colors.PINK, Colors.BLUE),
-                DustAndMoistureProtectionTypes.IP68,
-                159.8f,
-                74.5f,
-                8.4f,
-                190,
-                4500,
-                ScreenProtections.GORILLA_GLASS_V3,
-                true
-        ), XIAOMI_REDMI_NOTE_10 = new PhoneModel(
-                "Xiaomi Redmi Note 10",
-                Manufacturers.XIAOMI,
-                2021,
-                OperationSystems.ANDROID_ELEVEN,
-                6.43f,
-                Arrays.asList(new RamAndRomVariant(6, 128), new RamAndRomVariant(4, 64)),
-                1080,
-                2400,
-                ScreenTechnologies.AMOLED,
-                60,
-                FingerprintScannerLocations.ON_THE_SIDE_END,
-                2,
-                SimCardTypes.NANO_SIM,
-                true,
-                4,
-                48,
-                false,
-                PhoneCpus.QUALCOMM_SNAPDRAGON_678,
-                13,
-                true,
-                ConnectionSockets.USB_TYPE_C,
-                Arrays.asList(Colors.WHITE, Colors.GREEN, Colors.GREY),
-                DustAndMoistureProtectionTypes.IP53,
-                160.46f,
-                74.5f,
-                8.29f,
-                178.8f,
-                5000,
-                ScreenProtections.GORILLA_GLASS_V3,
-                false
-        );
-
-        List<PhoneModel> ALL = Arrays.asList(XIAOMI_REDMI_9_GLOBAL_WITH_NFC, XIAOMI_REDMI_9C_GLOBAL, XIAOMI_REDMI_NOTE_9T, POCO_X3_PRO_GLOBAL, SAMSUNG_GALAXY_S20_FE, XIAOMI_REDMI_NOTE_10);
-
-        Map<PhoneModel, String> PHONE_MODEL_TO_IMAGES_DIRECTORY_MAP = new HashMap<PhoneModel, String>() {{
-            put(XIAOMI_REDMI_9_GLOBAL_WITH_NFC, "redmi_9");
-            put(XIAOMI_REDMI_9C_GLOBAL, "redmi_9c");
-            put(XIAOMI_REDMI_NOTE_9T, "redmi_note_9t");
-        }};
-    }
-
-    interface Phones {
-        Phone XIAOMI_REDMI_9_3GB_32GB_GLOBAL_WITH_NFC_GREEN = new Phone("Xiaomi Redmi 9 3GB/32GB международная версия с NFC (зеленый)", PhoneModels.XIAOMI_REDMI_9_GLOBAL_WITH_NFC, Colors.GREEN, new RamAndRomVariant(3, 32)), XIAOMI_REDMI_9_4GB_64GB_GLOBAL_WITH_NFC_PURPLE = new Phone("Xiaomi Redmi 9 4GB/64GB международная версия с NFC (фиолетовый)", PhoneModels.XIAOMI_REDMI_9_GLOBAL_WITH_NFC, Colors.PURPLE, new RamAndRomVariant(4, 64));
-
-        List<Phone> ALL = Arrays.asList(XIAOMI_REDMI_9_3GB_32GB_GLOBAL_WITH_NFC_GREEN, XIAOMI_REDMI_9_4GB_64GB_GLOBAL_WITH_NFC_PURPLE);
-    }
-
-    interface Shops {
-        Shop XISTORE = new Shop("Xistore"), TECHNO_WORLD = new Shop("ТехноМир");
-
-        List<Shop> ALL = Arrays.asList(XISTORE, TECHNO_WORLD);
-    }
-
-    interface ItemPricesInShops {
-
-    }
+//    interface PhoneModels {
+//        PhoneModel XIAOMI_REDMI_9_GLOBAL_WITH_NFC = new PhoneModel(
+//                "Xiaomi Redmi 9 международная версия с NFC",
+//                Manufacturers.XIAOMI,
+//                2020,
+//                OperationSystems.ANDROID_TEN_DOT_ZERO,
+//                6.53f,
+//                Arrays.asList(new RamAndRomVariant(3, 32), new RamAndRomVariant(4, 64)),
+//                1080,
+//                2340,
+//                ScreenTechnologies.IPS,
+//                60,
+//                FingerprintScannerLocations.ON_THE_BACK_PANEL,
+//                2,
+//                SimCardTypes.NANO_SIM,
+//                true,
+//                4,
+//                13,
+//                false,
+//                PhoneCpus.MEDIATEK_HELIO_G80,
+//                8,
+//                true,
+//                ConnectionSockets.USB_TYPE_C,
+//                Arrays.asList(Colors.GREEN, Colors.GREY, Colors.PURPLE),
+//                null,
+//                163.3f,
+//                77f,
+//                9.1f,
+//                198f,
+//                5020,
+//                ScreenProtections.GORILLA_GLASS_V3,
+//                true
+//        ), XIAOMI_REDMI_9C_GLOBAL = new PhoneModel(
+//                "Xiaomi Redmi 9C международная версия",
+//                Manufacturers.XIAOMI,
+//                2020,
+//                OperationSystems.ANDROID_TEN_DOT_ZERO,
+//                6.53f,
+//                Arrays.asList(new RamAndRomVariant(2, 32), new RamAndRomVariant(3, 64), new RamAndRomVariant(4, 64)),
+//                720,
+//                1600,
+//                ScreenTechnologies.IPS,
+//                60,
+//                FingerprintScannerLocations.ON_THE_BACK_PANEL,
+//                2,
+//                SimCardTypes.NANO_SIM,
+//                true,
+//                3,
+//                13,
+//                false,
+//                PhoneCpus.MEDIATEK_HELIO_G35,
+//                5,
+//                true,
+//                ConnectionSockets.MICRO_USB,
+//                Arrays.asList(Colors.ORANGE, Colors.GREY, Colors.BLUE),
+//                null,
+//                164.9f,
+//                77.07f,
+//                9f,
+//                196f,
+//                5000,
+//                null,
+//                false
+//        ), XIAOMI_REDMI_NOTE_9T = new PhoneModel(
+//                "Xiaomi Redmi Note 9T международная версия",
+//                Manufacturers.XIAOMI,
+//                2021,
+//                OperationSystems.ANDROID_TEN_DOT_ZERO,
+//                6.53f,
+//                Arrays.asList(new RamAndRomVariant(4, 64), new RamAndRomVariant(4, 128)),
+//                1080,
+//                2340,
+//                ScreenTechnologies.IPS,
+//                60,
+//                FingerprintScannerLocations.ON_THE_SIDE_END,
+//                2,
+//                SimCardTypes.NANO_SIM,
+//                true,
+//                3,
+//                48,
+//                true,
+//                PhoneCpus.MEDIATEK_DIMENSITY_800,
+//                13,
+//                true,
+//                ConnectionSockets.USB_TYPE_C,
+//                Arrays.asList(Colors.BLACK, Colors.PURPLE),
+//                null,
+//                161.9f,
+//                77.3f,
+//                9.05f,
+//                199f,
+//                5000,
+//                ScreenProtections.GORILLA_GLASS_V5,
+//                true
+//        ), POCO_X3_PRO_GLOBAL = new PhoneModel(
+//                "POCO X3 Pro международная версия",
+//                Manufacturers.XIAOMI,
+//                2021,
+//                OperationSystems.ANDROID_ELEVEN,
+//                6.67f,
+//                Arrays.asList(new RamAndRomVariant(6, 128), new RamAndRomVariant(8, 256)),
+//                1080,
+//                2400,
+//                ScreenTechnologies.IPS,
+//                120,
+//                FingerprintScannerLocations.ON_THE_SIDE_END,
+//                2,
+//                SimCardTypes.NANO_SIM,
+//                true,
+//                4,
+//                48,
+//                false,
+//                PhoneCpus.QUALCOMM_SNAPDRAGON_860,
+//                20,
+//                true,
+//                ConnectionSockets.USB_TYPE_C,
+//                Arrays.asList(Colors.BLACK, Colors.BRONZE, Colors.BLUE),
+//                DustAndMoistureProtectionTypes.IP53,
+//                165.3f,
+//                76.8f,
+//                9.4f,
+//                215f,
+//                5160,
+//                ScreenProtections.GORILLA_GLASS_V6,
+//                true
+//        ), SAMSUNG_GALAXY_S20_FE = new PhoneModel(
+//                "Samsung Galaxy S20 FE",
+//                Manufacturers.SAMSUNG,
+//                2020,
+//                OperationSystems.ANDROID_TEN_DOT_ZERO,
+//                6.5f,
+//                Arrays.asList(new RamAndRomVariant(6, 128), new RamAndRomVariant(8, 256)),
+//                1080,
+//                2400,
+//                ScreenTechnologies.AMOLED,
+//                120,
+//                FingerprintScannerLocations.ON_THE_SIDE_END,
+//                2,
+//                SimCardTypes.NANO_SIM,
+//                true,
+//                3,
+//                12,
+//                false,
+//                PhoneCpus.QUALCOMM_SNAPDRAGON_865,
+//                32,
+//                true,
+//                ConnectionSockets.USB_TYPE_C,
+//                Arrays.asList(Colors.WHITE, Colors.RED, Colors.MINT, Colors.BLUE),
+//                DustAndMoistureProtectionTypes.IP68,
+//                159.8f,
+//                74.5f,
+//                8.4f,
+//                190,
+//                4500,
+//                ScreenProtections.GORILLA_GLASS_V3,
+//                true
+//        ), XIAOMI_REDMI_NOTE_10 = new PhoneModel(
+//                "Xiaomi Redmi Note 10",
+//                Manufacturers.XIAOMI,
+//                2021,
+//                OperationSystems.ANDROID_ELEVEN,
+//                6.43f,
+//                Arrays.asList(new RamAndRomVariant(6, 128), new RamAndRomVariant(4, 64)),
+//                1080,
+//                2400,
+//                ScreenTechnologies.AMOLED,
+//                60,
+//                FingerprintScannerLocations.ON_THE_SIDE_END,
+//                2,
+//                SimCardTypes.NANO_SIM,
+//                true,
+//                4,
+//                48,
+//                false,
+//                PhoneCpus.QUALCOMM_SNAPDRAGON_678,
+//                13,
+//                true,
+//                ConnectionSockets.USB_TYPE_C,
+//                Arrays.asList(Colors.WHITE, Colors.GREEN, Colors.GREY),
+//                DustAndMoistureProtectionTypes.IP53,
+//                160.46f,
+//                74.5f,
+//                8.29f,
+//                178.8f,
+//                5000,
+//                ScreenProtections.GORILLA_GLASS_V3,
+//                false
+//        );
+//
+//        List<PhoneModel> ALL = Arrays.asList(XIAOMI_REDMI_9_GLOBAL_WITH_NFC, XIAOMI_REDMI_9C_GLOBAL, XIAOMI_REDMI_NOTE_9T, POCO_X3_PRO_GLOBAL, SAMSUNG_GALAXY_S20_FE, XIAOMI_REDMI_NOTE_10);
+//
+//        Map<PhoneModel, String> PHONE_MODEL_TO_IMAGES_DIRECTORY_MAP = new HashMap<PhoneModel, String>() {{
+//            put(XIAOMI_REDMI_9_GLOBAL_WITH_NFC, "redmi_9");
+//            put(XIAOMI_REDMI_9C_GLOBAL, "redmi_9c");
+//            put(XIAOMI_REDMI_NOTE_9T, "redmi_note_9t");
+//            put(POCO_X3_PRO_GLOBAL, "poco_x3_pro");
+//            put(XIAOMI_REDMI_NOTE_10, "redmi_note_10");
+//            put(SAMSUNG_GALAXY_S20_FE, "samsung_galaxy_s20_fe");
+//        }};
+//    }
+//
+//    interface Phones {
+//        Phone XIAOMI_REDMI_9_3GB_32GB_GLOBAL_WITH_NFC_GREEN = new Phone("Xiaomi Redmi 9 3GB/32GB международная версия с NFC (зеленый)", PhoneModels.XIAOMI_REDMI_9_GLOBAL_WITH_NFC, Colors.GREEN, new RamAndRomVariant(3, 32)), XIAOMI_REDMI_9_4GB_64GB_GLOBAL_WITH_NFC_PURPLE = new Phone("Xiaomi Redmi 9 4GB/64GB международная версия с NFC (фиолетовый)", PhoneModels.XIAOMI_REDMI_9_GLOBAL_WITH_NFC, Colors.PURPLE, new RamAndRomVariant(4, 64));
+//
+//        List<Phone> ALL = Arrays.asList(XIAOMI_REDMI_9_3GB_32GB_GLOBAL_WITH_NFC_GREEN, XIAOMI_REDMI_9_4GB_64GB_GLOBAL_WITH_NFC_PURPLE);
+//    }
+//
+//    interface Shops {
+//        Shop XISTORE = new Shop("Xistore"), TECHNO_WORLD = new Shop("ТехноМир");
+//
+//        List<Shop> ALL = Arrays.asList(XISTORE, TECHNO_WORLD);
+//    }
+//
+//    interface ItemPricesInShops {
+//
+//    }
 
 }

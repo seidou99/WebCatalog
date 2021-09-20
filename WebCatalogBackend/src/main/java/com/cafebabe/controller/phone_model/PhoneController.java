@@ -26,7 +26,7 @@ public class PhoneController {
     }
 
     @GetMapping("api/phones")
-    public List<Phone> findAll() {
+    public Iterable<Phone> findAll() {
         return phoneService.findAll();
     }
 
@@ -50,4 +50,11 @@ public class PhoneController {
     public Long findFilteredPhoneModelsCount(@RequestBody PhoneFilterDto filterDto) {
         return phoneService.findFilteredPhonesCount(filterDto);
     }
+
+    //    @PostMapping(value = "api/phones/models", consumes = {MediaType.ALL_VALUE})
+//    public void save(@ModelAttribute(name = "images") List<MultipartFile> images, @ModelAttribute(name = "phoneModelJson") String phoneModelJson) throws IOException {
+//        ObjectMapper objectMapper = Jackson2ObjectMapperBuilder.json().build();
+//        PhoneModel phoneModel = objectMapper.readValue(phoneModelJson, PhoneModel.class);
+//        phoneModelService.save(phoneModel, images);
+//    }
 }

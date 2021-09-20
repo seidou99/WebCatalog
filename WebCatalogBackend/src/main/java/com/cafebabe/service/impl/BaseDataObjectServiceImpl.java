@@ -1,5 +1,6 @@
 package com.cafebabe.service.impl;
 
+import com.cafebabe.entity.BaseDataObject;
 import com.cafebabe.repository.BaseDataObjectRepository;
 import com.cafebabe.service.interfaces.BaseDataObjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,7 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
-public class BaseDataObjectServiceImpl<S extends BaseDataObjectRepository<T>, T> implements BaseDataObjectService<T> {
+public class BaseDataObjectServiceImpl<S extends BaseDataObjectRepository<T>, T extends BaseDataObject> implements BaseDataObjectService<T> {
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired

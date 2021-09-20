@@ -40,6 +40,7 @@ export class PhoneModel extends BaseDataObjectWithName {
   bodyColors: Array<BaseDataObjectWithName>;
   hasNfc: boolean;
   images: Array<Image>;
+  mainImage: Image;
 
   constructor(name: string, manufacturer: Manufacturer, marketLaunchYear: number, operationSystem: OperationSystemWithVersion, screenDiagonalInInches: number, horizontalScreenResolution: number, verticalScreenResolution: number, screenTechnology: ScreenTechnology, screenRefreshRate: number, ramAndRomVariants: Array<RamAndRomVariant>, isMemoryCardSupported: boolean, camerasAmount: number, cameraInMp: number, simCardsAmount: number, simCardType: BaseDataObjectWithName, is5GSupported: boolean, dustAndMoistureProtection: DustAndMoistureProtection, batteryCapacity: number, fingerprintScannerLocation: FingerprintScannerLocation, screenProtection: BaseDataObjectWithName, cpu: MobileCpu, frontCameraInMp: number, hasAudioOutput: boolean, connectionSocket: BaseDataObjectWithName, length: number, width: number, thickness: number, weight: number, bodyColors: Array<BaseDataObjectWithName>, hasNfc: boolean) {
     super();

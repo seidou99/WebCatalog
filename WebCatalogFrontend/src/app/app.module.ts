@@ -17,7 +17,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import {AppPhoneModelComponent} from './components/app-phone-model/app-phone-model.component';
+import {PhoneModelComponent} from './components/app-phone-model/phone-model.component';
 import {MatDividerModule} from '@angular/material/divider';
 import {AppNewPhoneModelComponent} from './components/app-new-phone-model/app-new-phone-model.component';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -35,6 +35,7 @@ import { AppErrorComponent } from './components/app-error/app-error.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { SelectImagesComponent } from './components/select-images/select-images.component';
+import { EditPhoneModelComponent } from './components/edit-phone-model/edit-phone-model.component';
 
 
 @NgModule({
@@ -42,7 +43,7 @@ import { SelectImagesComponent } from './components/select-images/select-images.
     AppComponent,
     AppPhonesListComponent,
     AppHomePageComponent,
-    AppPhoneModelComponent,
+    PhoneModelComponent,
     AppNewPhoneModelComponent,
     AppDialogWithNameComponent,
     AppNewOperationSystemWithVersionDialogComponent,
@@ -55,6 +56,7 @@ import { SelectImagesComponent } from './components/select-images/select-images.
     AppErrorComponent,
     NavbarComponent,
     SelectImagesComponent,
+    EditPhoneModelComponent,
   ],
   imports: [
     BrowserModule,

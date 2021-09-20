@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 @Setter
 public class ManufacturerType extends BaseDataObjectWithUniqueName {
 
+    public static final String MOBILE_PHONE = "MOBILE_PHONE";
+
     public ManufacturerType(String name) {
         super(name);
     }

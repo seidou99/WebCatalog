@@ -24,7 +24,7 @@ import {RamAndRomVariant} from '../../model/ram-and-rom-variant';
 import {PhoneModel} from '../../model/phone-model';
 import {PhoneModelService} from '../../services/phone-model.service';
 import {ConnectionSocketService} from '../../services/connection-socket.service';
-import {BodyColorService} from '../../services/body-color.service';
+import {ColorService} from '../../services/color.service';
 import {FormControlNames} from '../../Constants';
 
 @Component({
@@ -43,7 +43,7 @@ export class AppNewPhoneModelComponent implements OnInit {
               public mobileCpuService: PhoneCpuService, private fb: FormBuilder,
               private phoneModelService: PhoneModelService,
               public connectionSocketService: ConnectionSocketService,
-              public bodyColorService: BodyColorService) {
+              public bodyColorService: ColorService) {
     const mapper = () => this.fb.control([null]);
     const ramArray = this.fb.array(this.ramAndRomVariantsAmount.map(mapper));
     const romArray = this.fb.array(this.ramAndRomVariantsAmount.map(mapper));

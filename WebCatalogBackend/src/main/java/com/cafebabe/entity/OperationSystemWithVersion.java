@@ -14,11 +14,11 @@ import java.math.BigInteger;
 @Getter
 @Setter
 @NoArgsConstructor
-public class OperationSystemWithVersion {
+public class OperationSystemWithVersion extends BaseDataObject{
 
-    @Id
-    @GeneratedValue
-    protected BigInteger id;
+//    @Id
+//    @GeneratedValue
+//    protected BigInteger id;
 
     protected String version;
 

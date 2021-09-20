@@ -1,0 +1,113 @@
+<mat-card class="m-1">
+  <div class="row mb-1 flex-gap-1em">
+    <div class="product-summary-main-image-wrapper">
+      <img class="object-fit-contain hw-100"
+           src="http://localhost:8080/api/images/{{phoneModel.mainImage.imageName}}" *ngIf="phoneModel">
+    </div>
+    <div>
+      <h2 class="mat-h2">Смартфон {{phoneModel?.name}}</h2>
+      <p>Операционная система {{phoneModel?.operationSystemWithVersion.operationSystem.name}},
+        экран {{phoneModel?.screenDiagonalInInches}}"
+        {{phoneModel?.screenTechnology.name}}
+        ({{phoneModel?.horizontalScreenResolution}}x{{phoneModel?.verticalScreenResolution}}),
+        процессор {{phoneModel?.cpu.name}},
+        камера {{phoneModel?.cameraInMp}} Мп,
+        аккумулятор {{phoneModel?.batteryCapacity}} мАч,
+        {{phoneModel?.simCardsAmount}} SIM</p>
+      <div class="row flex-wrap flex-gap-1em">
+        <a mat-raised-button routerLink="edit">Редактировать</a>
+        <button mat-raised-button>Удалить</button>
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="row pt-1 mb-1 flex-gap-1em flex-wrap">
+    <div class="product-gallery-image-wrapper cursor-pointer" *ngFor="let image of phoneModel?.images">
+      <img class="object-fit-contain hw-100" src="http://localhost:8080/api/images/{{image.imageName}}"
+           (click)="changeSelectedGalleryImage(image)">
+    </div>
+  </div>
+  <mat-divider *ngIf="galleryBigImage"></mat-divider>
+  <div *ngIf="galleryBigImage" class="row w-100 flex-justify-space-around mb-1 pt-1">
+    <img class="product-gallery-big-image"
+         src="http://localhost:8080/api/images/{{galleryBigImage.imageName}}">
+  </div>
+  <mat-divider></mat-divider>
+  <div class="grid pt-1 grid1fr1fr product-full-info-grid">
+    <div>Дата выхода на рынок</div>
+    <div>{{phoneModel?.marketLaunchYear}}</div>
+    <!--    <div>Тип</div>-->
+    <!--    <div>смартфон</div>-->
+    <div>Операционная система</div>
+    <div>{{phoneModel?.operationSystemWithVersion.operationSystem.name}}</div>
+    <div>Версия операционной системы</div>
+    <div>{{phoneModel?.operationSystemWithVersion.version}}</div>
+    <div>Размер экрана</div>
+    <div>{{phoneModel?.screenDiagonalInInches}}"</div>
+    <div>Разрешение экрана</div>
+    <div>{{phoneModel?.horizontalScreenResolution}}x{{phoneModel?.verticalScreenResolution}}</div>
+    <div>Оперативная память и Флэш-память</div>
+    <div>{{getRamAndRomVariantsAsString()}}</div>
+    <div>Встроенная камера</div>
+    <div>{{phoneModel?.cameraInMp}} Мп</div>
+    <div>Фронтальная камера</div>
+    <div>{{phoneModel?.frontCameraInMp}} Мп</div>
+    <div>Количество основных камер</div>
+    <div>{{phoneModel?.camerasAmount}}</div>
+    <div>Количество SIM-карт</div>
+    <div>{{phoneModel?.simCardsAmount}}</div>
+    <div>Формат SIM-карты</div>
+    <div>{{phoneModel?.simCardType.name}}</div>
+    <!--    <div>Максимальное разрешение видео</div>-->
+    <!--    <div>1920x1080 (30 кадров/с)</div>-->
+    <!--    <div>Поддержка карт памяти</div>-->
+    <!--    <div> microSD, microSDHC, microSDXC  (до 512 ГБ)</div>-->
+    <!--    <div>Платформа</div>-->
+    <!--    <div>Qualcomm Snapdragon</div>-->
+    <div>Процессор</div>
+    <div>{{phoneModel?.cpu.name}}</div>
+    <div>Тактовая частота процессора</div>
+    <div>{{getCpuClockSpeed()}} МГц</div>
+    <div>Количество ядер</div>
+    <div>{{getCpuCoresAsString()}}</div>
+    <div>Микроархитектура ЦПУ</div>
+    <div>{{getCpuMicroarchitectureAsString()}}</div>
+    <div>Разрядность процессора</div>
+    <div>{{phoneModel?.cpu.digitalCapacityInBits}} бита</div>
+    <div>Техпроцесс</div>
+    <div>{{phoneModel?.cpu.techprocessInNm}} нм</div>
+    <div>Графический ускоритель</div>
+    <div>{{phoneModel?.cpu.integratedGpu?.name}}</div>
+    <!--    <div>Конструкция корпуса</div>-->
+    <!--    <div>моноблок</div>-->
+    <!--    <div>Материал корпуса</div>-->
+    <!--    <div>пластик</div>-->
+    <!--    <div>Материал задней крышки</div>-->
+    <!--    <div>пластик</div>-->
+    <!--    <div>Цвет корпуса</div>-->
+    <!--    <div>оранжевый</div>-->
+    <!--    <div>Цвет фронтальной панели</div>-->
+    <!--    <div>черный</div>-->
+    <div>Длина</div>
+    <div>{{phoneModel?.length}} мм</div>
+    <div>Ширина</div>
+    <div>{{phoneModel?.width}} мм</div>
+    <div>Толщина</div>
+    <div>{{phoneModel?.thickness}} мм</div>
+    <div>Вес</div>
+    <div>{{phoneModel?.weight}} г</div>
+    <div>Технология экрана</div>
+    <div>{{phoneModel?.screenTechnology.name}}</div>
+    <!--    <div>Количество цветов экрана</div>-->
+    <!--    <div>16 млн</div>-->
+    <div>Разрешающая способность экрана</div>
+    <div>{{phoneModel?.screenPpi}}</div>
+    <div>Частота обновления экрана</div>
+    <div>{{phoneModel?.screenRefreshRate}}</div>
+    <div>Защита от царапин</div>
+    <div>{{phoneModel?.screenProtection.name}}</div>
+    <div>Емкость аккумулятора</div>
+    <div>{{phoneModel?.batteryCapacity}} мА·ч</div>
+
+  </div>
+</mat-card>

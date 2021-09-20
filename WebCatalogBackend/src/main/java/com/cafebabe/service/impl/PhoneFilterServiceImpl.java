@@ -2,9 +2,6 @@ package com.cafebabe.service.impl;
 
 import com.cafebabe.dto.PhoneFilterDto;
 import com.cafebabe.service.interfaces.*;
-import com.cafebabe.service.interfaces.ManufacturerService;
-import com.cafebabe.service.interfaces.OperationSystemWithVersionService;
-import com.cafebabe.service.interfaces.PhoneModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +15,7 @@ public class PhoneFilterServiceImpl implements PhoneFilterService {
     protected ManufacturerService manufacturerService;
 
     @Autowired
-    protected PhoneModelService phoneModelService;
+    protected PhoneService phoneService;
 
     @Autowired
     protected OperationSystemWithVersionService operationSystemWithVersionService;
@@ -48,29 +45,26 @@ public class PhoneFilterServiceImpl implements PhoneFilterService {
     protected PhoneGpuService phoneGpuService;
 
     @Autowired
-    protected RamAndRomVariantService ramAndRomVariantService;
-
-    @Autowired
     protected ConnectionSocketService connectionSocketService;
 
     @Override
     public PhoneFilterDto loadPhoneFilterPossibleValues() {
         Stream<Consumer<PhoneFilterDto>> loadFilterCallbackStream = Stream.of(
                 filter -> filter.setManufacturers(manufacturerService.findAll()),
-                filter -> filter.setMarketLaunchYears(phoneModelService.findDistinctMarketLaunchYears()),
+                filter -> filter.setMarketLaunchYears(phoneService.findDistinctMarketLaunchYears()),
                 filter -> filter.setOperationSystemsWithVersions(operationSystemWithVersionService.findAll()),
-                filter -> filter.setScreenDiagonalsInInches(phoneModelService.findDistinctScreenDiagonals()),
-                filter -> filter.setScreenResolutions(phoneModelService.findDistinctScreenResolutions()),
-                filter -> filter.setScreenRefreshRates(phoneModelService.findDistinctScreenRefreshRates()),
-                filter -> filter.setRamVariants(ramAndRomVariantService.findDistinctRamVariants()),
-                filter -> filter.setRomVariants(ramAndRomVariantService.findDistinctRomVariants()),
-                filter -> filter.setCamerasAmountVariants(phoneModelService.findDistinctCamerasAmountVariants()),
-                filter -> filter.setCamerasInMp(phoneModelService.findDistinctCamerasInMp()),
-                filter -> filter.setSimCardsAmountVariants(phoneModelService.findDistinctSimCardsAmountVariants()),
+                filter -> filter.setScreenDiagonalsInInches(phoneService.findDistinctScreenDiagonals()),
+                filter -> filter.setScreenResolutions(phoneService.findDistinctScreenResolutions()),
+                filter -> filter.setScreenRefreshRates(phoneService.findDistinctScreenRefreshRates()),
+                filter -> filter.setRamVariants(phoneService.findDistinctRamVariants()),
+                filter -> filter.setRomVariants(phoneService.findDistinctRomVariants()),
+                filter -> filter.setCamerasAmountVariants(phoneService.findDistinctCamerasAmountVariants()),
+                filter -> filter.setCamerasInMp(phoneService.findDistinctCamerasInMp()),
+                filter -> filter.setSimCardsAmountVariants(phoneService.findDistinctSimCardsAmountVariants()),
                 filter -> filter.setSimCardTypes(simCardTypeService.findAll()),
                 filter -> filter.setBodyColors(colorService.findAll()),
                 filter -> filter.setDustAndMoistureProtections(dustAndMoistureProtectionService.findAll()),
-                filter -> filter.setBatteryCapacities(phoneModelService.findDistinctBatteryCapacities()),
+                filter -> filter.setBatteryCapacities(phoneService.findDistinctBatteryCapacities()),
                 filter -> filter.setFingerprintScannerLocations(fingerprintScannerLocationService.findAll()),
                 filter -> filter.setScreenProtections(screenProtectionService.findAll()),
                 filter -> filter.setCpuVariants(phoneCpuService.findAll()),
@@ -78,11 +72,11 @@ public class PhoneFilterServiceImpl implements PhoneFilterService {
                 filter -> filter.setCoresAmountVariants(phoneCpuService.findDistinctCoresAmountVariants()),
                 filter -> filter.setCpuClockSpeedVariants(phoneCpuService.findDistinctCpuClockSpeedVariants()),
                 filter -> filter.setCpuTechprocessVariants(phoneCpuService.findDistinctCpuTechprocessVariants()),
-                filter -> filter.setFrontCameraVariants(phoneModelService.findDistinctFrontCameraVariants()),
-                filter -> filter.setLengthVariants(phoneModelService.findDistinctLengthVariants()),
-                filter -> filter.setWidthVariants(phoneModelService.findDistinctWidthVariants()),
-                filter -> filter.setThicknessVariants(phoneModelService.findDistinctThicknessVariants()),
-                filter -> filter.setWeightVariants(phoneModelService.findDistinctWeightVariants()),
+                filter -> filter.setFrontCameraVariants(phoneService.findDistinctFrontCameraVariants()),
+                filter -> filter.setLengthVariants(phoneService.findDistinctLengthVariants()),
+                filter -> filter.setWidthVariants(phoneService.findDistinctWidthVariants()),
+                filter -> filter.setThicknessVariants(phoneService.findDistinctThicknessVariants()),
+                filter -> filter.setWeightVariants(phoneService.findDistinctWeightVariants()),
                 filter -> filter.setScreenTechnologies(screenTechnologyService.findAll()),
                 filter -> filter.setConnectionSocketVariants(connectionSocketService.findAll())
         );

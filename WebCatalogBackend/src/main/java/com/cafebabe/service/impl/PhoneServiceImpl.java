@@ -1,31 +1,58 @@
 package com.cafebabe.service.impl;
 
 import com.cafebabe.dto.PhoneFilterDto;
+import com.cafebabe.dto.ScreenResolutionDto;
 import com.cafebabe.entity.*;
-import com.cafebabe.entity.PhoneModel;
 import com.cafebabe.repository.PhoneRepository;
-import com.cafebabe.service.interfaces.PhoneModelService;
 import com.cafebabe.service.interfaces.PhoneService;
+import com.cafebabe.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
+import java.io.IOException;
 import java.math.BigInteger;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
-public class PhoneServiceImpl extends BaseDataObjectServiceImpl<PhoneRepository, Phone> implements PhoneService {
+public class PhoneServiceImpl implements PhoneService {
 
     @Autowired
     protected EntityManager entityManager;
 
     @Autowired
-    protected PhoneModelService phoneModelService;
+    protected PhoneRepository phoneRepository;
+
+    @Override
+    public Iterable<Phone> findAll() {
+        return phoneRepository.findAll();
+    }
+
+    @Override
+    public Phone save(Phone phone) {
+        phone.setScreenPpi(Util.calculateScreenPpi(phone));
+        return phoneRepository.save(phone);
+    }
+
+    @Override
+    public Optional<Phone> findById(BigInteger id) {
+        return phoneRepository.findById(id);
+    }
+
+//    @Override
+//    public PhoneModel save(PhoneModel phoneModel, List<MultipartFile> phoneModelImageFiles) throws IOException {
+//        List<Image> images = imageService.saveImages(phoneModelImageFiles);
+//        if (phoneModel.getMainImage() == null) {
+//            phoneModel.setMainImage(images.get(0));
+//        }
+//        phoneModel.setImages(images);
+//        return save(phoneModel);
+//    }
 
     @Override
     public List<Phone> findFilteredPhones(PhoneFilterDto filterDto, int pageIndex, int pageSize) {
@@ -40,43 +67,230 @@ public class PhoneServiceImpl extends BaseDataObjectServiceImpl<PhoneRepository,
     }
 
     @Override
-    public Long findFilteredPhonesCount(PhoneFilterDto phoneFilterDto) {
+    public Long findFilteredPhonesCount(PhoneFilterDto filterDto) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
         Root<Phone> root = criteriaQuery.from(Phone.class);
-        buildCriteriaQuery(root, phoneFilterDto, criteriaBuilder, criteriaQuery);
+        buildCriteriaQuery(root, filterDto, criteriaBuilder, criteriaQuery);
         CriteriaQuery<Long> select = criteriaQuery.select(criteriaBuilder.countDistinct(root));
         TypedQuery<Long> query = entityManager.createQuery(select);
-        return query.getResultList().stream().count();
+        return query.getSingleResult();
     }
 
-    protected void buildCriteriaQuery(Root<Phone> phoneRoot, PhoneFilterDto phoneFilterDto, CriteriaBuilder criteriaBuilder, CriteriaQuery<?> criteriaQuery) {
-        Join<Phone, PhoneModel> phoneModelJoin = phoneRoot.join(Phone_.phoneModel);
-        phoneModelService.buildCriteriaQuery(phoneModelJoin, phoneFilterDto, criteriaBuilder, criteriaQuery);
-        filterBodyColors(phoneFilterDto.getBodyColors(), phoneRoot, criteriaQuery, criteriaBuilder);
-        filterRamAndRomVariants(phoneRoot, phoneFilterDto.getRamVariants(), phoneFilterDto.getRomVariants(), criteriaBuilder, criteriaQuery);
+    protected void buildCriteriaQuery(Root<Phone> root, PhoneFilterDto filterDto, CriteriaBuilder criteriaBuilder, CriteriaQuery<?> criteriaQuery) {
+        Predicate[] predicates = Stream.of(
+                joinAndFilter(root, filterDto.getManufacturers(), Phone_.MANUFACTURER, criteriaBuilder),
+                filter(root, filterDto.getMarketLaunchYears(), Phone_.MARKET_LAUNCH_YEAR, criteriaBuilder),
+                filter(root, filterDto.getScreenDiagonalsInInches(), Phone_.SCREEN_DIAGONAL_IN_INCHES, criteriaBuilder),
+                filterScreenResolution(root, filterDto.getScreenResolutions(), criteriaBuilder),
+                joinAndFilter(root, filterDto.getScreenTechnologies(), Phone_.SCREEN_TECHNOLOGY, criteriaBuilder),
+                filter(root, filterDto.getScreenRefreshRates(), Phone_.SCREEN_REFRESH_RATE, criteriaBuilder),
+                filter(root, filterDto.getIsMemoryCardSupported(), Phone_.IS_MEMORY_CARD_SUPPORTED, criteriaBuilder),
+                filter(root, filterDto.getCamerasAmountVariants(), Phone_.CAMERAS_AMOUNT, criteriaBuilder),
+                filter(root, filterDto.getCamerasInMp(), Phone_.CAMERA_IN_MP, criteriaBuilder),
+                filter(root, filterDto.getSimCardsAmountVariants(), Phone_.SIM_CARDS_AMOUNT, criteriaBuilder),
+                joinAndFilter(root, filterDto.getSimCardTypes(), Phone_.SIM_CARD_TYPE, criteriaBuilder),
+                joinAndFilter(root, filterDto.getBodyColors(), Phone_.BODY_COLOR, criteriaBuilder),
+                leftJoinAndFilter(root, filterDto.getDustAndMoistureProtections(), Phone_.DUST_AND_MOISTURE_PROTECTION, criteriaBuilder),
+                filter(root, filterDto.getBatteryCapacities(), Phone_.BATTERY_CAPACITY, criteriaBuilder),
+                joinAndFilter(root, filterDto.getFingerprintScannerLocations(), Phone_.FINGERPRINT_SCANNER_LOCATION, criteriaBuilder),
+                leftJoinAndFilter(root, filterDto.getScreenProtections(), Phone_.SCREEN_PROTECTION, criteriaBuilder),
+                joinAndFilter(root, filterDto.getCpuVariants(), Phone_.CPU, criteriaBuilder),
+                filter(root, filterDto.getRamVariants(), Phone_.RAM_SIZE_IN_GB, criteriaBuilder),
+                filter(root, filterDto.getRomVariants(), Phone_.ROM_SIZE_IN_GB, criteriaBuilder),
+                filterGpu(root, filterDto.getPhoneGpuVariants(), criteriaBuilder),
+                filterCpuCoresAmount(filterDto.getCoresAmountVariants(), criteriaBuilder, criteriaQuery),
+                filterCpuClockSpeed(filterDto.getCpuClockSpeedVariants(), criteriaBuilder, criteriaQuery),
+                filterCpuTechprocess(root, filterDto.getCpuTechprocessVariants(), criteriaBuilder),
+                filter(root, filterDto.getFrontCameraVariants(), Phone_.FRONT_CAMERA_IN_MP, criteriaBuilder),
+                filter(root, filterDto.getHasAudioOutput(), Phone_.HAS_AUDIO_OUTPUT, criteriaBuilder),
+                joinAndFilter(root, filterDto.getConnectionSocketVariants(), Phone_.CONNECTION_SOCKET, criteriaBuilder),
+                filter(root, filterDto.getLengthVariants(), Phone_.LENGTH, criteriaBuilder),
+                filter(root, filterDto.getWidthVariants(), Phone_.WIDTH, criteriaBuilder),
+                filter(root, filterDto.getThicknessVariants(), Phone_.THICKNESS, criteriaBuilder),
+                filter(root, filterDto.getWeightVariants(), Phone_.WEIGHT, criteriaBuilder))
+                .filter(Objects::nonNull)
+                .toArray(Predicate[]::new);
+        criteriaQuery.where(predicates);
     }
 
-    protected void filterBodyColors(List<Color> bodyColors, Root<Phone> phoneRoot, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
-        if (!bodyColors.isEmpty()) {
-            Join<Phone, Color> join = phoneRoot.join(Phone_.color);
-            CriteriaBuilder.In<BigInteger> in = criteriaBuilder.in(join.get(Color_.id));
-            bodyColors.forEach(color -> in.value(color.getId()));
-            criteriaQuery.where(criteriaQuery.getRestriction(), in);
+    protected <T extends BaseDataObject> CriteriaBuilder.In<BigInteger> joinAndFilter(From<?, ?> root, List<T> entities, String joinEntityPath, CriteriaBuilder criteriaBuilder) {
+        Join<Object, Object> join = root.join(joinEntityPath);
+        CriteriaBuilder.In<BigInteger> inPredicate = null;
+        if (entities.size() != 0) {
+            inPredicate = criteriaBuilder.in(join.get(BaseDataObject_.ID));
+            for (T entity : entities) {
+                inPredicate.value(entity.getId());
+            }
         }
+        return inPredicate;
     }
 
-    protected void filterRamAndRomVariants(Root<Phone> phoneRoot, List<Integer> ramVariants, List<Integer> romVariants, CriteriaBuilder criteriaBuilder, CriteriaQuery<?> criteriaQuery) {
-        Join<Phone, RamAndRomVariant> ramAndRomVariantJoin = phoneRoot.join(Phone_.ramAndRomVariant);
-        if (ramVariants.size() != 0) {
-            CriteriaBuilder.In<Integer> ramSizePredicate = criteriaBuilder.in(ramAndRomVariantJoin.get(RamAndRomVariant_.ramSizeInGb));
-            ramVariants.forEach(ramSizePredicate::value);
-            criteriaQuery.where(criteriaQuery.getRestriction(), ramSizePredicate);
+    protected <T extends BaseDataObject> CriteriaBuilder.In<BigInteger> leftJoinAndFilter(From<?, ?> root, List<T> entities, String joinEntityPath, CriteriaBuilder criteriaBuilder) {
+        Join<Object, Object> join = root.join(joinEntityPath, JoinType.LEFT);
+        CriteriaBuilder.In<BigInteger> inPredicate = null;
+        if (entities.size() != 0) {
+            inPredicate = criteriaBuilder.in(join.get(BaseDataObject_.ID));
+            for (T entity : entities) {
+                inPredicate.value(entity.getId());
+            }
         }
-        if (romVariants.size() != 0) {
-            CriteriaBuilder.In<Integer> romSizePredicate = criteriaBuilder.in(ramAndRomVariantJoin.get(RamAndRomVariant_.ROM_SIZE_IN_GB));
-            romVariants.forEach(romSizePredicate::value);
-            criteriaQuery.where(criteriaQuery.getRestriction(), romSizePredicate);
+        return inPredicate;
+    }
+
+    protected <T extends Number> CriteriaBuilder.In<Number> filter(From<?, ?> root, List<T> filter, String fieldPath, CriteriaBuilder criteriaBuilder) {
+        CriteriaBuilder.In<Number> in = null;
+        if (filter.size() != 0) {
+            in = criteriaBuilder.in(root.get(fieldPath));
+            filter.forEach(in::value);
         }
+        return in;
+    }
+
+    protected Predicate filter(From<?, ?> root, Boolean filter, String fieldPath, CriteriaBuilder criteriaBuilder) {
+        Predicate equalPredicate = null;
+        if (filter != null) {
+            equalPredicate = criteriaBuilder.equal(root.get(fieldPath), filter);
+        }
+        return equalPredicate;
+    }
+
+    protected Predicate filterScreenResolution(From<?, Phone> root, List<ScreenResolutionDto> screenResolutions, CriteriaBuilder criteriaBuilder) {
+        Predicate screenResolutionPredicate = null;
+        if (screenResolutions.size() != 0) {
+            List<Predicate> horizontalAndVerticalScreenResolutionPredicates = new ArrayList<>(screenResolutions.size());
+            for (ScreenResolutionDto screenResolutionDto : screenResolutions) {
+                Predicate horizontalScreenResolutionPredicate = criteriaBuilder.equal(root.get(Phone_.horizontalScreenResolution), screenResolutionDto.getHorizontal());
+                Predicate verticalScreenResolutionPredicate = criteriaBuilder.equal(root.get(Phone_.verticalScreenResolution), screenResolutionDto.getVertical());
+                Predicate horizontalAndVerticalScreenResolutionPredicate = criteriaBuilder.and(horizontalScreenResolutionPredicate, verticalScreenResolutionPredicate);
+                horizontalAndVerticalScreenResolutionPredicates.add(horizontalAndVerticalScreenResolutionPredicate);
+            }
+            screenResolutionPredicate = criteriaBuilder.or(horizontalAndVerticalScreenResolutionPredicates.toArray(new Predicate[0]));
+        }
+        return screenResolutionPredicate;
+    }
+
+    protected CriteriaBuilder.In<BigInteger> filterGpu(From<?, Phone> root, List<PhoneGpu> phoneGpus, CriteriaBuilder criteriaBuilder) {
+        CriteriaBuilder.In<BigInteger> gpuPredicate = null;
+        if (phoneGpus.size() != 0) {
+            Join<Phone, PhoneCpu> phoneModelToPhoneCpuJoin = root.join(Phone_.cpu);
+            Join<PhoneCpu, PhoneGpu> phoneCpuToPhoneGpuJoin = phoneModelToPhoneCpuJoin.join(PhoneCpu_.integratedGpu);
+            gpuPredicate = criteriaBuilder.in(phoneCpuToPhoneGpuJoin.get(PhoneGpu_.id));
+            for (PhoneGpu gpu : phoneGpus) {
+                gpuPredicate.value(gpu.getId());
+            }
+        }
+        return gpuPredicate;
+    }
+
+    protected CriteriaBuilder.In<Integer> filterCpuTechprocess(From<?, Phone> root, List<Integer> cpuTechprocessVariants, CriteriaBuilder criteriaBuilder) {
+        CriteriaBuilder.In<Integer> cpuTechprocessPredicate = null;
+        if (cpuTechprocessVariants.size() != 0) {
+            Join<Phone, PhoneCpu> phoneModelToPhoneCpuJoin = root.join(Phone_.cpu);
+            cpuTechprocessPredicate = criteriaBuilder.in(phoneModelToPhoneCpuJoin.get(PhoneCpu_.TECHPROCESS_IN_NM));
+            cpuTechprocessVariants.forEach(cpuTechprocessPredicate::value);
+        }
+        return cpuTechprocessPredicate;
+    }
+
+    protected CriteriaBuilder.In<Integer> filterCpuCoresAmount(List<Integer> coreAmountVariants, CriteriaBuilder criteriaBuilder, CriteriaQuery<?> criteriaQuery) {
+        CriteriaBuilder.In<Integer> coresAmountPredicate = null;
+        if (coreAmountVariants.size() != 0) {
+            Subquery<Integer> subquery = criteriaQuery.subquery(Integer.class);
+            Root<PhoneCpu> subRoot = subquery.from(PhoneCpu.class);
+            ListJoin<PhoneCpu, CpuCoresBlock> phoneCpuToCoresBlocksJoin = subRoot.join(PhoneCpu_.coresBlocks);
+            subquery.select(criteriaBuilder.sum(phoneCpuToCoresBlocksJoin.get(CpuCoresBlock_.CORES_AMOUNT)));
+            coresAmountPredicate = criteriaBuilder.in(subquery);
+            coreAmountVariants.forEach(coresAmountPredicate::value);
+        }
+        return coresAmountPredicate;
+    }
+
+    protected CriteriaBuilder.In<Integer> filterCpuClockSpeed(List<Integer> cpuClockSpeedVariants, CriteriaBuilder criteriaBuilder, CriteriaQuery<?> criteriaQuery) {
+        CriteriaBuilder.In<Integer> clockSpeedPredicate = null;
+        if (cpuClockSpeedVariants.size() != 0) {
+            Subquery<Integer> subquery = criteriaQuery.subquery(Integer.class);
+            Root<PhoneCpu> subRoot = subquery.from(PhoneCpu.class);
+            ListJoin<PhoneCpu, CpuCoresBlock> phoneCpuToCoresBlocksJoin = subRoot.join(PhoneCpu_.coresBlocks);
+            subquery.select(criteriaBuilder.max(phoneCpuToCoresBlocksJoin.get(CpuCoresBlock_.CLOCK_SPEED_IN_MHZ)));
+            clockSpeedPredicate = criteriaBuilder.in(subquery);
+            cpuClockSpeedVariants.forEach(clockSpeedPredicate::value);
+        }
+        return clockSpeedPredicate;
+    }
+
+    @Override
+    public List<Integer> findDistinctMarketLaunchYears() {
+        return phoneRepository.findDistinctMarketLaunchYears();
+    }
+
+    @Override
+    public List<Float> findDistinctScreenDiagonals() {
+        return phoneRepository.findDistinctScreenDiagonals();
+    }
+
+    @Override
+    public List<ScreenResolutionDto> findDistinctScreenResolutions() {
+        return null;
+    }
+
+    @Override
+    public List<Integer> findDistinctScreenRefreshRates() {
+        return phoneRepository.findDistinctScreenRefreshRates();
+    }
+
+    @Override
+    public List<Float> findDistinctRamVariants() {
+        return phoneRepository.findDistinctRamVariants();
+    }
+
+    @Override
+    public List<Float> findDistinctRomVariants() {
+        return phoneRepository.findDistinctRomVariants();
+    }
+
+    @Override
+    public List<Integer> findDistinctCamerasAmountVariants() {
+        return phoneRepository.findDistinctCamerasAmountVariants();
+    }
+
+    @Override
+    public List<Float> findDistinctCamerasInMp() {
+        return phoneRepository.findDistinctCamerasInMp();
+    }
+
+    @Override
+    public List<Integer> findDistinctSimCardsAmountVariants() {
+        return phoneRepository.findDistinctSimCardsAmountVariants();
+    }
+
+    @Override
+    public List<Integer> findDistinctBatteryCapacities() {
+        return phoneRepository.findDistinctBatteryCapacities();
+    }
+
+    @Override
+    public List<Float> findDistinctFrontCameraVariants() {
+        return phoneRepository.findDistinctFrontCameraVariants();
+    }
+
+    @Override
+    public List<Float> findDistinctLengthVariants() {
+        return phoneRepository.findDistinctLengthVariants();
+    }
+
+    @Override
+    public List<Float> findDistinctWidthVariants() {
+        return phoneRepository.findDistinctWidthVariants();
+    }
+
+    @Override
+    public List<Float> findDistinctThicknessVariants() {
+        return phoneRepository.findDistinctThicknessVariants();
+    }
+
+    @Override
+    public List<Float> findDistinctWeightVariants() {
+        return phoneRepository.findDistinctWeightVariants();
     }
 }
