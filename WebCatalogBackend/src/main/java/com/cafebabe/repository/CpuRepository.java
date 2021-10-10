@@ -1,6 +1,6 @@
 package com.cafebabe.repository;
 
-import com.cafebabe.entity.PhoneCpu;
+import com.cafebabe.entity.phone.PhoneCpu;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;

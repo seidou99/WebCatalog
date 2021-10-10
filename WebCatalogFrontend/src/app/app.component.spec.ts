@@ -1,7 +1,7 @@
 import {TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {AppComponent} from './app.component';
-import {AppPhonesListComponent} from "./components/app-phones-list/app-phones-list.component";
+import {PhonesListComponent} from "./components/app-phones-list/phones-list.component";
 import {AppHomePageComponent} from "./components/app-home-page/app-home-page.component";
 import {PhoneModelComponent} from "./components/app-phone-model/phone-model.component";
 import {AppNewPhoneModelComponent} from "./components/app-new-phone-model/app-new-phone-model.component";
@@ -19,7 +19,7 @@ describe('Application integration test', () => {
       ],
       declarations: [
         AppComponent,
-        AppPhonesListComponent,
+        PhonesListComponent,
         AppHomePageComponent,
         PhoneModelComponent,
         AppNewPhoneModelComponent,

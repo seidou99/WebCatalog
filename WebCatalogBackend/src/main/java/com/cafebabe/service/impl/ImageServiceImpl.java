@@ -22,7 +22,6 @@ public class ImageServiceImpl extends BaseDataObjectServiceImpl<ImageRepository,
             String currentDirectory = System.getProperty("user.dir");
             String imagesDirectoryPath = currentDirectory + File.separator + "images";
             String fileExtension = getFileExtension(imageFile.getOriginalFilename());
-            //TODO save file to fs
             File tempFile = null;
             try {
                 tempFile = File.createTempFile("image-", "." + fileExtension, new File(imagesDirectoryPath));

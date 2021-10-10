@@ -50,7 +50,7 @@ public class PhoneFilterServiceImpl implements PhoneFilterService {
     @Override
     public PhoneFilterDto loadPhoneFilterPossibleValues() {
         Stream<Consumer<PhoneFilterDto>> loadFilterCallbackStream = Stream.of(
-                filter -> filter.setManufacturers(manufacturerService.findAll()),
+                filter -> filter.setManufacturers(manufacturerService.findAllMobilePhoneManufacturers()),
                 filter -> filter.setMarketLaunchYears(phoneService.findDistinctMarketLaunchYears()),
                 filter -> filter.setOperationSystemsWithVersions(operationSystemWithVersionService.findAll()),
                 filter -> filter.setScreenDiagonalsInInches(phoneService.findDistinctScreenDiagonals()),

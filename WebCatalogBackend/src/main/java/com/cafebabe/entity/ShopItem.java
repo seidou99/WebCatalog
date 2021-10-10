@@ -17,4 +17,6 @@ public class ShopItem extends BaseDataObject {
     @OneToMany
     @JoinColumn(name = "item_id")
     protected List<ItemPriceInShop> pricesInShops;
+
+
 }

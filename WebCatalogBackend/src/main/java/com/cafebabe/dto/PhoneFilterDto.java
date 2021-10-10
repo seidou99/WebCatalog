@@ -1,6 +1,8 @@
 package com.cafebabe.dto;
 
 import com.cafebabe.entity.*;
+import com.cafebabe.entity.phone.PhoneCpu;
+import com.cafebabe.entity.phone.PhoneGpu;
 import lombok.Getter;
 import lombok.Setter;
 

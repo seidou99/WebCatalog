@@ -2,8 +2,12 @@ package com.cafebabe.service.impl;
 
 import com.cafebabe.dto.PhoneFilterDto;
 import com.cafebabe.dto.ScreenResolutionDto;
-import com.cafebabe.entity.*;
+import com.cafebabe.entity.BaseDataObject;
+import com.cafebabe.entity.BaseDataObject_;
+import com.cafebabe.entity.Image;
+import com.cafebabe.entity.phone.*;
 import com.cafebabe.repository.PhoneRepository;
+import com.cafebabe.service.interfaces.ImageService;
 import com.cafebabe.service.interfaces.PhoneService;
 import com.cafebabe.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +19,10 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import java.io.IOException;
 import java.math.BigInteger;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -28,9 +35,17 @@ public class PhoneServiceImpl implements PhoneService {
     @Autowired
     protected PhoneRepository phoneRepository;
 
+    @Autowired
+    protected ImageService imageService;
+
     @Override
     public Iterable<Phone> findAll() {
         return phoneRepository.findAll();
+    }
+
+    @Override
+    public Optional<Phone> findByName(String name) {
+        return phoneRepository.findByName(name);
     }
 
     @Override
@@ -44,15 +59,13 @@ public class PhoneServiceImpl implements PhoneService {
         return phoneRepository.findById(id);
     }
 
-//    @Override
-//    public PhoneModel save(PhoneModel phoneModel, List<MultipartFile> phoneModelImageFiles) throws IOException {
-//        List<Image> images = imageService.saveImages(phoneModelImageFiles);
-//        if (phoneModel.getMainImage() == null) {
-//            phoneModel.setMainImage(images.get(0));
-//        }
-//        phoneModel.setImages(images);
-//        return save(phoneModel);
-//    }
+    @Override
+    public Phone save(Phone phone, MultipartFile mainImageFile, List<MultipartFile> imagesFiles) throws IOException {
+        List<Image> images = imageService.saveImages(imagesFiles);
+        phone.setMainImage(images.get(0));
+        phone.setImages(images);
+        return save(phone);
+    }
 
     @Override
     public List<Phone> findFilteredPhones(PhoneFilterDto filterDto, int pageIndex, int pageSize) {
@@ -79,36 +92,36 @@ public class PhoneServiceImpl implements PhoneService {
 
     protected void buildCriteriaQuery(Root<Phone> root, PhoneFilterDto filterDto, CriteriaBuilder criteriaBuilder, CriteriaQuery<?> criteriaQuery) {
         Predicate[] predicates = Stream.of(
-                joinAndFilter(root, filterDto.getManufacturers(), Phone_.MANUFACTURER, criteriaBuilder),
-                filter(root, filterDto.getMarketLaunchYears(), Phone_.MARKET_LAUNCH_YEAR, criteriaBuilder),
-                filter(root, filterDto.getScreenDiagonalsInInches(), Phone_.SCREEN_DIAGONAL_IN_INCHES, criteriaBuilder),
-                filterScreenResolution(root, filterDto.getScreenResolutions(), criteriaBuilder),
-                joinAndFilter(root, filterDto.getScreenTechnologies(), Phone_.SCREEN_TECHNOLOGY, criteriaBuilder),
-                filter(root, filterDto.getScreenRefreshRates(), Phone_.SCREEN_REFRESH_RATE, criteriaBuilder),
-                filter(root, filterDto.getIsMemoryCardSupported(), Phone_.IS_MEMORY_CARD_SUPPORTED, criteriaBuilder),
-                filter(root, filterDto.getCamerasAmountVariants(), Phone_.CAMERAS_AMOUNT, criteriaBuilder),
-                filter(root, filterDto.getCamerasInMp(), Phone_.CAMERA_IN_MP, criteriaBuilder),
-                filter(root, filterDto.getSimCardsAmountVariants(), Phone_.SIM_CARDS_AMOUNT, criteriaBuilder),
-                joinAndFilter(root, filterDto.getSimCardTypes(), Phone_.SIM_CARD_TYPE, criteriaBuilder),
-                joinAndFilter(root, filterDto.getBodyColors(), Phone_.BODY_COLOR, criteriaBuilder),
-                leftJoinAndFilter(root, filterDto.getDustAndMoistureProtections(), Phone_.DUST_AND_MOISTURE_PROTECTION, criteriaBuilder),
-                filter(root, filterDto.getBatteryCapacities(), Phone_.BATTERY_CAPACITY, criteriaBuilder),
-                joinAndFilter(root, filterDto.getFingerprintScannerLocations(), Phone_.FINGERPRINT_SCANNER_LOCATION, criteriaBuilder),
-                leftJoinAndFilter(root, filterDto.getScreenProtections(), Phone_.SCREEN_PROTECTION, criteriaBuilder),
-                joinAndFilter(root, filterDto.getCpuVariants(), Phone_.CPU, criteriaBuilder),
-                filter(root, filterDto.getRamVariants(), Phone_.RAM_SIZE_IN_GB, criteriaBuilder),
-                filter(root, filterDto.getRomVariants(), Phone_.ROM_SIZE_IN_GB, criteriaBuilder),
-                filterGpu(root, filterDto.getPhoneGpuVariants(), criteriaBuilder),
-                filterCpuCoresAmount(filterDto.getCoresAmountVariants(), criteriaBuilder, criteriaQuery),
-                filterCpuClockSpeed(filterDto.getCpuClockSpeedVariants(), criteriaBuilder, criteriaQuery),
-                filterCpuTechprocess(root, filterDto.getCpuTechprocessVariants(), criteriaBuilder),
-                filter(root, filterDto.getFrontCameraVariants(), Phone_.FRONT_CAMERA_IN_MP, criteriaBuilder),
-                filter(root, filterDto.getHasAudioOutput(), Phone_.HAS_AUDIO_OUTPUT, criteriaBuilder),
-                joinAndFilter(root, filterDto.getConnectionSocketVariants(), Phone_.CONNECTION_SOCKET, criteriaBuilder),
-                filter(root, filterDto.getLengthVariants(), Phone_.LENGTH, criteriaBuilder),
-                filter(root, filterDto.getWidthVariants(), Phone_.WIDTH, criteriaBuilder),
-                filter(root, filterDto.getThicknessVariants(), Phone_.THICKNESS, criteriaBuilder),
-                filter(root, filterDto.getWeightVariants(), Phone_.WEIGHT, criteriaBuilder))
+                        joinAndFilter(root, filterDto.getManufacturers(), Phone_.MANUFACTURER, criteriaBuilder),
+                        filter(root, filterDto.getMarketLaunchYears(), Phone_.MARKET_LAUNCH_YEAR, criteriaBuilder),
+                        filter(root, filterDto.getScreenDiagonalsInInches(), Phone_.SCREEN_DIAGONAL_IN_INCHES, criteriaBuilder),
+                        filterScreenResolution(root, filterDto.getScreenResolutions(), criteriaBuilder),
+                        joinAndFilter(root, filterDto.getScreenTechnologies(), Phone_.SCREEN_TECHNOLOGY, criteriaBuilder),
+                        filter(root, filterDto.getScreenRefreshRates(), Phone_.SCREEN_REFRESH_RATE, criteriaBuilder),
+                        filter(root, filterDto.getIsMemoryCardSupported(), Phone_.IS_MEMORY_CARD_SUPPORTED, criteriaBuilder),
+                        filter(root, filterDto.getCamerasAmountVariants(), Phone_.CAMERAS_AMOUNT, criteriaBuilder),
+                        filter(root, filterDto.getCamerasInMp(), Phone_.CAMERA_IN_MP, criteriaBuilder),
+                        filter(root, filterDto.getSimCardsAmountVariants(), Phone_.SIM_CARDS_AMOUNT, criteriaBuilder),
+                        joinAndFilter(root, filterDto.getSimCardTypes(), Phone_.SIM_CARD_TYPE, criteriaBuilder),
+                        joinAndFilter(root, filterDto.getBodyColors(), Phone_.BODY_COLOR, criteriaBuilder),
+                        leftJoinAndFilter(root, filterDto.getDustAndMoistureProtections(), Phone_.DUST_AND_MOISTURE_PROTECTION, criteriaBuilder),
+                        filter(root, filterDto.getBatteryCapacities(), Phone_.BATTERY_CAPACITY, criteriaBuilder),
+                        joinAndFilter(root, filterDto.getFingerprintScannerLocations(), Phone_.FINGERPRINT_SCANNER_LOCATION, criteriaBuilder),
+                        leftJoinAndFilter(root, filterDto.getScreenProtections(), Phone_.SCREEN_PROTECTION, criteriaBuilder),
+                        joinAndFilter(root, filterDto.getCpuVariants(), Phone_.CPU, criteriaBuilder),
+                        filter(root, filterDto.getRamVariants(), Phone_.RAM_SIZE_IN_GB, criteriaBuilder),
+                        filter(root, filterDto.getRomVariants(), Phone_.ROM_SIZE_IN_GB, criteriaBuilder),
+                        filterGpu(root, filterDto.getPhoneGpuVariants(), criteriaBuilder),
+                        filterCpuCoresAmount(filterDto.getCoresAmountVariants(), criteriaBuilder, criteriaQuery),
+                        filterCpuClockSpeed(filterDto.getCpuClockSpeedVariants(), criteriaBuilder, criteriaQuery),
+                        filterCpuTechprocess(root, filterDto.getCpuTechprocessVariants(), criteriaBuilder),
+                        filter(root, filterDto.getFrontCameraVariants(), Phone_.FRONT_CAMERA_IN_MP, criteriaBuilder),
+                        filter(root, filterDto.getHasAudioOutput(), Phone_.HAS_AUDIO_OUTPUT, criteriaBuilder),
+                        joinAndFilter(root, filterDto.getConnectionSocketVariants(), Phone_.CONNECTION_SOCKET, criteriaBuilder),
+                        filter(root, filterDto.getLengthVariants(), Phone_.LENGTH, criteriaBuilder),
+                        filter(root, filterDto.getWidthVariants(), Phone_.WIDTH, criteriaBuilder),
+                        filter(root, filterDto.getThicknessVariants(), Phone_.THICKNESS, criteriaBuilder),
+                        filter(root, filterDto.getWeightVariants(), Phone_.WEIGHT, criteriaBuilder))
                 .filter(Objects::nonNull)
                 .toArray(Predicate[]::new);
         criteriaQuery.where(predicates);
@@ -231,7 +244,8 @@ public class PhoneServiceImpl implements PhoneService {
 
     @Override
     public List<ScreenResolutionDto> findDistinctScreenResolutions() {
-        return null;
+        List<List<Integer>> distinctScreenResolutions = phoneRepository.findDistinctScreenResolutions();
+        return distinctScreenResolutions.stream().map(v -> new ScreenResolutionDto(v.get(0), v.get(1))).collect(Collectors.toList());
     }
 
     @Override

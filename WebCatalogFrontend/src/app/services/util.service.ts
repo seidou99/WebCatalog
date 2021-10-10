@@ -17,7 +17,7 @@ export class UtilService {
     if (!phone) {
       return '';
     }
-    const cores = phone.phoneModel.cpu.coresBlocks.map(value => value.coresAmount);
+    const cores = phone.cpu.coresBlocks.map(value => value.coresAmount);
     const coresAmount = cores.reduce((previousValue, currentValue) => previousValue + currentValue);
     let result = '' + coresAmount;
     if (cores.length > 1) {
@@ -30,7 +30,7 @@ export class UtilService {
     if (!phone) {
       return '';
     }
-    return phone.phoneModel.cpu.coresBlocks.map(coresBlock =>
+    return phone.cpu.coresBlocks.map(coresBlock =>
       `${coresBlock.name} (${coresBlock.clockSpeedInMHz} ${StringConstants.MHz})`
     ).join(' + ');
   }
@@ -39,16 +39,16 @@ export class UtilService {
     if (!phone) {
       return null;
     }
-    const diagonalInPx = Math.sqrt(Math.pow(phone.phoneModel.horizontalScreenResolution, 2) +
-      Math.pow(phone.phoneModel.verticalScreenResolution, 2));
-    return Math.trunc(diagonalInPx / phone.phoneModel.screenDiagonalInInches);
+    const diagonalInPx = Math.sqrt(Math.pow(phone.horizontalScreenResolution, 2) +
+      Math.pow(phone.verticalScreenResolution, 2));
+    return Math.trunc(diagonalInPx / phone.screenDiagonalInInches);
   }
 
   getCpuClockSpeedForPhone(phone: Phone): number {
     if (!phone) {
       return null;
     }
-    const clockSpeeds = phone.phoneModel.cpu.coresBlocks.map(block => block.clockSpeedInMHz);
+    const clockSpeeds = phone.cpu.coresBlocks.map(block => block.clockSpeedInMHz);
     let maxClockSpeed = clockSpeeds[0];
     for (let i = 1; i < clockSpeeds.length; i++) {
       if (clockSpeeds[i] > maxClockSpeed) {

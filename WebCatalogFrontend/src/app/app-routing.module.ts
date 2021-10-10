@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {AppPhonesListComponent} from './components/app-phones-list/app-phones-list.component';
+import {PhonesListComponent} from './components/app-phones-list/phones-list.component';
 import {AppHomePageComponent} from './components/app-home-page/app-home-page.component';
 import {PhoneModelComponent} from './components/app-phone-model/phone-model.component';
 import {AppNewPhoneModelComponent} from './components/app-new-phone-model/app-new-phone-model.component';
@@ -17,7 +17,7 @@ const routes: Routes = [
   {path: 'phone-models/:id', component: PhoneModelComponent},
   {path: 'phones/new', component: AppNewPhoneComponent},
   {path: 'phones/:id', component: AppPhoneComponent},
-  {path: 'phones', component: AppPhonesListComponent},
+  {path: 'phones', component: PhonesListComponent},
   {path: 'phone-models', component: AppPhoneModelsListComponent},
   {path: 'phone-models/:id/edit', component: EditPhoneModelComponent},
   {path: '', component: AppHomePageComponent},

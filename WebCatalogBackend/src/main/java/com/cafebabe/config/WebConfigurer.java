@@ -17,6 +17,7 @@ public class WebConfigurer implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
                 .addResourceHandler("/api/images/**")
-                .addResourceLocations("file:images/");
+                .addResourceLocations("file:images/")
+                .addResourceLocations("file:WebCatalogBackend/images/");
     }
 }

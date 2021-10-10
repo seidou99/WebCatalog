@@ -1,6 +1,6 @@
 package com.cafebabe.util;
 
-import com.cafebabe.entity.Phone;
+import com.cafebabe.entity.phone.Phone;
 
 import java.math.BigDecimal;
 

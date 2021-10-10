@@ -9,6 +9,6 @@ import java.util.Optional;
 
 public interface OperationSystemWithVersionRepository extends CrudRepository<OperationSystemWithVersion, BigInteger>, BaseDataObjectRepository<OperationSystemWithVersion> {
 
-    @Query("select osv from OperationSystemWithVersion osv join fetch OperationSystem os where os.name = ?1 and osv.version = ?2")
+    @Query("select osv from OperationSystemWithVersion osv join osv.operationSystem os where os.name = ?1 and osv.version = ?2")
     Optional<OperationSystemWithVersion> findByOperationSystemNameAndVersion(String operationSystemName, String version);
 }

@@ -1,16 +1,18 @@
 package com.cafebabe.repository;
 
-import com.cafebabe.entity.Phone;
-import com.cafebabe.repository.BaseDataObjectRepository;
+import com.cafebabe.entity.phone.Phone;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PhoneRepository extends CrudRepository<Phone, BigInteger> {
+
+    Optional<Phone> findByName(String name);
 
     @Query("select distinct p.marketLaunchYear from Phone p")
     List<Integer> findDistinctMarketLaunchYears();
@@ -51,9 +53,9 @@ public interface PhoneRepository extends CrudRepository<Phone, BigInteger> {
     @Query("select distinct p.weight from Phone p")
     List<Float> findDistinctWeightVariants();
 
-    @Query("select distinct p.ramSizeInGb from Phone p")
+    @Query("select distinct p.ramSizeInGB from Phone p")
     List<Float> findDistinctRamVariants();
 
-    @Query("select distinct p.romSizeInGb from Phone p")
+    @Query("select distinct p.romSizeInGB from Phone p")
     List<Float> findDistinctRomVariants();
 }

@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {AppPhonesListComponent} from './components/app-phones-list/app-phones-list.component';
+import {PhonesListComponent} from './components/app-phones-list/phones-list.component';
 import {AppHomePageComponent} from './components/app-home-page/app-home-page.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
@@ -41,7 +41,7 @@ import { EditPhoneModelComponent } from './components/edit-phone-model/edit-phon
 @NgModule({
   declarations: [
     AppComponent,
-    AppPhonesListComponent,
+    PhonesListComponent,
     AppHomePageComponent,
     PhoneModelComponent,
     AppNewPhoneModelComponent,

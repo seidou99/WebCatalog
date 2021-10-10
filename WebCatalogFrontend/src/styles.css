@@ -92,7 +92,7 @@ body {
   margin-right: auto;
 }
 
-app-app-phones-list {
+app-phones-list {
   padding-top: 5em;
 }
 
@@ -217,6 +217,7 @@ app-app-phones-list {
   height: 10em;
   width: 10em;
   border-radius: 0.5em;
+  position: relative;
 }
 
 .product-gallery-image {
@@ -226,12 +227,12 @@ app-app-phones-list {
   object-fit: contain;
 }
 
-.product-gallery-image-wrapper:hover {
-  height: 10em;
-  width: 10em;
-  border-radius: 1em;
-  background: rgba(0, 0, 0, .05);
-}
+/*.product-gallery-image-wrapper:hover {*/
+/*  height: 10em;*/
+/*  width: 10em;*/
+/*  border-radius: 1em;*/
+/*  background: rgba(0, 0, 0, .05);*/
+/*}*/
 
 /*.product-gallery-image-wrapper > img:hover:after {*/
 
@@ -265,4 +266,19 @@ app-app-phones-list {
   justify-content: space-around;
 }
 
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  color: #FFF;
+}
+
+.product-gallery-image-wrapper:hover .backdrop {
+  display: block;
+  background: rgba(0, 0, 0, .2);
+  border-radius: 1em;
+}
 

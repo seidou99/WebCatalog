@@ -2,9 +2,10 @@ package com.cafebabe.service.interfaces;
 
 import com.cafebabe.dto.PhoneFilterDto;
 import com.cafebabe.dto.ScreenResolutionDto;
-import com.cafebabe.entity.Phone;
-import com.cafebabe.service.interfaces.BaseDataObjectService;
+import com.cafebabe.entity.phone.Phone;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
@@ -49,5 +50,9 @@ public interface PhoneService {
 
     Phone save(Phone phone);
 
+    Phone save(Phone phone, MultipartFile mainImageFile, List<MultipartFile> imagesFiles) throws IOException;
+
     Optional<Phone> findById(BigInteger id);
+
+    Optional<Phone> findByName(String name);
 }

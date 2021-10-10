@@ -1,6 +1,6 @@
 package com.cafebabe.service.interfaces;
 
-import com.cafebabe.entity.PhoneCpu;
+import com.cafebabe.entity.phone.PhoneCpu;
 
 import java.util.List;
 

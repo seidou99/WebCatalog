@@ -1,6 +1,6 @@
 package com.cafebabe.service.impl;
 
-import com.cafebabe.entity.PhoneCpu;
+import com.cafebabe.entity.phone.PhoneCpu;
 import com.cafebabe.repository.CpuRepository;
 import com.cafebabe.service.interfaces.CpuCoresBlockService;
 import com.cafebabe.service.interfaces.PhoneCpuService;
