@@ -3,6 +3,7 @@ import {PhoneModel} from "../model/phone-model";
 import {StringConstants} from "../Constants";
 import {Phone} from "../model/phone";
 import {BaseDataObjectWithName} from "../model/base-data-object";
+import {FormGroup, ValidationErrors} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -64,5 +65,23 @@ export class UtilService {
       result = object.name;
     }
     return result;
+  }
+
+  booleanToYesOrNo(value: boolean): string {
+    if (value) {
+      return 'Да';
+    }
+    return 'Нет';
+  }
+
+  logFormValidationErrors(form: FormGroup): void {
+    Object.keys(form.controls).forEach(key => {
+      const controlErrors: ValidationErrors = form.get(key).errors;
+      if (controlErrors != null) {
+        Object.keys(controlErrors).forEach(keyError => {
+          console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
+        });
+      }
+    });
   }
 }

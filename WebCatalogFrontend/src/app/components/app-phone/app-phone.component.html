@@ -16,12 +16,12 @@
         {{phone?.simCardsAmount}} SIM</p>
       <div class="row flex-wrap flex-gap-1em">
         <a mat-raised-button routerLink="edit">Редактировать</a>
-        <button mat-raised-button>Удалить</button>
+        <button mat-raised-button (click)="deletePhone()">Удалить</button>
       </div>
     </div>
   </div>
-  <mat-divider></mat-divider>
-  <div class="row pt-1 mb-1 flex-gap-1em flex-wrap">
+  <mat-divider *ngIf="phone?.images.length"></mat-divider>
+  <div class="row pt-1 mb-1 flex-gap-1em flex-wrap" *ngIf="phone?.images.length">
     <div class="product-gallery-image-wrapper cursor-pointer" *ngFor="let image of phone?.images">
       <img class="object-fit-contain hw-100" src="http://localhost:8080/api/images/{{image.imageName}}"
            (click)="changeSelectedGalleryImage(image)">
@@ -35,6 +35,7 @@
   </div>
   <mat-divider></mat-divider>
   <div class="grid pt-1 grid1fr1fr product-full-info-grid">
+<!--    is memory card supported, is 5g supported, has audio output-->
     <div>Дата выхода на рынок</div>
     <div>{{phone?.marketLaunchYear}}</div>
     <div>Операционная система</div>
@@ -73,6 +74,20 @@
     <div>{{phone?.cpu.techprocessInNm}} нм</div>
     <div>Графический ускоритель</div>
     <div>{{phone?.cpu.integratedGpu?.name}}</div>
+    <div *ngIf="phone?.fingerprintScannerLocation">Расположение сканера отпечатков пальцев</div>
+    <div *ngIf="phone?.fingerprintScannerLocation">{{phone?.fingerprintScannerLocation?.name}}</div>
+    <div>Разъем подключения</div>
+    <div>{{phone?.connectionSocket?.name}}</div>
+    <div *ngIf="phone?.dustAndMoistureProtection">Пыле- и влагозашита</div>
+    <div *ngIf="phone?.dustAndMoistureProtection">{{phone?.dustAndMoistureProtection?.name}}</div>
+    <div>Поддержка карт памяти</div>
+    <div>{{utilService.booleanToYesOrNo(phone?.isMemoryCardSupported)}}</div>
+    <div>Поддержка 5G</div>
+    <div>{{utilService.booleanToYesOrNo(phone?.is5GSupported)}}</div>
+    <div>Аудиовыход</div>
+    <div>{{utilService.booleanToYesOrNo(phone?.hasAudioOutput)}}</div>
+    <div>NFC</div>
+    <div>{{utilService.booleanToYesOrNo(phone?.hasNfc)}}</div>
     <div>Длина</div>
     <div>{{phone?.length}} мм</div>
     <div>Ширина</div>
@@ -86,7 +101,7 @@
     <div>Разрешающая способность экрана</div>
     <div>{{phone?.screenPpi}}</div>
     <div>Частота обновления экрана</div>
-    <div>{{phone?.screenRefreshRate}}</div>
+    <div>{{phone?.screenRefreshRate}} dpi</div>
     <div>Защита от царапин</div>
     <div>{{phone?.screenProtection.name}}</div>
     <div>Емкость аккумулятора</div>

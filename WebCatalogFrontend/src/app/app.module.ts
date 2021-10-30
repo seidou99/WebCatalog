@@ -36,6 +36,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { SelectImagesComponent } from './components/select-images/select-images.component';
 import { EditPhoneModelComponent } from './components/edit-phone-model/edit-phone-model.component';
+import { EditPhoneComponent } from './components/edit-phone/edit-phone.component';
+import { EditProductImagesComponent } from './components/edit-product-images/edit-product-images.component';
+import { YesOrNoDialogWithTitleComponent } from './yes-or-no-dialog-with-title/yes-or-no-dialog-with-title.component';
 
 
 @NgModule({
@@ -57,6 +60,9 @@ import { EditPhoneModelComponent } from './components/edit-phone-model/edit-phon
     NavbarComponent,
     SelectImagesComponent,
     EditPhoneModelComponent,
+    EditPhoneComponent,
+    EditProductImagesComponent,
+    YesOrNoDialogWithTitleComponent,
   ],
   imports: [
     BrowserModule,

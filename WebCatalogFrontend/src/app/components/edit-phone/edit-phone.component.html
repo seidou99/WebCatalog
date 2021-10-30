@@ -182,7 +182,8 @@
       <input matInput type="number" formControlName="weight">
     </mat-form-field>
   </div>
-  <app-select-images #selectImagesComponent></app-select-images>
+  <app-edit-product-images #editProductImagesComponent [oldMainImage]="phone?.mainImage" [oldImages]="phone?.images"></app-edit-product-images>
+
   <div class="row flex-justify-end">
     <button mat-button (click)="createNewPhone()">Добавить</button>
   </div>

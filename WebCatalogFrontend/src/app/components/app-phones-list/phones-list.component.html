@@ -283,6 +283,7 @@
     <mat-card *ngFor="let phone of phones" class="mb-1">
       <div class="row">
         <img src="http://localhost:8080/api/images/{{phone.mainImage.imageName}}"
+             *ngIf="phone.mainImage && phone.mainImage.imageName"
              class="square-picture-15em">
         <div class="col ml-1">
           <a routerLink="{{phone.id}}" class="mat-h2 phone-name-link">{{phone.name}}</a>

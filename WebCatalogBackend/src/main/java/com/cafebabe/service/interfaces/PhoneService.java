@@ -12,6 +12,8 @@ import java.util.Optional;
 
 public interface PhoneService {
 
+    Phone update(Phone phone, MultipartFile newMainImageFile, List<MultipartFile> newImages) throws IOException;
+
     List<Phone> findFilteredPhones(PhoneFilterDto filterDto, int pageIndex, int pageSize);
 
     Long findFilteredPhonesCount(PhoneFilterDto phoneFilterDto);
@@ -51,6 +53,8 @@ public interface PhoneService {
     Phone save(Phone phone);
 
     Phone save(Phone phone, MultipartFile mainImageFile, List<MultipartFile> imagesFiles) throws IOException;
+
+    void delete(BigInteger id) throws IOException;
 
     Optional<Phone> findById(BigInteger id);
 

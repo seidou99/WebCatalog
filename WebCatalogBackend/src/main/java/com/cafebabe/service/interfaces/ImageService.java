@@ -9,4 +9,10 @@ import java.util.List;
 public interface ImageService extends BaseDataObjectService<Image> {
 
     List<Image> saveImages(List<MultipartFile> imageFiles) throws IOException;
+
+    Image saveImage(MultipartFile imageFile);
+
+    void deleteImages(List<Image> images) throws IOException;
+
+    void deleteImage(Image image) throws IOException;
 }

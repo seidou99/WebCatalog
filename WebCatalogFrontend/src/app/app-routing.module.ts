@@ -10,6 +10,7 @@ import {AppPhoneComponent} from './components/app-phone/app-phone.component';
 import {AppGeneratorComponent} from './components/app-generator/app-generator.component';
 import {AppErrorComponent} from './components/app-error/app-error.component';
 import {EditPhoneModelComponent} from "./components/edit-phone-model/edit-phone-model.component";
+import {EditPhoneComponent} from "./components/edit-phone/edit-phone.component";
 
 const routes: Routes = [
   {path: 'generator', component: AppGeneratorComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'phones/new', component: AppNewPhoneComponent},
   {path: 'phones/:id', component: AppPhoneComponent},
   {path: 'phones', component: PhonesListComponent},
+  {path: 'phones/:id/edit', component: EditPhoneComponent},
   {path: 'phone-models', component: AppPhoneModelsListComponent},
   {path: 'phone-models/:id/edit', component: EditPhoneModelComponent},
   {path: '', component: AppHomePageComponent},

@@ -1,0 +1,15 @@
+<h2 matDialogTitle>{{data.title}}</h2>
+<!--<mat-dialog-content [formGroup]="result">-->
+<!--  <mat-form-field class="w-100">-->
+<!--    <mat-label>Название</mat-label>-->
+<!--    <input matInput formControlName="name">-->
+<!--  </mat-form-field>-->
+<!--  <mat-form-field class="w-100">-->
+<!--    <mat-label>Частота графического процессора</mat-label>-->
+<!--    <input matInput formControlName="clockSpeedInMHz" type="number">-->
+<!--  </mat-form-field>-->
+<!--</mat-dialog-content>-->
+<mat-dialog-actions class="flex-justify-space-between">
+  <button mat-button [mat-dialog-close]="false">Нет</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Да</button>
+</mat-dialog-actions>

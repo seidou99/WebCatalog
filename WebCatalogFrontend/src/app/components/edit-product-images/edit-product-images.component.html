@@ -1,3 +1,21 @@
+<h3>Старое главное изабражение</h3>
+<div class="inline-block mb-1" *ngIf="oldMainImage">
+  <mat-card>
+    <img src="{{IMAGES_API_URL}}/{{oldMainImage.imageName}}" class="square-picture-10em">
+    <mat-card-actions>
+      <button mat-button (click)="deleteOldMainImage()">Удалить</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+<h3>Старые изображения</h3>
+<div class="row flex-gap-1em flex-wrap mb-1" *ngIf="oldImages">
+  <mat-card *ngFor="let image of oldImages; let i = index">
+    <img src="{{IMAGES_API_URL}}/{{image.imageName}}" class="square-picture-10em">
+    <mat-card-actions>
+      <button mat-button (click)="deleteOldImage(i)" class="mlr-auto">Удалить</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
 <input type="file" multiple accept="image/*" (change)="onImagesChanged($event)" #imagesInput class="display-none">
 <input type="file" accept="image/*" (change)="onMainImageChanged($event)" #mainImageInput class="display-none">
 <button mat-button (click)="mainImageInput.click()">Добавить главное изображение</button>

@@ -21,6 +21,7 @@ export class ApiConstants {
   static readonly FILTER_PATH = 'filter';
   static readonly FILTERED_PATH = 'filtered';
   static readonly COUNT_PATH = 'count';
+  static readonly IMAGES_PATH = 'images';
 
   static readonly PHONES_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.MOBILE_PHONES_PATH}`;
   static readonly PHONES_FILTER_API_URL = `${ApiConstants.PHONES_API_URL}/${ApiConstants.FILTER_PATH}`;
@@ -43,7 +44,7 @@ export class ApiConstants {
   static readonly PHONE_CPUS_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.PHONE_CPUS_PATH}`;
   static readonly CONNECTION_SOCKETS_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.CONNECTION_SOCKETS_PATH}`;
   static readonly COLORS_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.COLORS_PATH}`;
-
+  static readonly IMAGES_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.IMAGES_PATH}`;
 }
 
 export class GeneratorApiConstants {

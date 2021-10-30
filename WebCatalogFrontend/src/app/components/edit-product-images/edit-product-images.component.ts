@@ -1,14 +1,19 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FileWithDataUrl} from '../../model/base-data-object';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FileWithDataUrl, Image} from "../../model/base-data-object";
+import {ApiConstants} from "../../Constants";
 
 @Component({
-  selector: 'app-select-images',
-  templateUrl: './select-images.component.html',
-  styleUrls: ['./select-images.component.css']
+  selector: 'app-edit-product-images',
+  templateUrl: './edit-product-images.component.html',
+  styleUrls: ['./edit-product-images.component.css']
 })
-export class SelectImagesComponent implements OnInit {
+export class EditProductImagesComponent implements OnInit {
+
+  @Input() oldMainImage: Image;
+  @Input() oldImages: Array<Image>;
   mainImage: FileWithDataUrl;
   selectedImages: Array<FileWithDataUrl> = [];
+  IMAGES_API_URL = ApiConstants.IMAGES_API_URL;
 
   @Output()
   imagesChanged = new EventEmitter<Array<File>>();
@@ -50,13 +55,16 @@ export class SelectImagesComponent implements OnInit {
     this.selectedImages.splice(index, 1);
   }
 
+  deleteOldImage(index: number): void {
+    this.oldImages.splice(index, 1);
+  }
+
   deleteMainImage(): void {
     this.mainImage = null;
   }
 
-}
+  deleteOldMainImage(): void {
+    this.oldMainImage = null;
+  }
 
-export class SelectImagesResult {
-  mainImage: File;
-  images: Array<File>;
 }

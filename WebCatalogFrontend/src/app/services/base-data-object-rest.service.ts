@@ -16,7 +16,15 @@ export class BaseDataObjectRestService<T> {
     return this.httpClient.get<T>(`${this.apiUrl}/${id}`);
   }
 
+  delete(id: string | number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
   save(entity: T): Observable<void> {
     return this.httpClient.post<void>(this.apiUrl, entity);
+  }
+
+  saveFormData(formData: FormData): Observable<void> {
+    return this.httpClient.post<void>(this.apiUrl, formData);
   }
 }

@@ -1,6 +1,7 @@
 package com.cafebabe.entity.phone;
 
 import com.cafebabe.entity.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -47,7 +48,7 @@ public class Phone extends ShopItem {
     @Column(nullable = false)
     protected int screenRefreshRate;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     protected FingerprintScannerLocation fingerprintScannerLocation;
 
     @Column(nullable = false)
@@ -57,6 +58,7 @@ public class Phone extends ShopItem {
     protected SimCardType simCardType;
 
     @Column(nullable = false)
+    @JsonProperty("isMemoryCardSupported")
     protected boolean isMemoryCardSupported;
 
     @Column(nullable = false)
@@ -66,6 +68,7 @@ public class Phone extends ShopItem {
     protected float cameraInMp;
 
     @Column(nullable = false)
+    @JsonProperty("is5GSupported")
     protected boolean is5GSupported;
 
     @ManyToOne(optional = false)
@@ -120,7 +123,7 @@ public class Phone extends ShopItem {
     @OneToMany
     protected List<Image> images;
 
-    @OneToOne
+    @OneToOne(optional = false)
     protected Image mainImage;
 
     public Phone(String name, float ramSizeInGB, float romSizeInGB, Manufacturer manufacturer, int marketLaunchYear, OperationSystemWithVersion operationSystemWithVersion, float screenDiagonalInInches, int horizontalScreenResolution, int verticalScreenResolution, ScreenTechnology screenTechnology, int screenRefreshRate, FingerprintScannerLocation fingerprintScannerLocation, int simCardsAmount, SimCardType simCardType, boolean isMemoryCardSupported, int camerasAmount, float cameraInMp, boolean is5GSupported, PhoneCpu cpu, float frontCameraInMp, boolean hasAudioOutput, ConnectionSocket connectionSocket, Color bodyColor, DustAndMoistureProtection dustAndMoistureProtection, float length, float width, float thickness, float weight, int batteryCapacity, ScreenProtection screenProtection, boolean hasNfc) {

@@ -10,6 +10,7 @@ import com.cafebabe.repository.PhoneRepository;
 import com.cafebabe.service.interfaces.ImageService;
 import com.cafebabe.service.interfaces.PhoneService;
 import com.cafebabe.util.Util;
+import org.hibernate.collection.internal.PersistentBag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,10 +20,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import java.io.IOException;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -55,16 +53,56 @@ public class PhoneServiceImpl implements PhoneService {
     }
 
     @Override
+    public void delete(BigInteger id) throws IOException {
+        Phone phone = findById(id).get();
+        Image mainImage = phone.getMainImage();
+        List<Image> images = phone.getImages();
+        //dirty hack to init persistent bag
+        images.size();
+        phoneRepository.delete(phone);
+        imageService.deleteImages(images);
+        imageService.deleteImage(mainImage);
+    }
+
+    @Override
     public Optional<Phone> findById(BigInteger id) {
         return phoneRepository.findById(id);
     }
 
     @Override
     public Phone save(Phone phone, MultipartFile mainImageFile, List<MultipartFile> imagesFiles) throws IOException {
-        List<Image> images = imageService.saveImages(imagesFiles);
-        phone.setMainImage(images.get(0));
-        phone.setImages(images);
+        if (imagesFiles != null) {
+            List<Image> images = imageService.saveImages(imagesFiles);
+            phone.setImages(images);
+        }
+        Image mainImage = imageService.saveImages(Collections.singletonList(mainImageFile)).get(0);
+        phone.setMainImage(mainImage);
         return save(phone);
+    }
+
+    @Override
+    public Phone update(Phone phone, MultipartFile newMainImageFile, List<MultipartFile> newImages) throws IOException {
+        Optional<Phone> oldPhone = phoneRepository.findById(phone.getId());
+        Image mainImageToDelete = null;
+        List<Image> imagesToDelete = null;
+        if (newMainImageFile != null) {
+            mainImageToDelete = oldPhone.get().getMainImage();
+            Image mainImage = imageService.saveImage(newMainImageFile);
+            phone.setMainImage(mainImage);
+        }
+        if (newImages != null && newImages.size() != 0) {
+            List<Image> savedImages = imageService.saveImages(newImages);
+            imagesToDelete = oldPhone.get().getImages().stream().filter(oldImage -> phone.getImages().stream().noneMatch(image -> image.getId().equals(oldImage.getId()))).collect(Collectors.toList());
+            phone.getImages().addAll(savedImages);
+        }
+        phoneRepository.save(phone);
+        if (mainImageToDelete != null) {
+            imageService.deleteImage(mainImageToDelete);
+        }
+        if (imagesToDelete != null && !imagesToDelete.isEmpty()) {
+            imageService.deleteImages(imagesToDelete);
+        }
+        return phone;
     }
 
     @Override
@@ -106,7 +144,7 @@ public class PhoneServiceImpl implements PhoneService {
                         joinAndFilter(root, filterDto.getBodyColors(), Phone_.BODY_COLOR, criteriaBuilder),
                         leftJoinAndFilter(root, filterDto.getDustAndMoistureProtections(), Phone_.DUST_AND_MOISTURE_PROTECTION, criteriaBuilder),
                         filter(root, filterDto.getBatteryCapacities(), Phone_.BATTERY_CAPACITY, criteriaBuilder),
-                        joinAndFilter(root, filterDto.getFingerprintScannerLocations(), Phone_.FINGERPRINT_SCANNER_LOCATION, criteriaBuilder),
+                        leftJoinAndFilter(root, filterDto.getFingerprintScannerLocations(), Phone_.FINGERPRINT_SCANNER_LOCATION, criteriaBuilder),
                         leftJoinAndFilter(root, filterDto.getScreenProtections(), Phone_.SCREEN_PROTECTION, criteriaBuilder),
                         joinAndFilter(root, filterDto.getCpuVariants(), Phone_.CPU, criteriaBuilder),
                         filter(root, filterDto.getRamVariants(), Phone_.RAM_SIZE_IN_GB, criteriaBuilder),
