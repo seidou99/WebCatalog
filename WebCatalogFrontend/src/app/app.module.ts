@@ -39,6 +39,11 @@ import { EditPhoneModelComponent } from './components/edit-phone-model/edit-phon
 import { EditPhoneComponent } from './components/edit-phone/edit-phone.component';
 import { EditProductImagesComponent } from './components/edit-product-images/edit-product-images.component';
 import { YesOrNoDialogWithTitleComponent } from './yes-or-no-dialog-with-title/yes-or-no-dialog-with-title.component';
+import { ShopComponent } from './components/shop/shop.component';
+import { ShopsListComponent } from './components/shops-list/shops-list.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { NewShopComponent } from './components/new-shop/new-shop.component';
 
 
 @NgModule({
@@ -63,6 +68,11 @@ import { YesOrNoDialogWithTitleComponent } from './yes-or-no-dialog-with-title/y
     EditPhoneComponent,
     EditProductImagesComponent,
     YesOrNoDialogWithTitleComponent,
+    ShopComponent,
+    ShopsListComponent,
+    LoginComponent,
+    RegisterComponent,
+    NewShopComponent,
   ],
   imports: [
     BrowserModule,

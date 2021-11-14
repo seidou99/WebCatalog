@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {PhoneModel} from "../model/phone-model";
-import {StringConstants} from "../Constants";
+import {FormControlNames, StringConstants, ValidationConstants} from "../Constants";
 import {Phone} from "../model/phone";
 import {BaseDataObjectWithName} from "../model/base-data-object";
-import {FormGroup, ValidationErrors} from "@angular/forms";
+import {FormControl, FormGroup, ValidationErrors, ValidatorFn} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -79,9 +79,49 @@ export class UtilService {
       const controlErrors: ValidationErrors = form.get(key).errors;
       if (controlErrors != null) {
         Object.keys(controlErrors).forEach(keyError => {
-          console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
+          console.log('Key control: ', key, ', keyError: ', keyError, ', err value: ', controlErrors[keyError]);
         });
       }
     });
   }
+
+  getError(form: FormGroup, fieldName: string): string {
+    const errors = form.get(fieldName).errors;
+    const errorKey = Object.keys(errors)[0];
+    const errorDescription = ValidationConstants.ERROR_DESCRIPTIONS[errorKey];
+    let result;
+    if (errorDescription instanceof Function) {
+      let argsArray = [];
+      if ('minlength' === errorKey || 'maxlength' === errorKey) {
+        argsArray = [errors[errorKey].requiredLength];
+      }
+      result = errorDescription.apply(null, argsArray);
+    } else {
+      result = errorDescription;
+    }
+    return result;
+  }
+
+  hasError(form: FormGroup, fieldName: string): boolean {
+    const control = form.get(fieldName);
+    return control.errors != null && (control.dirty || control.touched);
+  }
+
+  confirmPasswordValidator(): ValidatorFn {
+    return (control: FormControl): ValidationErrors | null => {
+      let result = null;
+      const parent = control['_parent'] as FormGroup;
+      if (parent) {
+        const password = parent.get(FormControlNames.PASSWORD).value as string;
+        const confirmPassword = control.value as string;
+        if (password !== confirmPassword) {
+          result = {
+            confirmPassword: null
+          };
+        }
+      }
+      return result;
+    };
+  }
+
 }

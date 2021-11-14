@@ -1,0 +1,45 @@
+<div class="row flex-justify-space-around mt-8 m-1">
+  <mat-card [formGroup]="form" class="mw-600px w-100">
+    <h2>Регистрация</h2>
+    <mat-form-field class="w-100">
+      <mat-label>Адрес электронной почты</mat-label>
+      <input matInput [formControlName]="FormControlNames.EMAIL">
+      <mat-error
+        *ngIf="util.hasError(form, FormControlNames.EMAIL)">{{util.getError(form, FormControlNames.EMAIL)}}</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field class="w-100">
+      <mat-label>Имя</mat-label>
+      <input matInput [formControlName]="FormControlNames.NAME">
+      <mat-error
+        *ngIf="util.hasError(form, FormControlNames.NAME)">{{util.getError(form, FormControlNames.NAME)}}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <mat-label>Фамилия</mat-label>
+      <input matInput [formControlName]="FormControlNames.SURNAME">
+      <mat-error
+        *ngIf="util.hasError(form, FormControlNames.SURNAME)">{{util.getError(form, FormControlNames.SURNAME)}}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <mat-label>Придумайте пароль</mat-label>
+      <input matInput [formControlName]="FormControlNames.PASSWORD" [type]="hidePassword ? 'password' : 'text'">
+      <mat-icon matSuffix class="cursor-pointer"
+                (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      <mat-error
+        *ngIf="util.hasError(form, FormControlNames.PASSWORD)">{{util.getError(form, FormControlNames.PASSWORD)}}</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field class="w-100">
+      <mat-label>Повторите пароль</mat-label>
+      <input matInput [formControlName]="FormControlNames.CONFIRM_PASSWORD" [type]="hideConfirmPassword ? 'password' : 'text'">
+      <mat-icon matSuffix class="cursor-pointer"
+                (click)="hideConfirmPassword = !hideConfirmPassword">{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      <mat-error
+        *ngIf="util.hasError(form, FormControlNames.CONFIRM_PASSWORD)">{{util.getError(form, FormControlNames.CONFIRM_PASSWORD)}}</mat-error>
+    </mat-form-field>
+    <div class="row flex-justify-space-between">
+      <a routerLink="/login" mat-button>Войти</a>
+      <button mat-button (click)="register()">Создать аккаунт</button>
+    </div>
+  </mat-card>
+</div>

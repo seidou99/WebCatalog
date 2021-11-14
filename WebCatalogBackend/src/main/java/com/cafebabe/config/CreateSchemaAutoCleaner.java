@@ -13,7 +13,7 @@ public class CreateSchemaAutoCleaner {
     public static BeanFactoryPostProcessor schemaFileCleanupPostProcessor() {
         return configurableListableBeanFactory -> {
             String currentDirectory = System.getProperty("user.dir");
-            String createSchemaFilePath = currentDirectory + File.separator + "WebCatalogBackend" + File.separator + "conf" + File.separator + "db" + File.separator + "create-schema.sql";
+            String createSchemaFilePath = currentDirectory + File.separator + "conf" + File.separator + "db" + File.separator + "create-schema.sql";
             File file = new File(createSchemaFilePath);
             file.delete();
         };

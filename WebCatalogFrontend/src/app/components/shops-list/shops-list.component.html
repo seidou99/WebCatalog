@@ -1,0 +1,7 @@
+<div class="m-1">
+  <mat-card *ngFor="let shop of shops" class="mt-1">
+    <a routerLink="{{shop.id}}" class="mat-h2 phone-name-link">
+      Магазин "{{shop.name}}"
+    </a>
+  </mat-card>
+</div>

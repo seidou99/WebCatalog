@@ -2,7 +2,6 @@ package com.cafebabe;
 
 import com.cafebabe.entity.Manufacturer;
 import com.cafebabe.entity.ManufacturerType;
-import com.cafebabe.generator.GeneratorConstants;
 
 import java.util.Arrays;
 import java.util.Collections;

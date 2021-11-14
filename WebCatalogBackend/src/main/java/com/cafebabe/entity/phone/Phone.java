@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,8 +15,10 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@Indexed(index = "IDX_SHOP_ITEM")
 public class Phone extends ShopItem {
 
+    @Field(name = "name")
     @Column(unique = true)
     protected String name;
 

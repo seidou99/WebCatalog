@@ -22,6 +22,9 @@ export class ApiConstants {
   static readonly FILTERED_PATH = 'filtered';
   static readonly COUNT_PATH = 'count';
   static readonly IMAGES_PATH = 'images';
+  static readonly SHOPS_PATH = 'shops';
+  static readonly USERS_PATH = 'users';
+  static readonly LOGIN_PATH = 'login';
 
   static readonly PHONES_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.MOBILE_PHONES_PATH}`;
   static readonly PHONES_FILTER_API_URL = `${ApiConstants.PHONES_API_URL}/${ApiConstants.FILTER_PATH}`;
@@ -45,6 +48,9 @@ export class ApiConstants {
   static readonly CONNECTION_SOCKETS_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.CONNECTION_SOCKETS_PATH}`;
   static readonly COLORS_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.COLORS_PATH}`;
   static readonly IMAGES_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.IMAGES_PATH}`;
+  static readonly SHOPS_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.SHOPS_PATH}`;
+  static readonly USERS_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.USERS_PATH}`;
+  static readonly LOGIN_API_URL = `${ApiConstants.SERVER_API_URL}/${ApiConstants.LOGIN_PATH}`;
 }
 
 export class GeneratorApiConstants {
@@ -64,6 +70,7 @@ export class GeneratorApiConstants {
 
 export class FormControlNames {
   static readonly NAME = 'name';
+  static readonly SURNAME = 'surname';
   static readonly MANUFACTURER = 'manufacturer';
   static readonly MARKET_LAUNCH_YEAR = 'marketLaunchYear';
   static readonly OPERATION_SYSTEM = 'operationSystem';
@@ -103,6 +110,19 @@ export class FormControlNames {
   static readonly CORES_BLOCKS_AMOUNT = 'coresBlocksAmount';
   static readonly CORES_AMOUNT = 'coresAmount';
   static readonly CLOCK_SPEED_IN_MHZ = 'clockSpeedInMHz';
+  static readonly EMAIL = 'email';
+  static readonly CONFIRM_PASSWORD = 'confirmPassword';
+  static readonly PASSWORD = 'password';
+}
+
+export class LocalStorageConstants {
+  static readonly EMAIL = 'email';
+  static readonly JWT = 'jwt';
+  static readonly NAME = 'name';
+  static readonly SURNAME = 'surname';
+  static readonly ROLES = 'roles';
+  static readonly USER_ID = 'userId';
+  static readonly USER_DATA_FIELDS = [LocalStorageConstants.EMAIL, LocalStorageConstants.JWT, LocalStorageConstants.NAME, LocalStorageConstants.SURNAME, LocalStorageConstants.ROLES, LocalStorageConstants.USER_ID];
 }
 
 export class StringConstants {
@@ -110,4 +130,18 @@ export class StringConstants {
   static readonly ROM = 'ПЗУ';
   static readonly GB = 'ГБ';
   static readonly MHz = 'МГц';
+  static readonly FIELD_IS_REQUIRED = 'Поле обязательно для заполнения';
+  static readonly PASSWORDS_DOES_NOT_MATCH = 'Пароли не совпадают';
+}
+
+export class ValidationConstants {
+  static readonly PASSWORD_MIN_LENGTH = 6;
+  static readonly PASSWORD_MAX_LENGTH = 20;
+  static readonly ERROR_DESCRIPTIONS = {
+    required: StringConstants.FIELD_IS_REQUIRED,
+    minlength: (v) => `Минимальная длина поля ${v}`,
+    maxlength: (v) => `Максимальная длина поля ${v}`,
+    email: 'Неверный формат мыла',
+    confirmPassword: StringConstants.PASSWORDS_DOES_NOT_MATCH
+  };
 }

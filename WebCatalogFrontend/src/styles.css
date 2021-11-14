@@ -117,6 +117,10 @@ app-phones-list {
   margin-top: 1em;
 }
 
+.mt-8 {
+  margin-top: 8em;
+}
+
 .mb-1 {
   margin-bottom: 1em;
 }
@@ -288,5 +292,9 @@ app-phones-list {
 
 .inline-block {
   display: inline-block;
+}
+
+.mw-600px {
+  max-width: 600px;
 }
 

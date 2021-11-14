@@ -1,10 +1,12 @@
 <mat-card class="m-1">
-  <div class="row align-items-baseline">
-    <mat-form-field class="mr-05 flex-1">
+  <div class="row align-items-baseline flex-gap-1em">
+    <mat-form-field class="flex-1">
       <mat-label>Поиск</mat-label>
       <input matInput>
     </mat-form-field>
-    <a mat-raised-button routerLink="/" class="mr-05-important">На главную страницу</a>
-    <a mat-raised-button>Вход</a>
+    <a mat-raised-button routerLink="/">На главную страницу</a>
+    <a *ngIf="!localStorageService.isLoggedIn()" mat-raised-button routerLink="/login">Вход</a>
+    <button *ngIf="localStorageService.isLoggedIn()" mat-raised-button (click)="localStorageService.logout()">Выход</button>
+    <button *ngIf="localStorageService.isLoggedIn()" mat-raised-button>Профиль</button>
   </div>
 </mat-card>
