@@ -44,6 +44,7 @@ import { ShopsListComponent } from './components/shops-list/shops-list.component
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NewShopComponent } from './components/new-shop/new-shop.component';
+import {MatRadioModule} from "@angular/material/radio";
 
 
 @NgModule({
@@ -74,29 +75,30 @@ import { NewShopComponent } from './components/new-shop/new-shop.component';
     RegisterComponent,
     NewShopComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatCardModule,
-    MatGridListModule,
-    ReactiveFormsModule,
-    MatOptionModule,
-    MatAutocompleteModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatCheckboxModule,
-    MatIconModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatDialogModule,
-    FormsModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    MatPaginatorModule,
-    MatSnackBarModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatCardModule,
+        MatGridListModule,
+        ReactiveFormsModule,
+        MatOptionModule,
+        MatAutocompleteModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatCheckboxModule,
+        MatIconModule,
+        MatButtonModule,
+        MatDividerModule,
+        MatDialogModule,
+        FormsModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        MatPaginatorModule,
+        MatSnackBarModule,
+        MatRadioModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

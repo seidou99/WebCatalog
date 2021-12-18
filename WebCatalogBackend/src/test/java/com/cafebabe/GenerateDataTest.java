@@ -53,5 +53,6 @@ public class GenerateDataTest {
         phoneServiceTest.testCreate();
         rolesTest.testCreate();
         rolesTest.createDefaultAdmin();
+        rolesTest.createShopAdmin();
     }
 }

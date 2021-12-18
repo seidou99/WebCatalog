@@ -11,6 +11,7 @@
       <mat-select formControlName="manufacturer">
         <mat-option *ngFor="let manufacturer of manufacturers" [value]="manufacturer">{{manufacturer.name}}</mat-option>
       </mat-select>
+      <mat-icon class="cursor-pointer" matSuffix (click)="createNewManufacturer()">add</mat-icon>
     </mat-form-field>
 
     <mat-form-field class="w-100">
@@ -24,6 +25,7 @@
         <mat-option *ngFor="let os of operationSystemsWithVersions"
                     [value]="os">{{os.operationSystem.name}} {{os.version}}</mat-option>
       </mat-select>
+      <mat-icon matSuffix class="cursor-pointer" (click)="createNewMobilePhoneOperationSystemWithVersion()">add</mat-icon>
     </mat-form-field>
 
     <mat-form-field class="w-100">
@@ -47,6 +49,7 @@
         <mat-option *ngFor="let screenTechnology of screenTechnologies"
                     [value]="screenTechnology">{{screenTechnology.name}}</mat-option>
       </mat-select>
+      <mat-icon matSuffix class="cursor-pointer" (click)="createNewScreenTechnology()">add</mat-icon>
     </mat-form-field>
 
     <mat-form-field class="w-100">
@@ -88,6 +91,7 @@
       <mat-select formControlName="simCardType">
         <mat-option *ngFor="let simCardType of simCardTypes" [value]="simCardType">{{simCardType.name}}</mat-option>
       </mat-select>
+      <mat-icon matSuffix class="cursor-pointer" (click)="createNewSimCardType()">add</mat-icon>
     </mat-form-field>
 
     <section class="w-100 row flex-align-center">
@@ -99,6 +103,7 @@
       <mat-select [formControlName]="FormControlNames.BODY_COLOR">
         <mat-option *ngFor="let color of bodyColors" [value]="color">{{color.name}}</mat-option>
       </mat-select>
+      <mat-icon matSuffix class="cursor-pointer" (click)="createNewBodyColor()">add</mat-icon>
     </mat-form-field>
 
     <mat-form-field class="w-100">
@@ -108,6 +113,7 @@
         <mat-option *ngFor="let protection of dustAndMoistureProtectionTypes"
                     [value]="protection">{{protection.name}}</mat-option>
       </mat-select>
+      <mat-icon matSuffix class="cursor-pointer" (click)="createNewDustMoistureProtection()">add</mat-icon>
     </mat-form-field>
 
     <mat-form-field class="w-100">
@@ -122,6 +128,7 @@
         <mat-option *ngFor="let scannerLocation of fingerprintScannerLocations"
                     [value]="scannerLocation">{{scannerLocation.name}}</mat-option>
       </mat-select>
+      <mat-icon matSuffix class="cursor-pointer" (click)="createNewFingerprintScannerLocation()">add</mat-icon>
     </mat-form-field>
 
     <mat-form-field class="w-100">
@@ -130,14 +137,16 @@
         <mat-option *ngFor="let screenProtection of screenProtections"
                     [value]="screenProtection">{{screenProtection.name}}</mat-option>
       </mat-select>
+      <mat-icon matSuffix class="cursor-pointer" (click)="createNewScreenProtection()">add</mat-icon>
       <!--      <input matInput disabled [ngModel]="selectedPhoneModel?.screenProtection?.name"/>-->
     </mat-form-field>
 
     <mat-form-field class="w-100">
-      <mat-label class="block">Процессор</mat-label>
+      <mat-label>Процессор</mat-label>
       <mat-select formControlName="cpu">
         <mat-option *ngFor="let cpu of cpus" [value]="cpu">{{cpu.name}}</mat-option>
       </mat-select>
+      <mat-icon matSuffix class="cursor-pointer" (click)="createNewMobilePhoneCpu()">add</mat-icon>
       <!--      <input matInput type="text" disabled [ngModel]="selectedPhoneModel?.cpu?.name">-->
     </mat-form-field>
 
@@ -160,6 +169,7 @@
         <mat-option *ngFor="let connectionSocket of connectionSockets"
                     [value]="connectionSocket">{{connectionSocket.name}}</mat-option>
       </mat-select>
+      <mat-icon matSuffix class="cursor-pointer" (click)="createNewConnectionSocket()">add</mat-icon>
     </mat-form-field>
 
     <mat-form-field class="w-100">

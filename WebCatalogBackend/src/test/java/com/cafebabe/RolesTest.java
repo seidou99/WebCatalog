@@ -49,6 +49,21 @@ public class RolesTest {
         }
         user.setRoles(Arrays.asList(userRoleOptional.get(), appAdminRoleOptional.get()));
         userService.save(user);
-        String s = "";
+    }
+
+    @Test
+    public void createShopAdmin() {
+        String email = "shop_admin@test.com", password = "password", name = "ShopAdminName", surname = "ShopAdminSurname";
+        if (!userService.findByEmail(email).isPresent()) {
+            userService.create(new RegistrationRequest(email, password, name, surname));
+        }
+        User user = userService.findByEmail(email).get();
+        Optional<Role> userRoleOptional = roleRepository.findByName(ERole.USER.getName());
+        Optional<Role> shopAdminOptional = roleRepository.findByName(ERole.SHOP_ADMIN.getName());
+        if (!userRoleOptional.isPresent() || !shopAdminOptional.isPresent()) {
+            Assertions.fail("user or shop_admin role doesn't exist");
+        }
+        user.setRoles(Arrays.asList(userRoleOptional.get(), shopAdminOptional.get()));
+        userService.save(user);
     }
 }

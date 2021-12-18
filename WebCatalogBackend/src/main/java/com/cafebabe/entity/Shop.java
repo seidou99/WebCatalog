@@ -21,10 +21,10 @@ public class Shop extends BaseDataObjectWithUniqueName {
         super(name);
     }
 
-    @OneToOne
-    protected ShopAdmin shopAdmin;
+    @OneToOne(optional = false)
+    protected User shopAdmin;
 
-    @ElementCollection
+    @ElementCollection()
     protected List<String> addresses;
 
     @ElementCollection

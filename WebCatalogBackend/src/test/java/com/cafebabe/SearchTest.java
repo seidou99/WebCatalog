@@ -1,6 +1,7 @@
 package com.cafebabe;
 
 import com.cafebabe.entity.ShopItem;
+import com.cafebabe.entity.User;
 import org.apache.lucene.search.Query;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.FullTextQuery;
@@ -28,8 +29,27 @@ public class SearchTest {
                 .getSearchFactory()
                 .buildQueryBuilder()
                 .forEntity(ShopItem.class).get();
-        Query query = queryBuilder.keyword().fuzzy().onField("name").matching("relm").createQuery();
+        Query query = queryBuilder.keyword().fuzzy().onField("name").matching("POCO X3").createQuery();
         FullTextQuery fullTextQuery = fullTextEntityManager.createFullTextQuery(query, ShopItem.class);
+        List resultList = fullTextQuery.getResultList();
+    }
+
+    @Test
+    @Transactional
+    public void findShopAdminByNameAndSurname() {
+
+    }
+
+    @Test
+    @Transactional
+    public void findShopAdminByEmail() {
+        FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager);
+        QueryBuilder queryBuilder = fullTextEntityManager
+                .getSearchFactory()
+                .buildQueryBuilder()
+                .forEntity(User.class).get();
+        Query query = queryBuilder.keyword().fuzzy().onField("email").matching("admin").createQuery();
+        FullTextQuery fullTextQuery = fullTextEntityManager.createFullTextQuery(query, User.class);
         List resultList = fullTextQuery.getResultList();
     }
 }

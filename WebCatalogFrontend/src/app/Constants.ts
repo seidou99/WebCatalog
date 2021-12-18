@@ -144,4 +144,6 @@ export class ValidationConstants {
     email: 'Неверный формат мыла',
     confirmPassword: StringConstants.PASSWORDS_DOES_NOT_MATCH
   };
+  static readonly NAME_OR_SURNAME_REQUIRED = 'Требуются имя или фамилия';
+  static readonly EMAIL_REQUIRED = 'Требуется адерс электронной почты';
 }

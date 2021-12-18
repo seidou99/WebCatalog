@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {User} from '../model/User';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {Role, SearchType, User} from '../model/User';
 import {ApiConstants} from '../Constants';
 import {Observable} from 'rxjs';
 import {LoginRequest} from "../model/login-request";
@@ -32,6 +32,20 @@ export class UserService {
 
   login(loginRequest: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(ApiConstants.LOGIN_API_URL, loginRequest);
+  }
+
+  find(name: string, surname: string, email: string, searchType: SearchType, role: Role): Observable<Array<User>> {
+    console.log('name:', name);
+    console.log('surname:', surname);
+    console.log('email:', email);
+    console.log('searchType:', searchType);
+    let params = new HttpParams().set('searchType', searchType).set('role', role);
+    if (SearchType.NAME_AND_SURNAME === searchType) {
+      params = params.set('name', name).set('surname', surname);
+    } else {
+      params = params.set('email', email);
+    }
+    return this.http.get<Array<User>>(ApiConstants.USERS_API_URL, {params});
   }
 
 }

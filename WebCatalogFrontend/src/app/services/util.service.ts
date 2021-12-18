@@ -124,4 +124,8 @@ export class UtilService {
     };
   }
 
+  isStringEmpty(s: string): boolean {
+    return s === undefined || s === null || s.length === 0;
+  }
+
 }

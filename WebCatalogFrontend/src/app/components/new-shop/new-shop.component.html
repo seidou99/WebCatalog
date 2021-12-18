@@ -1,1 +1,73 @@
-<p>new-shop works!</p>
+<mat-card class="m-1" [formGroup]="createShopForm">
+  <h2>Добавить новый магазин</h2>
+  <mat-form-field class="w-100">
+    <mat-label>Название</mat-label>
+    <input matInput type="text" formControlName="name">
+  </mat-form-field>
+  <div class="row">
+    <h3>Адреса</h3>
+    <mat-icon class="cursor-pointer" (click)="addAddressControl()">add</mat-icon>
+  </div>
+  <div formArrayName="addresses">
+    <mat-form-field *ngFor="let address of getAddresses().controls; let i=index" class="w-100">
+      <mat-label>Адрес {{i + 1}}</mat-label>
+      <input matInput type="text" [formControlName]="i">
+      <mat-icon matSuffix class="cursor-pointer" (click)="removeAddressControl(i)">remove</mat-icon>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <h3>Контактная информация (номера, адреса электронной почты)</h3>
+    <mat-icon class="cursor-pointer" (click)="addContactInfoControl()">add</mat-icon>
+  </div>
+  <div formArrayName="contactInfoList">
+    <mat-form-field *ngFor="let contactInfo of getContactInfoList().controls; let i = index" class="w-100">
+      <mat-label>Контактная информация {{i + 1}}</mat-label>
+      <input matInput type="text" [formControlName]="i">
+      <mat-icon matSuffix class="cursor-pointer" (click)="removeContractInfoControl(i)">remove</mat-icon>
+    </mat-form-field>
+  </div>
+  <mat-form-field class="w-100">
+    <mat-label>Описание</mat-label>
+    <textarea matInput formControlName="shopDescription"></textarea>
+  </mat-form-field>
+  <h3>Администратор магазина</h3>
+  <div [formGroup]="adminSearchForm">
+    <mat-radio-group class="row flex-gap-1em" formControlName="selectedSearchType">
+      <mat-radio-button [value]="SearchType.NAME_AND_SURNAME">Поиск по имени</mat-radio-button>
+      <mat-radio-button [value]="SearchType.EMAIL">Поиск по почте</mat-radio-button>
+    </mat-radio-group>
+    <div>
+      <div class="row flex-gap-1em"
+           *ngIf="SearchType.NAME_AND_SURNAME === adminSearchForm.get('selectedSearchType').value">
+        <mat-form-field class="flex-1">
+          <mat-label>Имя</mat-label>
+          <input matInput formControlName="name">
+          <mat-error *ngIf="adminSearchFormError">{{adminSearchFormError}}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="flex-1">
+          <mat-label>Фамилия</mat-label>
+          <input matInput formControlName="surname">
+        </mat-form-field>
+      </div>
+      <mat-form-field class="w-100" *ngIf="SearchType.EMAIL === adminSearchForm.get('selectedSearchType').value">
+        <mat-label>Адес электронной почты</mat-label>
+        <input matInput formControlName="email">
+        <mat-error *ngIf="adminSearchFormError">{{adminSearchFormError}}</mat-error>
+      </mat-form-field>
+    </div>
+    <button mat-stroked-button (click)="searchShopAdmin()">Найти</button>
+  </div>
+  <mat-form-field class="w-100">
+    <mat-label>Результаты поиска</mat-label>
+    <mat-select formControlName="shopAdmin">
+      <mat-option *ngFor="let shopAdmin of shopAdmins" [value]="shopAdmin">{{shopAdmin.name}} {{shopAdmin.surname}}
+        ({{shopAdmin.email}})
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="row flex-justify-space-between">
+    <button mat-button>Отмена</button>
+    <button mat-button (click)="createShop()">Создать</button>
+  </div>
+  <!--  TODO add admin-->
+</mat-card>
