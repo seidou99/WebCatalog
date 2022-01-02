@@ -1,3 +1,11 @@
 <div class="m-1">
-  <h2>Магазин {{shop.name}}</h2>
+  <mat-card class="mt-1">
+    <h2>Магазин "{{shop?.name}}"</h2>
+    <p>Описание: {{shop?.shopDescription}}</p>
+    <p>Контактная информация: {{getAllContactInfo()}}</p>
+    <p>Адреса: {{getAllAddresses()}}</p>
+    <button mat-button [disabled]="shop === null || shop === undefined" routerLink="edit">Редактировать</button>
+    <br>
+    <button mat-button color="warn" [disabled]="shop === null || shop === undefined" (click)="delete()">Удалить</button>
+  </mat-card>
 </div>

@@ -14,8 +14,11 @@ import {EditPhoneComponent} from "./components/edit-phone/edit-phone.component";
 import {ShopsListComponent} from "./components/shops-list/shops-list.component";
 import {ShopComponent} from "./components/shop/shop.component";
 import {LoginComponent} from "./components/login/login.component";
-import {RegisterComponent} from "./components/register/register.component";
-import {NewShopComponent} from "./components/new-shop/new-shop.component";
+import {RegisterComponent} from './components/register/register.component';
+import {NewShopComponent} from './components/new-shop/new-shop.component';
+import {EditShopComponent} from "./components/edit-shop/edit-shop.component";
+import {ShowProfileComponent} from "./components/show-profile/show-profile.component";
+import {EditProfileComponent} from "./components/edit-profile/edit-profile.component";
 
 const routes: Routes = [
   {path: 'generator', component: AppGeneratorComponent},
@@ -30,8 +33,11 @@ const routes: Routes = [
   {path: 'shops', component: ShopsListComponent, pathMatch: 'full'},
   {path: 'shops/new', component: NewShopComponent, pathMatch: 'full'},
   {path: 'shops/:id', component: ShopComponent, pathMatch: 'full'},
+  {path: 'shops/:id/edit', component: EditShopComponent, pathMatch: 'full'},
   {path: 'login', component: LoginComponent, pathMatch: 'full'},
   {path: 'register', component: RegisterComponent, pathMatch: 'full'},
+  {path: 'users/:id', component: ShowProfileComponent, pathMatch: 'full'},
+  {path: 'users/:id/edit', component: EditProfileComponent, pathMatch: 'full'},
   {path: '', component: AppHomePageComponent},
   {path: '**', component: AppErrorComponent}
 ];

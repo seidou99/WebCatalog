@@ -1,5 +1,5 @@
-<mat-card class="m-1" [formGroup]="createShopForm">
-  <h2>Добавить новый магазин</h2>
+<mat-card class="m-1" [formGroup]="editShopForm">
+  <h2>Редактировать магазин</h2>
   <mat-form-field class="w-100">
     <mat-label>Название</mat-label>
     <input matInput type="text" formControlName="name">
@@ -60,13 +60,14 @@
   <mat-form-field class="w-100">
     <mat-label>Результаты поиска</mat-label>
     <mat-select formControlName="shopAdmin">
+      <mat-option></mat-option>
       <mat-option *ngFor="let shopAdmin of shopAdmins" [value]="shopAdmin">{{shopAdmin.name}} {{shopAdmin.surname}}
         ({{shopAdmin.email}})
       </mat-option>
     </mat-select>
   </mat-form-field>
   <div class="row flex-justify-space-between">
-    <button mat-button>Отмена</button>
-    <button mat-button (click)="createShop()">Создать</button>
+    <button mat-button routerLink="/shops">Отмена</button>
+    <button mat-button (click)="saveShop()">Сохранить</button>
   </div>
 </mat-card>

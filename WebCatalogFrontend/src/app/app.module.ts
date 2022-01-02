@@ -45,6 +45,9 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NewShopComponent } from './components/new-shop/new-shop.component';
 import {MatRadioModule} from "@angular/material/radio";
+import { EditShopComponent } from './components/edit-shop/edit-shop.component';
+import { ShowProfileComponent } from './components/show-profile/show-profile.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 
 @NgModule({
@@ -74,6 +77,9 @@ import {MatRadioModule} from "@angular/material/radio";
     LoginComponent,
     RegisterComponent,
     NewShopComponent,
+    EditShopComponent,
+    ShowProfileComponent,
+    EditProfileComponent,
   ],
     imports: [
         BrowserModule,

@@ -19,6 +19,11 @@ public class ShopController {
         return shopService.save(shop);
     }
 
+    @PutMapping("api/shops")
+    public void edit(@RequestBody Shop shop) {
+        shopService.save(shop);
+    }
+
     @GetMapping("api/shops/{id}")
     public Shop findById(@PathVariable BigInteger id) {
         return shopService.findById(id).get();

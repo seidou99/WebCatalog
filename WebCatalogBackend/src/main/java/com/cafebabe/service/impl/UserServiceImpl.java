@@ -89,5 +89,9 @@ public class UserServiceImpl {
         return userRepository.findAllByNameLikeAndSurnameLike(name, surname);
     }
 
+    public User findById(BigInteger id) {
+        return userRepository.findById(id).get();
+    }
+
 
 }

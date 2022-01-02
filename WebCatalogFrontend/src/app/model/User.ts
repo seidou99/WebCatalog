@@ -4,6 +4,7 @@ export class User extends BaseDataObject {
   name: string;
   surname: string;
   email: string;
+  roles: Array<any>;
 }
 
 export enum Role {

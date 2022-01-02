@@ -7,6 +7,6 @@
     <a mat-raised-button routerLink="/">На главную страницу</a>
     <a *ngIf="!localStorageService.isLoggedIn()" mat-raised-button routerLink="/login">Вход</a>
     <button *ngIf="localStorageService.isLoggedIn()" mat-raised-button (click)="localStorageService.logout()">Выход</button>
-    <button *ngIf="localStorageService.isLoggedIn()" mat-raised-button>Профиль</button>
+    <a *ngIf="localStorageService.isLoggedIn()" mat-raised-button [routerLink]="'/users/' + localStorageService.getUserId()">Профиль</a>
   </div>
 </mat-card>

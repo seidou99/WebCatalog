@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {BaseDataObjectWithName} from "../model/base-data-object";
 import {Observable} from "rxjs";
 import {ApiConstants} from "../Constants";
+import {Shop} from "../model/shop";
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,12 @@ export class ShopService {
     return this.http.post<BaseDataObjectWithName>(ApiConstants.SHOPS_API_URL, shop);
   }
 
-  getById(id: string | number): Observable<BaseDataObjectWithName> {
-    return this.http.get<BaseDataObjectWithName>(`${ApiConstants.SHOPS_API_URL}/${id}`);
+  edit(shop: Shop): Observable<void> {
+    return this.http.put<void>(ApiConstants.SHOPS_API_URL, shop);
+  }
+
+  getById(id: string | number): Observable<Shop> {
+    return this.http.get<Shop>(`${ApiConstants.SHOPS_API_URL}/${id}`);
   }
 
   getAll(): Observable<Array<BaseDataObjectWithName>> {

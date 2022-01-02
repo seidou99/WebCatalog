@@ -7,6 +7,7 @@ import com.cafebabe.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @RestController
@@ -29,6 +30,11 @@ public class UserController {
             result = userService.findByNameAndSurnameAndRole(name, surname, role);
         }
         return result;
+    }
+
+    @GetMapping("api/users/{id}")
+    public User findById(@PathVariable BigInteger id) {
+        return userService.findById(id);
     }
 
     enum UserSearchType {
